@@ -57,7 +57,6 @@ function Editor() {
     const [currLine, setCurrLine] = useState(11);
 
     const onChange = (newValue) => {
-        editorRef?.current?.session?.setAnnotations(annotations)
         setProg(newValue);
     }
 
@@ -100,47 +99,8 @@ function Editor() {
         setEditorRef(editorRef)
     }, []);
 
-    const annotations = [
-        {
-            row: 0, // must be 0 based
-            column: 0, // must be 0 based
-            text: "error.message", // text to show in tooltip
-            type: "error"
-        },
-        {
-            row: 1, // must be 0 based
-            column: 0, // must be 0 based
-            text: "error.message", // text to show in tooltip
-            type: "warn"
-        },
-        {
-            row: 2, // must be 0 based
-            column: 0, // must be 0 based
-            text: "error.message", // text to show in tooltip
-            type: "error"
-        }
-    ]; // not working at the moment
-
     return (
         <div className="App">
-            <h2>MOTHER FUCKER DEBUGGER</h2>
-
-            <button onClick={() => editorRef.current.editor.undo()}>UNDO</button>
-            <button onClick={() => editorRef.current.editor.redo()}>REDO</button>
-            <button onClick={() => setCurrThemeIdx(currThemeIdx + 1)}>Change Theme</button>
-            <button onClick={() => {
-                setCurrLine(currLine + 1)
-                editorRef.current.editor.selection.moveCursorToPosition({row: currLine, column: 0});
-                editorRef.current.editor.selection.selectLine()
-            }}>NEXT STEP
-            </button>
-            <button onClick={() => {
-                setCurrLine(11)
-                editorRef.current.editor.selection.moveCursorToPosition({row: currLine, column: 0});
-                editorRef.current.editor.selection.selectLine()
-            }}>RUN
-            </button>
-
             <AceEditor
                 ref={editorRef}
                 value={prog}
@@ -148,17 +108,14 @@ function Editor() {
                 theme={editorThemes[currThemeIdx]}
                 onChange={onChange}
                 name="UNIQUE_ID_OF_DIV"
-                editorProps={{
-                    $blockScrolling: true,
-                    $useWorker: false
-                }}
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}
                 enableSnippets={true}
                 highlightActiveLine={false}
-                annotations={annotations}
-                setOptions={{
-                    useWorker: false
+                setOptions={{useWorker: false}}
+                editorProps={{
+                    $blockScrolling: true,
+                    $useWorker: false
                 }}
             />
         </div>

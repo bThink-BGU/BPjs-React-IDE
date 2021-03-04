@@ -128,6 +128,27 @@ export const editorThemes = [
     "xcode"
 ]
 
+const annotations = [
+    {
+        row: 0, // must be 0 based
+        column: 0, // must be 0 based
+        text: "error.message", // text to show in tooltip
+        type: "error"
+    },
+    {
+        row: 1, // must be 0 based
+        column: 0, // must be 0 based
+        text: "error.message", // text to show in tooltip
+        type: "warn"
+    },
+    {
+        row: 2, // must be 0 based
+        column: 0, // must be 0 based
+        text: "error.message", // text to show in tooltip
+        type: "error"
+    }
+]; // not working at the moment
+
 export const setBpjsMode = function (editor, session) {
     registerSnippets(editor, session, "javascript", bpjsSnippets)
     session.setMode(new BpjsMode())
