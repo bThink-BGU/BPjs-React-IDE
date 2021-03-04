@@ -1,0 +1,168 @@
+import React, { useState, useEffect, createRef } from "react";
+import AceEditor from "react-ace";
+import "ace-builds/src-min-noconflict/ext-language_tools";
+import "ace-builds/src-min-noconflict/ext-beautify";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/snippets/javascript";
+
+import "ace-builds/src-noconflict/theme-ambiance"
+import "ace-builds/src-noconflict/theme-chaos"
+import "ace-builds/src-noconflict/theme-chrome"
+import "ace-builds/src-noconflict/theme-clouds"
+import "ace-builds/src-noconflict/theme-clouds_midnight"
+import "ace-builds/src-noconflict/theme-cobalt"
+import "ace-builds/src-noconflict/theme-crimson_editor"
+import "ace-builds/src-noconflict/theme-dawn"
+import "ace-builds/src-noconflict/theme-dracula"
+import "ace-builds/src-noconflict/theme-dreamweaver"
+import "ace-builds/src-noconflict/theme-eclipse"
+import "ace-builds/src-noconflict/theme-github"
+import "ace-builds/src-noconflict/theme-gob"
+import "ace-builds/src-noconflict/theme-gruvbox"
+import "ace-builds/src-noconflict/theme-idle_fingers"
+import "ace-builds/src-noconflict/theme-iplastic"
+import "ace-builds/src-noconflict/theme-katzenmilch"
+import "ace-builds/src-noconflict/theme-kr_theme"
+import "ace-builds/src-noconflict/theme-kuroir"
+import "ace-builds/src-noconflict/theme-merbivore"
+import "ace-builds/src-noconflict/theme-merbivore_soft"
+import "ace-builds/src-noconflict/theme-mono_industrial"
+import "ace-builds/src-noconflict/theme-monokai"
+import "ace-builds/src-noconflict/theme-nord_dark"
+import "ace-builds/src-noconflict/theme-pastel_on_dark"
+import "ace-builds/src-noconflict/theme-solarized_dark"
+import "ace-builds/src-noconflict/theme-solarized_light"
+import "ace-builds/src-noconflict/theme-sqlserver"
+import "ace-builds/src-noconflict/theme-terminal"
+import "ace-builds/src-noconflict/theme-textmate"
+import "ace-builds/src-noconflict/theme-tomorrow"
+import "ace-builds/src-noconflict/theme-tomorrow_night"
+import "ace-builds/src-noconflict/theme-tomorrow_night_blue"
+import "ace-builds/src-noconflict/theme-tomorrow_night_bright"
+import "ace-builds/src-noconflict/theme-tomorrow_night_eighties"
+import "ace-builds/src-noconflict/theme-twilight"
+import "ace-builds/src-noconflict/theme-vibrant_ink"
+import "ace-builds/src-noconflict/theme-xcode"
+
+import "./code-editor.css";
+import { setBpjsMode, editorThemes } from "./editor-setting";
+
+const BP_TAP = "guttermousedown";
+
+function Editor() {
+    const [currThemeIdx, setCurrThemeIdx] = useState(0);
+    const [prog, setProg] = useState("");
+    const [editorRef, setEditorRef] = useState(null);
+    const [breakPoints, setBreakPoints] = useState([]);
+    const [currLine, setCurrLine] = useState(11);
+
+    const onChange = (newValue) => {
+        editorRef?.current?.session?.setAnnotations(annotations)
+        setProg(newValue);
+    }
+
+    const handleBreakPointTap = (e, updateBreakpoints) => {
+        const target = e.domEvent.target;
+
+        if (target.className.indexOf("ace_gutter-cell") === -1) {
+            return;
+        }
+        const row = e.getDocumentPosition().row;
+        const breakpoints = e.editor.session.getBreakpoints(row, 0);
+
+        if (typeof breakpoints[row] === typeof undefined) {
+            e.editor.session.setBreakpoint(row);
+        } else {
+            e.editor.session.clearBreakpoint(row);
+        }
+        updateBreakpoints(breakpoints)
+        e.stop();
+    };
+
+    const setCleanBreakpoints = (breakpoints) => {
+        setBreakPoints(Object.keys(breakpoints)
+            .map(breakPoint => parseInt(breakPoint)))
+    };
+
+    useEffect(() => {
+        if (editorRef && editorRef.current) {
+            const {editor, editor: {session}} = editorRef.current;
+            setBpjsMode(editor, session);
+
+            editor.on(BP_TAP, (e) => {
+                handleBreakPointTap(e, setCleanBreakpoints)
+            });
+        }
+    }, [editorRef]);
+
+    useEffect(() => {
+        const editorRef = createRef()
+        setEditorRef(editorRef)
+    }, []);
+
+    const annotations = [
+        {
+            row: 0, // must be 0 based
+            column: 0, // must be 0 based
+            text: "error.message", // text to show in tooltip
+            type: "error"
+        },
+        {
+            row: 1, // must be 0 based
+            column: 0, // must be 0 based
+            text: "error.message", // text to show in tooltip
+            type: "warn"
+        },
+        {
+            row: 2, // must be 0 based
+            column: 0, // must be 0 based
+            text: "error.message", // text to show in tooltip
+            type: "error"
+        }
+    ]; // not working at the moment
+
+    return (
+        <div className="App">
+            <h2>MOTHER FUCKER DEBUGGER</h2>
+
+            <button onClick={() => editorRef.current.editor.undo()}>UNDO</button>
+            <button onClick={() => editorRef.current.editor.redo()}>REDO</button>
+            <button onClick={() => setCurrThemeIdx(currThemeIdx + 1)}>Change Theme</button>
+            <button onClick={() => {
+                setCurrLine(currLine + 1)
+                editorRef.current.editor.selection.moveCursorToPosition({row: currLine, column: 0});
+                editorRef.current.editor.selection.selectLine()
+            }}>NEXT STEP
+            </button>
+            <button onClick={() => {
+                setCurrLine(11)
+                editorRef.current.editor.selection.moveCursorToPosition({row: currLine, column: 0});
+                editorRef.current.editor.selection.selectLine()
+            }}>RUN
+            </button>
+
+            <AceEditor
+                ref={editorRef}
+                value={prog}
+                mode={"javascript"}
+                theme={editorThemes[currThemeIdx]}
+                onChange={onChange}
+                name="UNIQUE_ID_OF_DIV"
+                editorProps={{
+                    $blockScrolling: true,
+                    $useWorker: false
+                }}
+                enableBasicAutocompletion={true}
+                enableLiveAutocompletion={true}
+                enableSnippets={true}
+                highlightActiveLine={false}
+                annotations={annotations}
+                setOptions={{
+                    useWorker: false
+                }}
+            />
+        </div>
+    );
+}
+
+export default Editor;

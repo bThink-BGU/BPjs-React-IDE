@@ -1,0 +1,6 @@
+.ace_gutter-cell.ace_breakpoint {
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0px 0px 1px 1px #b67171 inset;
+    background: linear-gradient(to right, #b67171 30%, transparent 30%);
+    display: inline-block;
+}
