@@ -1,12 +1,18 @@
-import React from "react";
+import React  ,{ useState } from "react";
 import './App.css';
 import AceEditor from "react-ace"; // do not remove this import.
 import Editor from "./components/code-editor/code-editor.component";
 import { StyledResizablePanel } from "./components/resizable-panel/resizable-panel.styles";
-
+import StateManager from './components/state-context/StateContextWrapper'
+import VarTable from './components/var-table/VarsTableContainer'
 function App() {
+    
+    const [progState, setProgState] = useState({});
+    
     return (
+        
         <div>
+        <StateManager>
             <StyledResizablePanel
                 defaultSize={{
                     width: 100,
@@ -31,8 +37,10 @@ function App() {
                 positions={["left", "bottom"]}
                 color={"#65ba6782"}
             >
-                FOOTER
+                
             </StyledResizablePanel>
+            <VarTable/>
+            </StateManager>
         </div>
     );
 }
