@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect, createRef, useContext } from "react";
 import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-min-noconflict/ext-beautify";
@@ -46,11 +46,27 @@ import "ace-builds/src-noconflict/theme-xcode"
 
 import "./code-editor.css";
 import { setBpjsMode, editorThemes } from "./editor-setting";
+import IdeDimensionCTX from "../../pages/IDE/IdeDimensionCtx";
+import { Card } from "antd";
+import styled from "styled-components";
 
 const BP_TAP = "guttermousedown";
 
+const EditorContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const editorStyle = {
+    width: "100%",
+    height: "100%"
+};
+
 function Editor() {
-    const [currThemeIdx, setCurrThemeIdx] = useState(0);
+    const [currThemeIdx, setCurrThemeIdx] = useState(2);
     const [prog, setProg] = useState("");
     const [editorRef, setEditorRef] = useState(null);
     const [breakPoints, setBreakPoints] = useState([]);
@@ -87,6 +103,7 @@ function Editor() {
         if (editorRef && editorRef.current) {
             const {editor, editor: {session}} = editorRef.current;
             setBpjsMode(editor, session);
+            editor.setAutoScrollEditorIntoView(true);
 
             editor.on(BP_TAP, (e) => {
                 handleBreakPointTap(e, setCleanBreakpoints)
@@ -100,7 +117,7 @@ function Editor() {
     }, []);
 
     return (
-        <div className="App">
+        <EditorContainer>
             <AceEditor
                 ref={editorRef}
                 value={prog}
@@ -117,9 +134,10 @@ function Editor() {
                     $blockScrolling: true,
                     $useWorker: false
                 }}
+                style={editorStyle}
             />
-        </div>
+        </EditorContainer>
     );
-}
+};
 
 export default Editor;

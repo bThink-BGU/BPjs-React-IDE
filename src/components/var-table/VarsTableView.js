@@ -1,6 +1,4 @@
-import React, { useState, useEffect, createRef } from "react";
-import ProgramStateCTX from "../state-context/StateContext";
-import getVars from './VarTableContextResolver'
+import React from "react";
 import { Table } from 'antd';
 import ReactJson from 'react-json-view'
 
