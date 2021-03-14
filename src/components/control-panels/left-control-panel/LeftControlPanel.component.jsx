@@ -4,14 +4,14 @@ import { Resizable } from "re-resizable";
 import { PanelDivider } from "../panel-divider/PanelDivider";
 import { handleStyle, StyledLeftControlPanel, StyledResizableContainer } from "./LeftControlPanel.styles";
 
-
+import VarTable from "../../../components/var-table/VarsTableContainer";
 const LeftControlPanel = () => {
 
     return (
         <StyledResizableContainer enable={{right: true}} handleStyles={handleStyle}>
             <PanelDivider direction={"vertical"}/>
             <StyledLeftControlPanel>
-                XYZ
+            <VarTable/>
             </StyledLeftControlPanel>
         </StyledResizableContainer>
     );

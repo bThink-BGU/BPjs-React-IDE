@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import StateManager from "../../components/state-context/StateContextWrapper";
-import VarTable from "../../components/var-table/VarsTableContainer";
+import StateManager from "../../components/state-context/StateContextWrapper";  
 import Editor from "../../components/code-editor/CodeEditor.component";
 import LeftControlPanel from "../../components/control-panels/left-control-panel/LeftControlPanel.component";
 import BottomControlPanel from "../../components/control-panels/bottom-control-panel/BottomControlPanel.component";
@@ -33,11 +32,13 @@ function IDE() {
                         <Editor/>
                         <BottomControlPanel/>
                     </RightContainer>
+                    
                 </IdeContainer>
+            
             </IdeDimensionCTX.Provider>
-            <VarTable/>
+            
         </StateManager>
-    );
+    );  
 }
 
 export default IDE;

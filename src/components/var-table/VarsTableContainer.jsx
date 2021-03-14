@@ -10,7 +10,7 @@ export default function VarTable() {
 
     return (
         <div>
-            {getVars(programStateCtx).vars &&
+            {getVars(programStateCtx).vars || true &&
             <VarTableView varsToVals={getVars(programStateCtx).vars}/>}
         </div>
     )
