@@ -25,7 +25,6 @@ export default function BPTerminal() {
     const {activeBottomPanels} = layoutCtx;
     const terminalState = useContext(ProgramStateCTX);
     //our terminal is listening to console.log so any printout with console.log file will be displayed in the ui
-    console.log(printoutsResolver(terminalState))
 
     const getWidth = () => {
         const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.TERMINAL);
@@ -57,6 +56,10 @@ export default function BPTerminal() {
         console.log(initialBpjsText);
         return () => Unhook(window.console)
     }, [])
+
+    useEffect(() => {
+        console.log(printoutsResolver(terminalState))
+    }, [terminalState.terminalState])
 
     return (
         <div style={terminalStyle}>
