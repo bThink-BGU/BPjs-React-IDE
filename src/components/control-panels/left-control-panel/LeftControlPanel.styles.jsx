@@ -29,13 +29,6 @@ export const StyledResizableContainer = styled(Resizable)`
 `;
 
 
-export const StyledResizableContainerFlexHorizon = styled(Resizable)`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-`;
 
 
 export const handleStyle = {

@@ -9,6 +9,7 @@
     "ace-builds": "^1.4.12",
     "antd": "^4.13.0",
     "javascript-terminal": "^1.1.1",
+    "node-sass": "^5.0.0",
     "re-resizable": "^6.9.0",
     "react": "^17.0.1",
     "react-ace": "^9.3.0",

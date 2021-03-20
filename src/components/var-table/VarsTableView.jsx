@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import ReactJson from "react-json-view";
-import "./table.css";
+import "./table.scss";
 
 /***
  * Vars to vals is a map holds the follwing keys:

@@ -2,12 +2,14 @@ import { Cascader } from "antd";
 import React, { useContext } from "react";
 import VarTableView from "./VarsTableView";
 import ProgramStateCTX from "../state-context/StateContext";
-import "./table.css";
+import "./table.scss";
 import {
   handleStyle,
-  StyledLeftControlPanel,
   StyledResizableContainerFlexHorizon,
-} from "../control-panels/left-control-panel/LeftControlPanel.styles";
+} from "./StyledContainers";
+
+
+
 const options = [
   {
     value: "B-Thread 1",
@@ -59,7 +61,7 @@ export default function EnvSelector() {
       handleStyles={handleStyle}
     >
       <span
-        style={{ color: "white", width: "100%", backgroundColor: "#ff9b42" }}
+        className="thread-selector-title"
       >
         &nbsp; Thread Selector
         <Cascader
