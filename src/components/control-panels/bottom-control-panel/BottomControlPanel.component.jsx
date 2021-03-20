@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Resizable } from "re-resizable";
 import { PanelDivider } from "../panel-divider/PanelDivider";
 import { handleStyle } from "./BottomControlPanel.styles";
+import BPTerminal from "../../terminal/terminal";
+import EnvSelector from "../../../components/var-table/EnvSelector";
 
 const StyledResizableContainer = styled(Resizable)`
   display: flex;
@@ -21,19 +23,23 @@ const StyledLeftControlPanel = styled.div`
 `;
 
 const BottomControlPanel = () => {
+  return (
+    <StyledResizableContainer
+      maxWidth={"100%"}
+      enable={{ top: true }}
+      handleStyles={handleStyle}
+    >
+      <StyledLeftControlPanel>
+        <EnvSelector />
+      </StyledLeftControlPanel>
 
-    return (
-        <StyledResizableContainer
-            maxWidth={"100%"}
-            enable={{top: true}}
-            handleStyles={handleStyle}
-        >
-            <PanelDivider direction={"horizontal"}/>
-            <StyledLeftControlPanel>
-                sdsdcsdc
-            </StyledLeftControlPanel>
-        </StyledResizableContainer>
-    );
+      <PanelDivider direction={"horizontal"} />
+
+      <StyledLeftControlPanel>
+        <BPTerminal />
+      </StyledLeftControlPanel>
+    </StyledResizableContainer>
+  );
 };
 
 export default BottomControlPanel;

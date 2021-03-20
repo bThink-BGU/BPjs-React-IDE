@@ -1,0 +1,14 @@
+.ant-cascader-picker {
+    width: 100% !important;
+}    
+
+.ant-table-thead > tr >th{
+    color: white !important;
+    background: #ff9b42 !important;
+  }
+
+.ant-table-tbody > tr >th{
+    color: black !important;
+    background:#1c272b !important;
+    }
+

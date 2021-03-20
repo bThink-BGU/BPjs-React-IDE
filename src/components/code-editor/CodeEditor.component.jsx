@@ -124,6 +124,7 @@ function Editor() {
                 mode={"javascript"}
                 theme={editorThemes[currThemeIdx]}
                 onChange={onChange}
+                maxLines={27}
                 name="UNIQUE_ID_OF_DIV"
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}

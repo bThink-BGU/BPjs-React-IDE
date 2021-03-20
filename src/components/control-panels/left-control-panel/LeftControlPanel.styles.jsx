@@ -28,6 +28,16 @@ export const StyledResizableContainer = styled(Resizable)`
   justify-content: center;
 `;
 
+
+export const StyledResizableContainerFlexHorizon = styled(Resizable)`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+`;
+
+
 export const handleStyle = {
     right: {
         right: "0px"
