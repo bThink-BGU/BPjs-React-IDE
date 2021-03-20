@@ -1,6 +1,7 @@
 import { Cascader } from "antd";
-import React, { useContext } from "react";
+import React, { useContext,useState } from "react";
 import VarTableView from "./VarsTableView";
+import {mapStateToOptions,mapStateToCurrThread} from './VarTableContextResolver'
 import ProgramStateCTX from "../state-context/StateContext";
 import "./table.scss";
 import {
@@ -8,64 +9,26 @@ import {
   StyledResizableContainerFlexHorizon,
 } from "./StyledContainers";
 
-
-
-const options = [
-  {
-    value: "B-Thread 1",
-    label: "B-Thread 1",
-    children: [
-      {
-        value: "Scope 0",
-        label: "Scope 0",
-      },
-      {
-        value: "Scope 1",
-        label: "Scope 1",
-      },
-      {
-        value: "Scope 2",
-        label: "Scope 2",
-      },
-    ],
-  },
-  {
-    value: "B-Thread 2",
-    label: "B-Thread 2",
-    children: [
-      {
-        value: "Scope 0",
-        label: "Scope 0",
-      },
-      {
-        value: "Scope 1",
-        label: "Scope 1",
-      },
-      {
-        value: "Scope 2",
-        label: "Scope 2",
-      },
-    ],
-  },
-];
-
 function onChange(value) {
   console.log(value);
 }
+
 export default function EnvSelector() {
   const programStateCtx = useContext(ProgramStateCTX);
-
+  const optionsFromState = mapStateToOptions(programStateCtx)
+  const currThread = mapStateToCurrThread(programStateCtx)
+  console.log('optionsis',optionsFromState)
+  console.log('curr',currThread)
   return (
     <StyledResizableContainerFlexHorizon
       enable={{ right: true, left: false }}
       handleStyles={handleStyle}
     >
-      <span
-        className="thread-selector-title"
-      >
+      <span className="thread-selector-title">
         &nbsp; Thread Selector
         <Cascader
-          options={options}
+          defaultValue={[0,0]}
+          options={optionsFromState}
           className="selectors"
           onChange={onChange}
           placeholder="Please select"

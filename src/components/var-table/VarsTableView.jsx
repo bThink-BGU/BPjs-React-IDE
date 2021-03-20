@@ -25,21 +25,21 @@ export default function VarTableView({ varsToVals }) {
     '{"field":{"a":1,"b":2},"field2":{"a":1,"b":2},"field3":"String Value of a var"}'
   );
 
-  const rows = Object.keys(vals).map((k, index) => {
-    return {
-      key: index,
-      varName: k,
-      varVal: k !== "field3" ? <ReactJson src={vals[k]} /> : vals[k],
-    };
-  });
+//   const rows = Object.keys(vals).map((k, index) => {
+//     return {
+//       key: index,
+//       varName: k,
+//       varVal: k !== "field3" ? <ReactJson src={vals[k]} /> : vals[k],
+//     };
+//   });
 
-  // const rows = varsToVals && Object.keys(varsToVals).map((k, index) => {
-  //     return {
-  //         key: index,
-  //         varName: k,
-  //         varVal: k!== "field3" ? <ReactJson src={varsToVals[k]} /> : varsToVals[k]
-  //     }
-  // })
+  const rows = varsToVals && Object.keys(varsToVals).map((k, index) => {
+      return {
+          key: index,
+          varName: k,
+          varVal: k!== "field3" ? <ReactJson src={varsToVals[k]} /> : varsToVals[k]
+      }
+  })
   return (
     <div style={{ width: "100%", height: "100%" }}>
       
