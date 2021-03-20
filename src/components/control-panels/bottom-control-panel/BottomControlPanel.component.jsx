@@ -1,45 +1,38 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { Resizable } from "re-resizable";
-import { PanelDivider } from "../panel-divider/PanelDivider";
-import { handleStyle } from "./BottomControlPanel.styles";
 import BPTerminal from "../../terminal/terminal";
 import EnvSelector from "../../../components/var-table/EnvSelector";
+import VarTableView from "../../var-table/VarsTableView";
+import LayoutCtx from "../../../pages/IDE/LayoutCtx";
+import { BOTTOM_PANELS } from "../../../pages/IDE/ide";
+import _ from "lodash";
 
-const StyledResizableContainer = styled(Resizable)`
+const StyledBottomControlPanel = styled.div`
+  position: fixed;
+  bottom: 38px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledLeftControlPanel = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  padding-left: 20px;
-  padding-top: 10px;
+  justify-content: space-around;
+  flex-direction: row;
+  padding: 10px 60px 10px 20px;
   width: 100%;
-  height: 100%;
+  height: 355px;
   background-color: #1b272b;
 `;
 
 const BottomControlPanel = () => {
-  return (
-    <StyledResizableContainer
-      maxWidth={"100%"}
-      enable={{ top: true }}
-      handleStyles={handleStyle}
-    >
-      <StyledLeftControlPanel>
-        <EnvSelector />
-      </StyledLeftControlPanel>
 
-      <PanelDivider direction={"horizontal"} />
+    const layoutCtx = useContext(LayoutCtx);
+    const {activeBottomPanels} = layoutCtx;
 
-      <StyledLeftControlPanel>
-        <BPTerminal />
-      </StyledLeftControlPanel>
-    </StyledResizableContainer>
-  );
+    const isActive = (panel) => _.includes(activeBottomPanels, panel);
+
+    return (
+        activeBottomPanels.length !== 0 &&
+        <StyledBottomControlPanel>
+            {isActive(BOTTOM_PANELS.DEBUG) && <VarTableView/>}
+            {isActive(BOTTOM_PANELS.TERMINAL) && <BPTerminal/>}
+        </StyledBottomControlPanel>
+    );
 };
 
 export default BottomControlPanel;

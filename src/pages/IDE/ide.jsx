@@ -1,44 +1,44 @@
 import React, { useState } from "react";
-import StateManager from "../../components/state-context/StateContextWrapper";  
+import StateManager from "../../components/state-context/StateContextWrapper";
 import Editor from "../../components/code-editor/CodeEditor.component";
 import LeftControlPanel from "../../components/control-panels/left-control-panel/LeftControlPanel.component";
 import BottomControlPanel from "../../components/control-panels/bottom-control-panel/BottomControlPanel.component";
-import IdeDimensionCTX from "./IdeDimensionCtx";
-import { IdeContainer, RightContainer } from "./ide.styles";
+import { IdeContainer, IdeContentContainer, RightContainer } from "./ide.styles";
 import IdeHeader from "../../components/header/Header.component";
+import ControlButtons from "../../components/control-panels/bottom-control-panel/control-buttons/ControlButtons";
+import LayoutCtx from "./LayoutCtx";
+
+export const BOTTOM_PANELS = {
+    TERMINAL: "terminal",
+    DEBUG: "debug"
+};
 
 function IDE() {
 
-    const [bottomPanelHeight, setBottomPanelHeight] = useState(300);
-    const [rightPanelWidth, setRightPanelWidth] = useState(400);
-    const [leftPanelWidth, setLeftPanelWidth] = useState(400);
+    const [activeBottomPanels, setActiveBottomPanels] = useState([]);
 
-    const ideDimensionsCtxValue = {
-        bottomPanelHeight,
-        setBottomPanelHeight,
-        rightPanelWidth,
-        setRightPanelWidth,
-        leftPanelWidth,
-        setLeftPanelWidth
+    const layoutProperties = {
+        activeBottomPanels,
+        setActiveBottomPanels
     };
 
     return (
         <StateManager>
-            <IdeDimensionCTX.Provider value={ideDimensionsCtxValue}>
-                <IdeHeader/>
+            <LayoutCtx.Provider value={layoutProperties}>
                 <IdeContainer>
-                    <LeftControlPanel/>
-                    <RightContainer>
-                        <Editor/>
-                        <BottomControlPanel/>
-                    </RightContainer>
-                    
+                    <IdeHeader/>
+                    <IdeContentContainer>
+                        <LeftControlPanel/>
+                        <RightContainer>
+                            <Editor/>
+                            <BottomControlPanel/>
+                        </RightContainer>
+                    </IdeContentContainer>
+                    <ControlButtons/>
                 </IdeContainer>
-            
-            </IdeDimensionCTX.Provider>
-            
+            </LayoutCtx.Provider>
         </StateManager>
-    );  
+    );
 }
 
 export default IDE;

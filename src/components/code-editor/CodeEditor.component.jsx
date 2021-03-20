@@ -46,7 +46,7 @@ import "ace-builds/src-noconflict/theme-xcode"
 
 import "./code-editor.css";
 import { setBpjsMode, editorThemes } from "./editor-setting";
-import IdeDimensionCTX from "../../pages/IDE/IdeDimensionCtx";
+import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { Card } from "antd";
 import styled from "styled-components";
 
@@ -57,12 +57,11 @@ const EditorContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const editorStyle = {
     width: "100%",
-    height: "100%"
 };
 
 function Editor() {
@@ -124,7 +123,6 @@ function Editor() {
                 mode={"javascript"}
                 theme={editorThemes[currThemeIdx]}
                 onChange={onChange}
-                maxLines={27}
                 name="UNIQUE_ID_OF_DIV"
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}

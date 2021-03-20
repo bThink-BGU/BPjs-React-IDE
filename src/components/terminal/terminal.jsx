@@ -1,36 +1,69 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import LayoutCtx from "../../pages/IDE/LayoutCtx";
+import { Console, Hook, Unhook } from "console-feed";
 import ProgramStateCTX from "../state-context/StateContext";
 import printoutsResolver from "./TerminalStateResolver"
-import Terminal from "terminal-in-react";
-//Terminal component github [props and other api]
-//https://github.com/nitin42/terminal-in-react
-import { handleStyle, StyledLeftControlPanel, StyledResizableContainer } from "../control-panels/left-control-panel/LeftControlPanel.styles"
-const ans =
-  "Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n v v Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n v v Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n v v Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n v v Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n v v Some Very long long text \n Some Very long long text \n Some Very long long text \n Some Very long long text \n ";
+import { BOTTOM_PANELS } from "../../pages/IDE/ide";
+import _ from "lodash";
 
-  export default function BPTerminal() {
-  const [text, setText] = useState(ans);
-  const terminalState = useContext(ProgramStateCTX);
-  //our terminal is listening to console.log so any printout with console.log file will be displayed in the ui
-  console.log(printoutsResolver(terminalState))
-  return (    
-    
-    // <div style={{width:"100%", height:"100vh"}}>
-    
-    <Terminal
-        color="white"
-        backgroundColor="#1a262b"
-        watchConsoleLogging
-        barColor="black"
-        style={{ fontWeight: "bold", fontSize: "1em",maxHeight:"300px",minHeight:"100px",padding:"6px", borderRadius: "16px",border:"1px solid #ff9b42",overflow:"hidden" }}
-        promptSymbol="🔥"
-        allowTabs={false}
-        hideTopBar={true}
-        msg="WELCOME TO BPJS ONLINE IDE"
-      />
-    //   </div>
-    
+const initialBpjsText = " /$$$$$$$  /$$$$$$$   /$$$$$  /$$$$$$ \n" +
+    "| $$__  $$| $$__  $$ |__  $$ /$$__  $$\n" +
+    "| $$  \\ $$| $$  \\ $$    | $$| $$  \\__/\n" +
+    "| $$$$$$$ | $$$$$$$/    | $$|  $$$$$$ \n" +
+    "| $$__  $$| $$____//$$  | $$ \\____  $$\n" +
+    "| $$  \\ $$| $$    | $$  | $$ /$$  \\ $$\n" +
+    "| $$$$$$$/| $$    |  $$$$$$/|  $$$$$$/\n" +
+    "|_______/ |__/     \\______/  \\______/ \n" +
+    "                                      \n" +
+    "Happy Debugging";
 
-  );
+
+export default function BPTerminal() {
+
+    const [text, setText] = useState([]);
+    const layoutCtx = useContext(LayoutCtx);
+    const {activeBottomPanels} = layoutCtx;
+    const terminalState = useContext(ProgramStateCTX);
+    //our terminal is listening to console.log so any printout with console.log file will be displayed in the ui
+    console.log(printoutsResolver(terminalState))
+
+    const getWidth = () => {
+        const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.TERMINAL);
+        const debugIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.DEBUG);
+        if(terminalIsActive && debugIsActive) {
+            return "49%";
+        }
+        else if (!debugIsActive && terminalIsActive) {
+            return "100%";
+        }
+    };
+
+    const terminalStyle = {
+        fontWeight: "bold",
+        fontSize: "16px",
+        height: "92.6%",
+        borderRadius: "5px",
+        overflowY: "scroll",
+        backgroundColor: "rgb(49, 49, 49)",
+        width: `${getWidth()}`
+    };
+
+    useEffect(() => {
+        Hook(
+            window.console,
+            (log) => setText((currLogs) => [...currLogs, log]),
+            false
+        )
+        console.log(initialBpjsText);
+        return () => Unhook(window.console)
+    }, [])
+
+    return (
+        <div style={terminalStyle}>
+            Console
+            <Console logs={text} styles={{LOG_COLOR: "white", BASE_FONT_SIZE: "16px", LOG_BACKGROUND: "none"}}
+                      variant={"dark"}/>
+        </div>
+    );
 }
 
