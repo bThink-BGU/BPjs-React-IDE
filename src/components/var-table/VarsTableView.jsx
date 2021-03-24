@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import { Table } from "antd";
 import ReactJson from "react-json-view";
-import "./table.scss";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
-import _ from "lodash";
-import { BOTTOM_PANELS } from "../../pages/IDE/ide";
+import { TableWrapper, StyledTitle } from "./VarTable.styles";
 
 /***
  * Vars to vals is a map holds the follwing keys:
@@ -39,29 +37,22 @@ export default function VarTableView({varsToVals}) {
         };
     });
 
-    const getWidth = () => {
-        const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.TERMINAL);
-        const debugIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.DEBUG);
-        if(terminalIsActive && debugIsActive) {
-            return "49%";
-        }
-        else if (!terminalIsActive && debugIsActive) {
-            return "100%";
-        }
-    };
-
     return (
-        <Table
-            style={{
-                width: `${getWidth()}`,
-                height: "80%"
-            }}
-            columns={columns}
-            pagination={false}
-            className="antdTable"
-            dataSource={rows}
-            size="small"
-        />
+        <TableWrapper activeBottomPanels={activeBottomPanels}>
+            <StyledTitle level={4}>Variables</StyledTitle>
+            <Table
+                scroll={{y: 253}}
+                style={{
+                    width: "100% !important",
+                    height: "100%"
+                }}
+                columns={columns}
+                pagination={false}
+                className="antdTable"
+                dataSource={rows}
+                size="small"
+            />
+        </TableWrapper>
     );
 }
 

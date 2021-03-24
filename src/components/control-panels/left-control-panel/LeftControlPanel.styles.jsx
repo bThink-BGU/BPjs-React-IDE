@@ -19,14 +19,13 @@ export const StyledLeftControlPanel = styled.div`
   padding-top: 10px;
   width: 100%;
   height: calc(100vh - 50px);
-  background-color: #1b272b;
+  background-color: rgb(35, 39, 43);
 `;
 
 export const StyledResizableContainer = styled(Resizable)`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 99;
 `;
 
 
