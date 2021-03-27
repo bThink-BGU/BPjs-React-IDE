@@ -35,7 +35,7 @@ export const StyledTitle = styled(Title)`
 `;
 
 export const ConsoleWrapper = styled.div`
-  height: 88%;
+  height: 100%;
   border-radius: 7px;
   ${props => getWidth(props.activeBottomPanels)}
 `;

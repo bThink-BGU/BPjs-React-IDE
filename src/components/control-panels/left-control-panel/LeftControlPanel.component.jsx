@@ -7,7 +7,8 @@ const LeftControlPanel = () => {
     return (
         <StyledResizableContainer
             enable={{right: true}}
-            handleStyles={handleStyle}>
+            handleStyles={handleStyle}
+            defaultSize={{width: 10}}>
             <PanelDivider direction={"vertical"}/>
             <StyledLeftControlPanel>
                 גגש

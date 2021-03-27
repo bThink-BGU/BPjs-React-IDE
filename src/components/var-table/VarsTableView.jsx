@@ -41,7 +41,7 @@ export default function VarTableView({varsToVals}) {
         <TableWrapper activeBottomPanels={activeBottomPanels}>
             <StyledTitle level={4}>Variables</StyledTitle>
             <Table
-                scroll={{y: 253}}
+                scroll={{y: 210}}
                 style={{
                     width: "100% !important",
                     height: "100%"
