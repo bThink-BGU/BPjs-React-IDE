@@ -47,8 +47,8 @@ import "ace-builds/src-noconflict/theme-xcode"
 import "./code-editor.css";
 import { setBpjsMode, editorThemes } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
-import { Card } from "antd";
 import styled from "styled-components";
+import _ from "lodash";
 
 const BP_TAP = "guttermousedown";
 
@@ -60,16 +60,15 @@ const EditorContainer = styled.div`
   align-items: flex-start;
 `;
 
-const editorStyle = {
-    width: "100%",
-};
-
 function Editor() {
     const [currThemeIdx, setCurrThemeIdx] = useState(2);
     const [prog, setProg] = useState("");
     const [editorRef, setEditorRef] = useState(null);
     const [breakPoints, setBreakPoints] = useState([]);
     const [currLine, setCurrLine] = useState(11);
+
+    const layoutContext = useContext(LayoutCtx);
+    const {activeBottomPanels} = layoutContext;
 
     const onChange = (newValue) => {
         setProg(newValue);
@@ -115,9 +114,14 @@ function Editor() {
         setEditorRef(editorRef)
     }, []);
 
+    const editorStyle = {
+        width: "100%",
+    };
+
     return (
         <EditorContainer>
             <AceEditor
+                height={`calc(100vh - ${_.isEmpty(activeBottomPanels) ? "89px" : "444px"})`}
                 ref={editorRef}
                 value={prog}
                 mode={"javascript"}
