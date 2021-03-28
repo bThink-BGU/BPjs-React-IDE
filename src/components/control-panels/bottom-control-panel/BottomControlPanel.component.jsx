@@ -28,6 +28,7 @@ const PanelsContainer = styled.div`
   flex-direction: row;
   width: 100%;
   height: calc(100% - 80px);
+
 `;
 
 const BottomControlPanel = () => {
@@ -44,13 +45,13 @@ const BottomControlPanel = () => {
             <PanelsContainer>
                 <LeftDebugButtons/>
                 {isActive(BOTTOM_PANELS.DEBUG) && <VarTableView/>}
-                {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.TERMINAL) &&
+                {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.CONSOLE) &&
                 <Divider style={{
                     height: "250px",
                     backgroundColor: "#ff9b42",
                     marginTop: "40px"
                 }} type="vertical"/>}
-                {isActive(BOTTOM_PANELS.TERMINAL) && <BPTerminal/>}
+                {isActive(BOTTOM_PANELS.CONSOLE) && <BPTerminal/>}
             </PanelsContainer>
         </StyledBottomControlPanel>
     );

@@ -9,7 +9,7 @@ import ControlButtons from "../../components/control-panels/bottom-control-panel
 import LayoutCtx from "./LayoutCtx";
 
 export const BOTTOM_PANELS = {
-    TERMINAL: "terminal",
+    CONSOLE: "console",
     DEBUG: "debug"
 };
 

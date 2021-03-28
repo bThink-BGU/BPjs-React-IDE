@@ -22,3 +22,30 @@ table {
   box-shadow: 0 0 0 2px #1c272b;
   border-style: hidden !important;
 }
+
+.ant-table-container {
+  border: 1px solid #1a272a !important;
+}
+
+///* width */
+//::-webkit-scrollbar {
+//  width: 8px;
+//  border-radius: 2px;
+//}
+//
+///* Track */
+//::-webkit-scrollbar-track {
+//  background: #FF9B42;
+//  border-radius: 2px;
+//}
+//
+///* Handle */
+//::-webkit-scrollbar-thumb {
+//  background: white;
+//  border-radius: 2px;
+//}
+//
+///* Handle on hover */
+//::-webkit-scrollbar-thumb:hover {
+//  background: #555;
+//}

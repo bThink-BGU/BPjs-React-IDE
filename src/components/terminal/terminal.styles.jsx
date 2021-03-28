@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 const {Title} = Typography;
 
 const getWidth = (activeBottomPanels) => {
-    const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.TERMINAL);
+    const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.CONSOLE);
     const debugIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.DEBUG);
     if (terminalIsActive && debugIsActive) {
         return css` width: 48% `;

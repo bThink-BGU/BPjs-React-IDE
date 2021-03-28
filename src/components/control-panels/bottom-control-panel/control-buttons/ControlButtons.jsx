@@ -10,7 +10,7 @@ const ControlButtons = () => {
     return (
         <ControlButtonsContainer>
             <ControlButton Image={DebugImg} title={BOTTOM_PANELS.DEBUG}/>
-            <ControlButton Image={TerminalImg} title={BOTTOM_PANELS.TERMINAL}/>
+            <ControlButton Image={TerminalImg} title={BOTTOM_PANELS.CONSOLE}/>
         </ControlButtonsContainer>
     );
 };

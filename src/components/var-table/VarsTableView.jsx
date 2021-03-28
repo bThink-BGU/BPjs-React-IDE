@@ -19,6 +19,7 @@ export default function VarTableView({varsToVals}) {
         {
             title: "Variable Name",
             dataIndex: "varName",
+            width: "130px"
         },
         {
             title: "Value",
@@ -41,15 +42,16 @@ export default function VarTableView({varsToVals}) {
         <TableWrapper activeBottomPanels={activeBottomPanels}>
             <StyledTitle level={4}>Variables</StyledTitle>
             <Table
+                bordered={true}
                 scroll={{y: 210}}
                 style={{
                     width: "100% !important",
                     height: "100%"
                 }}
                 columns={columns}
+                dataSource={rows}
                 pagination={false}
                 className="antdTable"
-                dataSource={rows}
                 size="small"
             />
         </TableWrapper>
