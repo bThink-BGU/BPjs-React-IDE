@@ -9,16 +9,20 @@ import {
   StyledResizableContainerFlexHorizon,
 } from "./StyledContainers";
 
-function onChange(value) {
-  console.log(value);
-}
-
 export default function EnvSelector() {
   const programStateCtx = useContext(ProgramStateCTX);
   const optionsFromState = mapStateToOptions(programStateCtx)
-  const currThread = mapStateToCurrThread(programStateCtx)
-  console.log('optionsis',optionsFromState)
-  console.log('curr',currThread)
+  const stateCurrThread = mapStateToCurrThread(programStateCtx)
+  const [cascaderValue, setCascaderValue] = useState("Please Select");
+  console.log(stateCurrThread);
+  
+  (stateCurrThread && stateCurrThread !== cascaderValue) && setCascaderValue(stateCurrThread)
+  const onChange = (e)=> {
+    if(stateCurrThread && stateCurrThread !== cascaderValue) {
+      console.log(e)
+    }
+  }
+  
   return (
     <StyledResizableContainerFlexHorizon
       enable={{ right: true, left: false }}
@@ -27,8 +31,8 @@ export default function EnvSelector() {
       <span className="thread-selector-title">
         &nbsp; Thread Selector
         <Cascader
-          defaultValue={[0,0]}
           options={optionsFromState}
+          value={[cascaderValue]}
           className="selectors"
           onChange={onChange}
           placeholder="Please select"

@@ -23,7 +23,7 @@ function IDE() {
     };
 
     return (
-        <StateManager>
+        
             <LayoutCtx.Provider value={layoutProperties}>
                 <IdeContainer>
                     <IdeHeader/>
@@ -37,7 +37,7 @@ function IDE() {
                     <ControlButtons/>
                 </IdeContainer>
             </LayoutCtx.Provider>
-        </StateManager>
+        
     );
 }
 

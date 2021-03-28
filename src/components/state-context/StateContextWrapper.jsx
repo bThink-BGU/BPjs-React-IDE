@@ -1,56 +1,53 @@
 import React from "react";
 import ProgramStateCTX from "./StateContext";
 import { mapDebugState, mapTerminalState } from "./StateMapper";
+import { Client } from "@stomp/stompjs";
 
 export default class StateManager extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       progState: "empty state",
-      terminalState: {outputs: "WELCOME TO BPJS ONLINE IDE"},
+      terminalState: { outputs: "WELCOME TO BPJS ONLINE IDE" },
     };
-    this.wsDebug = new WebSocket("ws://localhost:4545");
-    this.wsTerminal = new WebSocket("ws://localhost:4546");
   }
 
   componentDidMount() {
-    this.openDebugWebSocket();
-    this.openDebugWebSocket();
-    this.registerWebSocketHandler();
-    this.handleWebSocketClose();
-  }
-  openTermnialWebSocket() {
-    this.wsTerminal.onopen = () => {
-    };
-  }
+    this.client = new Client();
+    this.client.configure({
+      brokerURL: "ws://localhost:8080/ws",
+      onConnect: (msg) => {
+        console.log("onConnect", msg);
+        this.client.subscribe("/bpjs/subscribe", (message) => {
+          console.log(message);
+        });
 
-  openDebugWebSocket() {
-    this.wsDebug.onopen = () => {
-    };
-  }
+        this.client.subscribe("/user/console/update", (message) => {
+          this.setState({ terminalState: mapTerminalState(msg) });
+        });
 
-  registerWebSocketHandler() {
-    this.wsDebug.onmessage = (evt) => {
-      const message = JSON.parse(evt.data);
-      this.setState({ progState: mapDebugState(message) });
-    };
-    this.wsTerminal.onmessage = (evt) => {
-      const message = JSON.parse(evt.data);
-      this.setState({ terminalState: mapTerminalState(message) });
-    };
-  }
+        this.client.subscribe("/user/state/update", (message) => {
+          alert(message.body);
+          this.setState({ progState: mapDebugState(msg) });
+        });
+      },
+      // Helps during debugging, remove in production
+      debug: (str) => {
+        console.log(new Date(), str);
+      },
+    });
 
-  handleWebSocketClose() {
-    this.wsDebug.onclose = () => {
-    };
-    this.wsTerminal.onclose = () => {
-    
-    };
+    this.client.activate();
   }
 
   render() {
     return (
-      <ProgramStateCTX.Provider value={{progState: this.state.progState,terminalState: this.state.terminalState}}>
+      <ProgramStateCTX.Provider
+        value={{
+          progState: this.state.progState,
+          terminalState: this.state.terminalState,
+        }}
+      >
         {this.props.children}
       </ProgramStateCTX.Provider>
     );
