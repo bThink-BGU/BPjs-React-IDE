@@ -1,9 +1,11 @@
 export const mapDebugState = (stateFromServer) => {
-    var newState = {
-        threadsAndEnvs:stateFromServer&& stateFromServer.bThreadInfoList &&  stateFromServer.bThreadInfoList.map(t => {return {name: t.name, env: t.env }}),
-        currentRunningThread: {name: stateFromServer.currentRunningBT}    
+    console.log("mapDebugState", stateFromServer)
+    return {
+        threadsAndEnvs: stateFromServer && stateFromServer.bThreadInfoList && stateFromServer.bThreadInfoList.map(t => {
+            return { name: t.name, env: t.env }
+        }),
+        currentRunningThread: { name: stateFromServer.currentRunningBT }
     }
-    return newState
 }
 //example state:
 // const s2 = {"bThreadInfoList":[
@@ -23,10 +25,9 @@ export const mapDebugState = (stateFromServer) => {
     //     "chosenEvent":null,"currentRunningBT":"bt-hello1","currentLineNumber":null}
 
 export const mapTerminalState = (terminalStateFromServer) => {
-    var newState = {
-        outputs: terminalStateFromServer
+    return {
+        outputs: terminalStateFromServer.message
     }
-    return newState
 }
 
 
