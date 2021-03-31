@@ -1,7 +1,7 @@
+import { Client } from "@stomp/stompjs";
 import React from "react";
 import ProgramStateCTX from "./StateContext";
 import { mapDebugState, mapTerminalState } from "./StateMapper";
-import { Client } from "@stomp/stompjs";
 
 export default class StateManager extends React.Component {
   constructor(props) {
@@ -18,12 +18,13 @@ export default class StateManager extends React.Component {
       brokerURL: "ws://localhost:8080/ws",
       onConnect: (msg) => {
         console.log("onConnect", msg);
+
         this.client.subscribe("/bpjs/subscribe", (message) => {
           console.log(message);
         });
 
         this.client.subscribe("/user/console/update", (message) => {
-          this.setState({ terminalState: mapTerminalState(msg) });
+          this.setState({ terminalState: mapTerminalState(message) });
         });
 
         this.client.subscribe("/user/state/update", (message) => {

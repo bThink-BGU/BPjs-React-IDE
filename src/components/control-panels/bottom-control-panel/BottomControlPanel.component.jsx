@@ -16,7 +16,7 @@ const StyledBottomControlPanel = styled.div`
   position: fixed;
   bottom: 38px;
   padding: 10px 30px 10px 20px;
-  height: 355px;
+  height: 415px;
   width: 100%;
   background-color: #1b272b;
   border-top: 5px solid orange;
@@ -44,7 +44,7 @@ const BottomControlPanel = () => {
             <TopDebugButtons/>
             <PanelsContainer>
                 <LeftDebugButtons/>
-                {isActive(BOTTOM_PANELS.DEBUG) && <VarTableView/>}
+                {isActive(BOTTOM_PANELS.DEBUG) && <EnvSelector/>}
                 {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.CONSOLE) &&
                 <Divider style={{
                     height: "250px",

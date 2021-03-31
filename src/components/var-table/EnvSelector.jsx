@@ -1,34 +1,39 @@
 import { Cascader } from "antd";
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import VarTableView from "./VarsTableView";
-import {mapStateToOptions,mapStateToCurrThread} from './VarTableContextResolver'
+import {
+  mapStateToOptions,
+  mapStateToCurrThread,
+} from "./VarTableContextResolver";
 import ProgramStateCTX from "../state-context/StateContext";
 import "./table.scss";
 import {
   handleStyle,
   StyledResizableContainerFlexHorizon,
 } from "./StyledContainers";
-
+import { TableWrapper, StyledTitle } from "./VarTable.styles";
+import LayoutCtx from "../../pages/IDE/LayoutCtx";
 export default function EnvSelector() {
   const programStateCtx = useContext(ProgramStateCTX);
-  const optionsFromState = mapStateToOptions(programStateCtx)
-  const stateCurrThread = mapStateToCurrThread(programStateCtx)
+  const optionsFromState = mapStateToOptions(programStateCtx);
+  const stateCurrThread = mapStateToCurrThread(programStateCtx);
   const [cascaderValue, setCascaderValue] = useState("Please Select");
   console.log(stateCurrThread);
-  
-  (stateCurrThread && stateCurrThread !== cascaderValue) && setCascaderValue(stateCurrThread)
-  const onChange = (e)=> {
-    if(stateCurrThread && stateCurrThread !== cascaderValue) {
-      console.log(e)
+  const layoutCtx = useContext(LayoutCtx);
+  const { activeBottomPanels } = layoutCtx;
+  stateCurrThread &&
+    stateCurrThread !== cascaderValue &&
+    setCascaderValue(stateCurrThread);
+  const onChange = (e) => {
+    if (stateCurrThread && stateCurrThread !== cascaderValue) {
+      console.log(e);
     }
-  }
-  
+  };
+
   return (
-    <StyledResizableContainerFlexHorizon
-      enable={{ right: true, left: false }}
-      handleStyles={handleStyle}
-    >
-      <span className="thread-selector-title">
+    <TableWrapper activeBottomPanels={activeBottomPanels}>
+      <StyledTitle level={4}>Variables</StyledTitle>
+      <div className="thread-selector-title">
         &nbsp; Thread Selector
         <Cascader
           options={optionsFromState}
@@ -37,8 +42,8 @@ export default function EnvSelector() {
           onChange={onChange}
           placeholder="Please select"
         />
-      </span>
+      </div>
       <VarTableView varsToVals={"hi"} />
-    </StyledResizableContainerFlexHorizon>
+    </TableWrapper>
   );
 }

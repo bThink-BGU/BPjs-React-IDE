@@ -121,7 +121,7 @@ function Editor() {
     return (
         <EditorContainer>
             <AceEditor
-                height={`calc(100vh - ${_.isEmpty(activeBottomPanels) ? "89px" : "444px"})`}
+                height={`calc(100vh - ${_.isEmpty(activeBottomPanels) ? "89px" : "503px"})`}
                 ref={editorRef}
                 value={prog}
                 mode={"javascript"}
