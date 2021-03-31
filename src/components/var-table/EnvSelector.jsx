@@ -29,7 +29,7 @@ export default function EnvSelector() {
 
   const { activeBottomPanels } = layoutCtx;
 
-  initThreads(stateCurrThread, cascaderValue, setCascaderValue);
+  // initThreads(stateCurrThread, cascaderValue, setCascaderValue);
 
   const onChange = (e) => {
     if (stateCurrThread !== cascaderValue) {

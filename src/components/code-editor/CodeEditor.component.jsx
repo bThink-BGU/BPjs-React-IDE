@@ -131,7 +131,7 @@ function Editor() {
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}
                 enableSnippets={true}
-                highlightActiveLine={false}
+                highlightActiveLine={true}
                 setOptions={{useWorker: false}}
                 editorProps={{
                     $blockScrolling: true,

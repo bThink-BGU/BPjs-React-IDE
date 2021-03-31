@@ -2,7 +2,7 @@ import { Client } from "@stomp/stompjs";
 import React from "react";
 import ProgramStateCTX from "./StateContext";
 import { mapDebugState, mapTerminalState } from "./StateMapper";
-
+import {setUserId} from '../../utils/api'
 export default class StateManager extends React.Component {
   constructor(props) {
     super(props);
@@ -17,8 +17,9 @@ export default class StateManager extends React.Component {
     this.client.configure({
       brokerURL: "ws://localhost:8080/ws",
       onConnect: (msg) => {
-        console.log("onConnect", msg);
-
+        
+        setUserId(msg.headers['user-name'])
+        
         this.client.subscribe("/user/console/update", (message) => {
           if (message && message.body)
             this.setState({ terminalState: mapTerminalState(JSON.parse(message.body)) });
