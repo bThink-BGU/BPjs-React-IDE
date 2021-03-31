@@ -5,8 +5,8 @@ export const mapStateToOptions = ({ progState }) => {
             label: t.name,
             children: Object.keys(t.env).map(envName => {
                 return {
-                    value: envName,
-                    label: envName,
+                    value: t.env[envName]['FUNCNAME'],
+                    label: t.env[envName]['FUNCNAME'],
                 }
             })
         }

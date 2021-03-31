@@ -26,7 +26,12 @@ export default class StateManager extends React.Component {
 
         this.client.subscribe("/user/state/update", (message) => {
           if (message && message.body)
-            this.setState({ progState: mapDebugState(JSON.parse(message.body)) });
+        
+        {
+          console.log("this is wwhat WS - ",message.body)
+          this.setState({ progState: mapDebugState(JSON.parse(message.body)) });
+      
+      }
         });
 
         this.client.publish({destination: "/bpjs/subscribe"});
