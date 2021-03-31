@@ -5,7 +5,7 @@ import { ReactComponent as DebugButton } from "../../assets/debug-button.svg";
 import { ReactComponent as RunButton } from "../../assets/run-button.svg";
 import { ReactComponent as StopButton } from "../../assets/stop-button.svg";
 import { ReactComponent as NextSyncStateButton } from "../../assets/next-sync-state-button.svg";
-import { sendDebugReq } from '../../utils/api'
+import { sendDebugReq, nextSync, stop } from '../../utils/api'
 //2a9bc4
 const StyledSpace = styled(Space)`
   margin-right: 5px;
@@ -30,10 +30,10 @@ const LeftDebugButtons = () => {
                 <RunButton/>
             </Tooltip>
             <Tooltip placement="top" title={"Next Sync State"} color={"#7cba59"}>
-                <NextSyncStateButton/>
+                <NextSyncStateButton onClick={()=>nextSync()}/>
             </Tooltip>
             <Tooltip placement="top" title={"Stop"} color={"#c45749"}>
-                <StopButton/>
+                <StopButton onClick={()=>stop()}/>
             </Tooltip>
         </StyledSpace>
     );
