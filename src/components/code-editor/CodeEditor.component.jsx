@@ -118,7 +118,7 @@ function Editor() {
         width: "100%",
     };
     let markers = [];
-    markers.push({startRow: progState.currentLine, startCol: 0, endRow: progState.currentLine+1, endCol: 0, className: 'replacement_marker', type: 'text' });
+    markers.push({startRow: progState.currentLine-1, startCol: 0, endRow: progState.currentLine, endCol: 0, className: 'replacement_marker', type: 'text' });
     
     return (
         <EditorContainer>
