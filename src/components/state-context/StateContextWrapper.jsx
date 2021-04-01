@@ -29,7 +29,6 @@ export default class StateManager extends React.Component {
           if (message && message.body)
         
         {
-          console.log("this is wwhat WS - ",message.body)
           this.setState({ progState: mapDebugState(JSON.parse(message.body)) });
       
       }

@@ -66,7 +66,7 @@ function Editor() {
     const [editorRef, setEditorRef] = useState(null);
     const [breakPoints, setBreakPoints] = useState([]);
     const [currLine, setCurrLine] = useState(11);
-
+    const progState = useContext(ProgramStateCTX).progState;
     const layoutContext = useContext(LayoutCtx);
     const {activeBottomPanels} = layoutContext;
 
@@ -117,7 +117,9 @@ function Editor() {
     const editorStyle = {
         width: "100%",
     };
-
+    let markers = [];
+    markers.push({startRow: progState.currentLine, startCol: 0, endRow: progState.currentLine+1, endCol: 0, className: 'replacement_marker', type: 'text' });
+    
     return (
         <EditorContainer>
             <AceEditor
@@ -133,6 +135,7 @@ function Editor() {
                 enableSnippets={true}
                 highlightActiveLine={true}
                 setOptions={{useWorker: false}}
+                markers={markers}
                 editorProps={{
                     $blockScrolling: true,
                     $useWorker: false

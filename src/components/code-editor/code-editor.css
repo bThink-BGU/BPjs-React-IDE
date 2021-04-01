@@ -4,3 +4,7 @@
     background: linear-gradient(to right, #b67171 30%, transparent 30%);
     display: inline-block;
 }
+.replacement_marker {
+    position: absolute;
+    background-color: #FFFF00;
+ }
