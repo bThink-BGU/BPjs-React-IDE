@@ -4,8 +4,9 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*"
 axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 export const setUserId = (uid) => axios.defaults.headers.common['userId'] = uid;
 
+const baseUrl = "http://localhost:8080"
 export const sendDebugReq = (code) => {
-    axios.post("http://localhost:8080/bpjs/debug",
+    axios.post(`${baseUrl}/bpjs/debug`,
         {
             "sourceCode": code,
             "skipSyncStateToggle": true,
@@ -15,25 +16,25 @@ export const sendDebugReq = (code) => {
 };
 
 export const stop = () => {
-    axios.get("http://localhost:8080/bpjs/stop")
+    axios.get(`${baseUrl}/bpjs/stop`)
 };
 
 export const stepOut = () => {
-    axios.get("http://localhost:8080/bpjs/stepOut")
+    axios.get(`${baseUrl}/bpjs/stepOut`)
 };
 
 export const stepInto = () => {
-    axios.get("http://localhost:8080/bpjs/stepInto")
+    axios.get(`${baseUrl}/bpjs/stepInto`)
 };
 
 export const stepOver = () => {
-    axios.get("http://localhost:8080/bpjs/stepOver")
+    axios.get(`${baseUrl}/bpjs/stepOver`)
 };
 
 export const cont = () => {
-    axios.get("http://localhost:8080/bpjs/continue")
+    axios.get(`${baseUrl}/bpjs/continue`)
 };
 
 export const nextSync = () => {
-    axios.get("http://localhost:8080/bpjs/nextSync")
+    axios.get(`${baseUrl}/bpjs/nextSync`)
 };
