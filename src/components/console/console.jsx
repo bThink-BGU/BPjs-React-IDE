@@ -19,7 +19,8 @@ export default function BPConsole({consoleText}) {
             <StyledConsole>
                 <Console logs={consoleText}
                          styles={consoleStyle}
-                         variant={"dark"}/>
+                         variant={"dark"}
+                filter={["log"]}/>
             </StyledConsole>
         </ConsoleWrapper>
     );
