@@ -1,7 +1,8 @@
-import React from "react";
+import {React, useContext } from "react";
 import { Space } from "antd";
 import styled from "styled-components";
 import { ReactComponent as DebugButton } from "../../../assets/debug-button.svg";
+import IDECTX from '../../../pages/IDE/IDECTX'
 import { ReactComponent as RunButton } from "../../../assets/run-button.svg";
 import { ReactComponent as StopButton } from "../../../assets/stop-button.svg";
 import { ReactComponent as NextSyncStateButton } from "../../../assets/next-sync-state-button.svg";
@@ -28,12 +29,13 @@ const StyledSpace = styled(Space)`
 `;
 
 const LeftDebugButtons = () => {
+  const layoutContext = useContext(IDECTX);
     return (
         <StyledSpace direction={"vertical"}>
             <DelayedToolTip placement="top"
                             title={"Debug"}
                             color={"#7cba59"}>
-                <DebugButton onClick={() => sendDebugReq()}/>
+                <DebugButton onClick={() => sendDebugReq(layoutContext)}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Run"}

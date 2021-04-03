@@ -50,6 +50,7 @@ import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
 import { setBreakpoint } from "../../utils/api";
+import IDECTX from "../../pages/IDE/IDECTX";
 
 const BP_TAP = "guttermousedown";
 
@@ -61,17 +62,18 @@ const EditorContainer = styled.div`
   align-items: flex-start;
 `;
 
-function Editor() {
+function Editor({setProg}) {
     const [currThemeIdx, setCurrThemeIdx] = useState(2);
-    const [prog, setProg] = useState("");
+    
     const [editorRef, setEditorRef] = useState(null);
     const [breakPoints, setBreakPoints] = useState([]);
     const progState = useContext(ProgramStateCTX).progState;
     const layoutContext = useContext(LayoutCtx);
+    const prog = useContext(IDECTX);
     const {activeBottomPanels} = layoutContext;
 
     const onChange = (newValue) => {
-        setProg(newValue);
+        newValue !== prog && setProg(newValue);
     }
 
     const handleBreakPointTap = (e, updateBreakpoints) => {

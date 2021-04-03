@@ -4,13 +4,13 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*"
 axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 export const setUserId = (uid) => axios.defaults.headers.common['userId'] = uid;
 
-export const sendDebugReq = () => {
+export const sendDebugReq = (code) => {
     axios.post("http://localhost:8080/bpjs/debug",
         {
-            "sourceCode": "aaa",
+            "sourceCode": code,
             "skipSyncStateToggle": true,
             "skipBreakpointsToggle": false,
-            "breakpoints": [14, 3, 34]
+            "breakpoints": [1]
         })
 };
 
@@ -23,7 +23,7 @@ export const stepOut = () => {
 };
 
 export const stepInto = () => {
-    axios.get("http://localhost:8080/bpjs/stepInto")
+    axios.get("http://localhost:8   080/bpjs/stepInto")
 };
 
 export const stepOver = () => {
