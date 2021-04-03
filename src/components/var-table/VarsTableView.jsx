@@ -3,7 +3,7 @@ import { Table } from "antd";
 import ReactJson from "react-json-view";
 
 import { StyledTitle } from "./VarTable.styles";
-import { consoleStyle } from "../terminal/terminal.styles";
+import { consoleStyle } from "../console/console.styles";
 
 /***
  * Vars to vals is a map holds the follwing keys:

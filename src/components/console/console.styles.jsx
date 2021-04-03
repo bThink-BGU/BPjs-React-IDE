@@ -18,7 +18,7 @@ const getWidth = (activeBottomPanels) => {
 export const consoleStyle = {
     LOG_COLOR: "white",
     BASE_FONT_SIZE: "16px",
-    LOG_BACKGROUND: "none"
+    LOG_BACKGROUND: "none",
 };
 
 export const StyledConsole = styled.div`

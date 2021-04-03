@@ -49,6 +49,7 @@ import { setBpjsMode, editorThemes } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
+import { setBreakpoint } from "../../utils/api";
 
 const BP_TAP = "guttermousedown";
 
@@ -65,7 +66,6 @@ function Editor() {
     const [prog, setProg] = useState("");
     const [editorRef, setEditorRef] = useState(null);
     const [breakPoints, setBreakPoints] = useState([]);
-    const [currLine, setCurrLine] = useState(11);
     const progState = useContext(ProgramStateCTX).progState;
     const layoutContext = useContext(LayoutCtx);
     const {activeBottomPanels} = layoutContext;
@@ -88,13 +88,13 @@ function Editor() {
         } else {
             e.editor.session.clearBreakpoint(row);
         }
-        updateBreakpoints(breakpoints)
+        updateBreakpoints(breakpoints);
         e.stop();
     };
 
     const setCleanBreakpoints = (breakpoints) => {
         setBreakPoints(Object.keys(breakpoints)
-            .map(breakPoint => parseInt(breakPoint)))
+            .map(breakPoint => parseInt(breakPoint)));
     };
 
     useEffect(() => {
@@ -118,8 +118,15 @@ function Editor() {
         width: "100%",
     };
     let markers = [];
-    markers.push({startRow: progState.currentLine-1, startCol: 0, endRow: progState.currentLine, endCol: 0, className: 'replacement_marker', type: 'text' });
-    
+    markers.push({
+        startRow: progState.currentLine - 1,
+        startCol: 0,
+        endRow: progState.currentLine,
+        endCol: 0,
+        className: 'replacement_marker',
+        type: 'text'
+    });
+
     return (
         <EditorContainer>
             <AceEditor

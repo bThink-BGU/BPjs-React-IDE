@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import BPTerminal from "../../terminal/terminal";
+import BPConsole from "../../console/console";
 import EnvSelector from "../../../components/var-table/EnvSelector";
-import VarTableView from "../../var-table/VarsTableView";
 import LayoutCtx from "../../../pages/IDE/LayoutCtx";
 import { BOTTOM_PANELS } from "../../../pages/IDE/ide";
 import _ from "lodash";
 import { Divider } from "antd";
-import TopDebugButtons from "../../top-debug-buttons/TopDebugButtons";
-import LeftDebugButtons from "../../left-debug-buttons/LeftDebugButtons";
+import TopDebugButtons from "../../debug-buttons/top-debug-buttons/TopDebugButtons";
+import LeftDebugButtons from "../../debug-buttons/left-debug-buttons/LeftDebugButtons";
+import { useConsoleText } from "../../console/useConsoleText";
 
 const StyledBottomControlPanel = styled.div`
   display: flex;
@@ -35,6 +35,7 @@ const BottomControlPanel = () => {
 
     const layoutCtx = useContext(LayoutCtx);
     const {activeBottomPanels} = layoutCtx;
+    const {consoleText} = useConsoleText();
 
     const isActive = (panel) => _.includes(activeBottomPanels, panel);
 
@@ -51,7 +52,7 @@ const BottomControlPanel = () => {
                     backgroundColor: "#ff9b42",
                     marginTop: "40px"
                 }} type="vertical"/>}
-                {isActive(BOTTOM_PANELS.CONSOLE) && <BPTerminal/>}
+                {isActive(BOTTOM_PANELS.CONSOLE) && <BPConsole consoleText={consoleText}/>}
             </PanelsContainer>
         </StyledBottomControlPanel>
     );

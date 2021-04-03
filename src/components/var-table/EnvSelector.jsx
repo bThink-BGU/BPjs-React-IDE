@@ -7,10 +7,6 @@ import {
 } from "./VarTableContextResolver";
 import ProgramStateCTX from "../state-context/StateContext";
 import "./table.scss";
-import {
-  handleStyle,
-  StyledResizableContainerFlexHorizon,
-} from "./StyledContainers";
 import { TableWrapper, StyledTitle } from "./VarTable.styles";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 
@@ -28,8 +24,6 @@ export default function EnvSelector() {
   const layoutCtx = useContext(LayoutCtx);
 
   const { activeBottomPanels } = layoutCtx;
-
-  // initThreads(stateCurrThread, cascaderValue, setCascaderValue);
 
   const onChange = (e) => {
     if (stateCurrThread !== cascaderValue) {
