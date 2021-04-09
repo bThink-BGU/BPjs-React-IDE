@@ -23,23 +23,30 @@ export default function EnvSelector() {
 
   const layoutCtx = useContext(LayoutCtx);
 
+  const [currentThreadName, setCurrThreadName] = useState(stateCurrThread);
+
   const { activeBottomPanels } = layoutCtx;
 
+  function getEnvByThreadName(programStateCtx, selcetedThread) {
+    const maybeSelectedScope = programStateCtx && programStateCtx.progState.threadsAndEnvs && programStateCtx.progState.threadsAndEnvs.filter(
+      (t) => t.name == selcetedThread
+    );
+    var selectedScopeCopy = maybeSelectedScope &&
+      maybeSelectedScope[0] &&
+      maybeSelectedScope[0].env &&
+      maybeSelectedScope[0].env[0];     
+    return selectedScopeCopy;
+  }
+
+  
   const onChange = (e) => {
     if (stateCurrThread !== cascaderValue) {
       const selcetedThread = e && e[0];
       const selectedScopeName = e && e[1];
-      const maybeSelectedScope = programStateCtx.progState.threadsAndEnvs.filter(
-        (t) => t.name == selcetedThread
-      );
-      var selectedScopeCopy =
-        maybeSelectedScope &&
-        maybeSelectedScope[0] &&
-        maybeSelectedScope[0].env &&
-        maybeSelectedScope[0].env[0] 
-      
+      var selectedScopeCopy = getEnvByThreadName(programStateCtx, selcetedThread); 
       setCascaderValue(e.toString());
-      setCurrEnv(selectedScopeCopy);
+      setCurrThreadName(selcetedThread)
+
     }
   };
 
@@ -56,10 +63,12 @@ export default function EnvSelector() {
           placeholder="Please select"
         />
       </div>
-      <VarTableView varsToVals={currEnv} />
+      <VarTableView varsToVals={getEnvByThreadName(programStateCtx,currentThreadName)} />
     </TableWrapper>
   );
 }
+
+
 function initThreads(stateCurrThread, cascaderValue, setCascaderValue) {
   stateCurrThread &&
     stateCurrThread !== cascaderValue &&
