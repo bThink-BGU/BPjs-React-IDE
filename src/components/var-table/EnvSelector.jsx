@@ -18,6 +18,7 @@ export default function EnvSelector() {
   const stateCurrThread = mapStateToCurrThread(programStateCtx);
 
   const [cascaderValue, setCascaderValue] = useState("Please Select");
+  
   const [functionName, setFunctionName] = useState("Please Select");
 
   const [currEnv, setCurrEnv] = useState({});
@@ -57,7 +58,7 @@ export default function EnvSelector() {
 
   return (
     <TableWrapper activeBottomPanels={activeBottomPanels}>
-      <StyledTitle level={4}>Variables</StyledTitle>
+      <StyledTitle level={4}>Variables {stateCurrThread}</StyledTitle>
       <div className="thread-selector-title">
         &nbsp; Thread Selector
         <Cascader

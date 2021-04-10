@@ -5,14 +5,19 @@ axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 export const setUserId = (uid) => axios.defaults.headers.common['userId'] = uid;
 
 const baseUrl = "http://localhost:8080"
-export const sendDebugReq = (code) => {
+export const sendDebugReq = (code,bps) => {
     axios.post(`${baseUrl}/bpjs/debug`,
         {
             "sourceCode": code,
             "skipSyncStateToggle": true,
             "skipBreakpointsToggle": false,
-            "breakpoints": [20]
+            "breakpoints": bps
         })
+};
+
+
+export const getEventHsitory = (from,to) => {
+    axios.get(`${baseUrl}/bpjs/events?from=${from}&to=${to}`)    
 };
 
 export const stop = () => {

@@ -35,7 +35,7 @@ const LeftDebugButtons = () => {
             <DelayedToolTip placement="top"
                             title={"Debug"}
                             color={"#7cba59"}>
-                <DebugButton onClick={() => sendDebugReq(layoutContext)}/>
+                <DebugButton onClick={() => sendDebugReq(layoutContext.prog,layoutContext.bps)}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Run"}

@@ -21,6 +21,8 @@ function IDE() {
   const [activeBottomPanels, setActiveBottomPanels] = useState([]);
 
   const [prog, setProg] = useState("");
+  const [bps, setBps] = useState([]);
+
   const layoutProperties = {
     activeBottomPanels,
     setActiveBottomPanels,
@@ -28,13 +30,13 @@ function IDE() {
 
   return (
     <LayoutCtx.Provider value={layoutProperties}>
-      <IDECTX.Provider value={prog}>
+      <IDECTX.Provider value={{prog,bps}}>
         <IdeContainer>
           <IdeHeader />
           <IdeContentContainer>
             <LeftControlPanel />
             <RightContainer>
-              <Editor setProg={setProg} />
+              <Editor setProg={setProg} setBps={setBps} />
               <BottomControlPanel />
             </RightContainer>
           </IdeContentContainer>
