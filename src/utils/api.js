@@ -11,7 +11,7 @@ export const sendDebugReq = (code) => {
             "sourceCode": code,
             "skipSyncStateToggle": true,
             "skipBreakpointsToggle": false,
-            "breakpoints": [1]
+            "breakpoints": [20]
         })
 };
 

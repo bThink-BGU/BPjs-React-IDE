@@ -36,7 +36,7 @@ export default function VarTableView({ varsToVals }) {
           key: index,
           varName: k,
           varVal:
-            isStr(varsToVals[k]) || isNum(varsToVals[k]) || true ? (
+          ( (isStr(varsToVals[k]) || isNum(varsToVals[k]))) ? (
               varsToVals[k]
             ) : (
               <ReactJson src={varsToVals[k]} />

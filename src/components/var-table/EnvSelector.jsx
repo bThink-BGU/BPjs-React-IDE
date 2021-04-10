@@ -18,6 +18,7 @@ export default function EnvSelector() {
   const stateCurrThread = mapStateToCurrThread(programStateCtx);
 
   const [cascaderValue, setCascaderValue] = useState("Please Select");
+  const [functionName, setFunctionName] = useState("Please Select");
 
   const [currEnv, setCurrEnv] = useState({});
 
@@ -26,24 +27,28 @@ export default function EnvSelector() {
   const [currentThreadName, setCurrThreadName] = useState(stateCurrThread);
 
   const { activeBottomPanels } = layoutCtx;
+  
 
-  function getEnvByThreadName(programStateCtx, selcetedThread) {
+  function getEnvByThreadName(programStateCtx, selcetedThread,functionName) {
     const maybeSelectedScope = programStateCtx && programStateCtx.progState.threadsAndEnvs && programStateCtx.progState.threadsAndEnvs.filter(
       (t) => t.name == selcetedThread
     );
+    
     var selectedScopeCopy = maybeSelectedScope &&
       maybeSelectedScope[0] &&
       maybeSelectedScope[0].env &&
-      maybeSelectedScope[0].env[0];     
-    return selectedScopeCopy;
+      Object.entries(maybeSelectedScope[0].env).filter(e => e[1]['FUNCNAME'] == functionName)[0]
+    return selectedScopeCopy && selectedScopeCopy[1];
   }
 
   
   const onChange = (e) => {
+    console.log(programStateCtx)
     if (stateCurrThread !== cascaderValue) {
       const selcetedThread = e && e[0];
       const selectedScopeName = e && e[1];
       var selectedScopeCopy = getEnvByThreadName(programStateCtx, selcetedThread); 
+      e && e[1] && setFunctionName(e[1])
       setCascaderValue(e.toString());
       setCurrThreadName(selcetedThread)
 
@@ -63,7 +68,7 @@ export default function EnvSelector() {
           placeholder="Please select"
         />
       </div>
-      <VarTableView varsToVals={getEnvByThreadName(programStateCtx,currentThreadName)} />
+      <VarTableView varsToVals={getEnvByThreadName(programStateCtx,currentThreadName,functionName)} />
     </TableWrapper>
   );
 }
