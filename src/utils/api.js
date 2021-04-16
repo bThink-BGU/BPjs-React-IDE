@@ -16,7 +16,7 @@ export const sendDebugReq = (code,bps) => {
 };
 
 
-export const getEventHsitory = (from,to) => {
+export const getEventHsitory = (from, to) => {
     axios.get(`${baseUrl}/bpjs/events?from=${from}&to=${to}`)    
 };
 
@@ -43,3 +43,13 @@ export const cont = () => {
 export const nextSync = () => {
     axios.get(`${baseUrl}/bpjs/nextSync`)
 };
+
+export const muteBreakpoints = (mute) => {
+    axios.put(`${baseUrl}/bpjs/breakpoint`, {skipBreakpoints: mute})
+};
+
+export const muteSyncState = (mute) => {
+    axios.put(`${baseUrl}/bpjs/syncStates`, {skipSyncStates: mute})
+};
+
+

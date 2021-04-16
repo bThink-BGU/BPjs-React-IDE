@@ -10,7 +10,7 @@ import "../../../animations.scss";
 import { ReactComponent as NextSyncStateButton } from "../../../assets/next-sync-state-button.svg";
 
 const StyledSpace = styled(Space)`
-  margin-left: 30px;
+  margin-left: 40px;
   margin-bottom: 10px;
   width: 100%;
 
@@ -25,6 +25,11 @@ const TopDebugButtons = () => {
     return (
         <StyledSpace direction={"horizontal"}>
             <DelayedToolTip placement="top"
+                            title={"Next Sync State"}
+                            color={"#2a9bc4"}>
+                <NextSyncStateButton onClick={() => nextSync()}/>
+            </DelayedToolTip>
+            <DelayedToolTip placement="top"
                             title={"Step Out"}
                             color={"#2a9bc4"}>
                 <StepOutButton className={"hvr-icon-grow"} onClick={() => stepOut()}/>
@@ -38,11 +43,6 @@ const TopDebugButtons = () => {
                             title={"Step Over"}
                             color={"#2a9bc4"}>
                 <StepOverButton onClick={() => stepOver()}/>
-            </DelayedToolTip>
-            <DelayedToolTip placement="top"
-                            title={"Next Sync State"}
-                            color={"#2a9bc4"}>
-                <NextSyncStateButton onClick={() => nextSync()}/>
             </DelayedToolTip>
         </StyledSpace>
     );

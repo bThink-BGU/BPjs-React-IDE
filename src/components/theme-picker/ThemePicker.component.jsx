@@ -11,7 +11,6 @@ const ThemePicker = () => {
     const {currTheme, setCurrTheme} = useContext(LayoutCtx);
 
     const handleThemeChange = (pickedTheme) => {
-        console.log(editorThemes.length)
         setCurrTheme(pickedTheme);
     };
 
