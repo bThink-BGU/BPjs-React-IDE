@@ -63,14 +63,11 @@ const EditorContainer = styled.div`
 `;
 
 function Editor({ setProg, setBps }) {
-  const [currThemeIdx, setCurrThemeIdx] = useState(2);
-
   const [editorRef, setEditorRef] = useState(null);
   const [breakPoints, setBreakPoints] = useState([]);
-  const progState = useContext(ProgramStateCTX).progState;
-  const layoutContext = useContext(LayoutCtx);
+  const {progState} = useContext(ProgramStateCTX);
+  const { activeBottomPanels, currTheme } = useContext(LayoutCtx);
   const {prog} = useContext(IDECTX);
-  const { activeBottomPanels } = layoutContext;
 
   const onChange = (newValue) => {
     newValue !== prog && setProg(newValue);
@@ -123,6 +120,7 @@ function Editor({ setProg, setBps }) {
 
   const editorStyle = {
     width: "100%",
+    paddingTop: "10px"
   };
   let markers = [];
   markers.push({
@@ -143,7 +141,7 @@ function Editor({ setProg, setBps }) {
         ref={editorRef}
         value={prog}
         mode={"javascript"}
-        theme={editorThemes[currThemeIdx]}
+        theme={currTheme}
         onChange={onChange}
         name="UNIQUE_ID_OF_DIV"
         enableBasicAutocompletion={true}

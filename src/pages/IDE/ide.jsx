@@ -18,14 +18,16 @@ export const BOTTOM_PANELS = {
 };
 
 function IDE() {
+  const [currTheme, setCurrTheme] = useState("ambiance");
   const [activeBottomPanels, setActiveBottomPanels] = useState([]);
-
   const [prog, setProg] = useState("");
   const [bps, setBps] = useState([]);
 
   const layoutProperties = {
     activeBottomPanels,
     setActiveBottomPanels,
+    currTheme,
+    setCurrTheme
   };
 
   return (

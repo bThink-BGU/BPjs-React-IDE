@@ -6,6 +6,6 @@ export const ControlButtonsContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 100%;
-  height: 40px;
+  height: 41px;
   padding-left: 30px;
 `;
