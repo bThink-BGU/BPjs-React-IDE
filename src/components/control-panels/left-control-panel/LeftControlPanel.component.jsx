@@ -1,6 +1,9 @@
 import React from "react";
 import { PanelDivider } from "../panel-divider/PanelDivider";
 import { handleStyle, StyledLeftControlPanel, StyledResizableContainer } from "./LeftControlPanel.styles";
+import EventsHistory from "../../event-history/EventsHistory.component";
+import RequestedOrBlocked from "../../requested-or-blocked/RequestedOrBlocked";
+import Trace from "../../trace/trace";
 
 const LeftControlPanel = () => {
 
@@ -8,10 +11,13 @@ const LeftControlPanel = () => {
         <StyledResizableContainer
             enable={{right: true}}
             handleStyles={handleStyle}
-            defaultSize={{width: 10}}>
+            defaultSize={{width: 10}}
+            maxWidth={500}>
             <PanelDivider direction={"vertical"}/>
             <StyledLeftControlPanel>
-                גגש
+                <EventsHistory/>
+                <RequestedOrBlocked/>
+                <Trace/>
             </StyledLeftControlPanel>
         </StyledResizableContainer>
     );

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { Console } from "console-feed";
-import { consoleStyle, ConsoleWrapper, StyledConsole, StyledTitle } from "./console.styles";
-
+import { consoleStyle, ConsoleWrapper, StyledConsole } from "./console.styles";
+import { CustomTitle } from "../title/title";
 
 
 export default function BPConsole({consoleText}) {
@@ -13,14 +13,14 @@ export default function BPConsole({consoleText}) {
 
     return (
         <ConsoleWrapper activeBottomPanels={activeBottomPanels}>
-            <StyledTitle level={4}>
+            <CustomTitle level={4} color={"white"}>
                 Console
-            </StyledTitle>
+            </CustomTitle>
             <StyledConsole>
                 <Console logs={consoleText}
                          styles={consoleStyle}
                          variant={"dark"}
-                filter={["log"]}/>
+                         filter={["log"]}/>
             </StyledConsole>
         </ConsoleWrapper>
     );

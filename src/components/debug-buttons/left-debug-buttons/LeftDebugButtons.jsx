@@ -43,11 +43,6 @@ const LeftDebugButtons = () => {
                 <RunButton/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
-                            title={"Next Sync State"}
-                            color={"#7cba59"}>
-                <NextSyncStateButton onClick={() => nextSync()}/>
-            </DelayedToolTip>
-            <DelayedToolTip placement="top"
                             title={"Stop"}
                             color={"#c45749"}>
                 <StopButton onClick={() => stop()}/>

@@ -18,7 +18,7 @@ const StyledBottomControlPanel = styled.div`
   padding: 10px 30px 10px 20px;
   height: 415px;
   width: 100%;
-  background-color: #1b272b;
+  background-color: #353d45;
   border-top: 5px solid orange;
 `;
 

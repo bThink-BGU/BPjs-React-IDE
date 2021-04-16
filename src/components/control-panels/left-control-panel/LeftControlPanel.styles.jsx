@@ -14,11 +14,10 @@ export const LeftControlPanelContent = styled.div`
 export const StyledLeftControlPanel = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   padding-top: 10px;
   width: 100%;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 87px);
   background-color: rgb(35, 39, 43);
 `;
 
