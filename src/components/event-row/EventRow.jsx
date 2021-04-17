@@ -31,7 +31,7 @@ const ThreadBadge = ({ children }) => {
   );
 };
 
-export const EventRow = ({ name, withX = true }) => {
+export const EventRow = ({ name, withX = false }) => {
   const [visible, setVisible] = useState(true);
   return visible ? (
     // <ThreadBadge>

@@ -43,7 +43,7 @@ const Trace = () => {
       </CustomTitle>
       {progState.eventsHistory &&
         progState.eventsHistory.map((eh) => <EventRow name={eh} />)}
-        {/* {['a','b','c','a','b','c','a','b','c','a','b','c'].map((eh) => <EventRow name={eh} />)} */}
+        {['a','b','c','a','b','c','a','b','c','a','b','c'].map((eh) => <EventRow name={eh} />)}
     </TraceContainer>
   );
 };
