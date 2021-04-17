@@ -48,7 +48,8 @@ const BottomControlPanel = () => {
                 {isActive(BOTTOM_PANELS.DEBUG) && <EnvSelector/>}
                 {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.CONSOLE) &&
                 <Divider style={{
-                    height: "250px",
+                    height: "100%",
+                    width: "2px",
                     backgroundColor: "#ff9b42",
                     marginTop: "40px"
                 }} type="vertical"/>}
