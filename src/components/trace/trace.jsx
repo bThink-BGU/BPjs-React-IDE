@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import ProgramStateCTX from "../state-context/StateContext";
 import styled from "styled-components";
 import { CustomTitle } from "../title/title";
+import * as API from "../../utils/api";
 import { EventRow } from "../event-row/EventRow";
 const TraceContainer = styled.div`
   width: 90%;
@@ -26,6 +27,7 @@ const TraceContainer = styled.div`
 
 const Trace = () => {
   const { progState } = useContext(ProgramStateCTX);
+  const confirmMsg = "Are u sure you want to travel back in time?";
   return (
     <TraceContainer>
       <CustomTitle
@@ -42,8 +44,29 @@ const Trace = () => {
         Trace
       </CustomTitle>
       {progState.eventsHistory &&
-        progState.eventsHistory.map((eh) => <EventRow name={eh} />)}
-        {['a','b','c','a','b','c','a','b','c','a','b','c'].map((eh) => <EventRow name={eh} />)}
+        progState.eventsHistory.map((eh) => (
+          <EventRow
+            name={eh.name}
+            withConfirmation
+            withX={false}
+            afterConfirmMsg={`Back To The Time Where \n  Event: \"${eh.name}\" \n Came Out To The World!`}
+            confirmMsg={`Are you sure you want to cancel the event \"${eh.name}\" selection?`}
+            onClick={() => API.backToSnapShot(eh.timeStamp)}
+          />
+        ))}
+
+{/* please keep this comment as this is very easy to development! */}
+      {/* {["a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"].map(
+        (eh) => (
+          <EventRow
+            name={eh}
+            clickAble={false}
+            afterConfirmMsg={`Back To ${eh}`}
+            onClick={() => console.log("clicked")}
+            confirmMsg={confirmMsg}
+          />
+        )
+      )} */}
     </TraceContainer>
   );
 };

@@ -60,6 +60,14 @@ export const addExternalEvent = (name) => {
         })
 };
 
+export const backToSnapShot = (time) => {
+    axios.post(`${baseUrl}/bpjs/syncSnapshot`,
+        {
+            "snapShotTime": time
+        })
+};
+
+
 export const removeExternalEvent = (name) => {
     axios.post(`${baseUrl}/bpjs/externalEvent`,
         {
