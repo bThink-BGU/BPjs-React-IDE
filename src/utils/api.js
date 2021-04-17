@@ -5,7 +5,7 @@ axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 export const setUserId = (uid) => axios.defaults.headers.common['userId'] = uid;
 
 const baseUrl = "http://localhost:8080"
-export const sendDebugReq = (code,bps) => {
+export const sendDebugReq = (code, bps) => {
     axios.post(`${baseUrl}/bpjs/debug`,
         {
             "sourceCode": code,
@@ -17,7 +17,7 @@ export const sendDebugReq = (code,bps) => {
 
 
 export const getEventHsitory = (from, to) => {
-    axios.get(`${baseUrl}/bpjs/events?from=${from}&to=${to}`)    
+    axios.get(`${baseUrl}/bpjs/events?from=${from}&to=${to}`)
 };
 
 export const stop = () => {
@@ -45,11 +45,25 @@ export const nextSync = () => {
 };
 
 export const muteBreakpoints = (mute) => {
-    axios.put(`${baseUrl}/bpjs/breakpoint`, {skipBreakpoints: mute})
+    axios.put(`${baseUrl}/bpjs/breakpoint`, { skipBreakpoints: mute })
 };
 
 export const muteSyncState = (mute) => {
-    axios.put(`${baseUrl}/bpjs/syncStates`, {skipSyncStates: mute})
+    axios.put(`${baseUrl}/bpjs/syncStates`, { skipSyncStates: mute })
 };
 
+export const addExternalEvent = (name) => {
+    axios.post(`${baseUrl}/bpjs/externalEvent`,
+        {
+            "externalEvent": name,
+            "addEvent": true,
+        })
+};
 
+export const removeExternalEvent = (name) => {
+    axios.post(`${baseUrl}/bpjs/externalEvent`,
+        {
+            "externalEvent": name,
+            "addEvent": false,
+        })
+};
