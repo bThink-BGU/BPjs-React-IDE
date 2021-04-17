@@ -31,7 +31,7 @@ const ThreadBadge = ({ children }) => {
   );
 };
 
-export const EventRow = ({ name, withX = false }) => {
+export const EventRow = ({ name, withX = true }) => {
   const [visible, setVisible] = useState(true);
   return visible ? (
     // <ThreadBadge>
@@ -40,7 +40,7 @@ export const EventRow = ({ name, withX = false }) => {
         {withX && (
           <CloseOutlined
             onClick={() => setVisible(false)}
-            style={{ position: "relative", right: "0px", color: "#ff9e35" }}
+            style={ {color: "#ff9e35" }}
           />
         )}
       </EventRowContainer>
