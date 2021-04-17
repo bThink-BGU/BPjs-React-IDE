@@ -32,7 +32,7 @@ const StyledSpace = styled(Space)`
 const LeftDebugButtons = () => {
     const [bpMuted, setBpMuted] = useState(false);
     const [syncStateMuted, setSyncStateMuted] = useState(false);
-    const layoutContext = useContext(IDECTX);
+    const ideContext = useContext(IDECTX);
 
     const handleMuteOrUnmuteBp = (mute) => {
         setBpMuted(mute);
@@ -49,7 +49,7 @@ const LeftDebugButtons = () => {
             <DelayedToolTip placement="top"
                             title={"Debug"}
                             color={"#7cba59"}>
-                <DebugButton onClick={() => sendDebugReq(layoutContext.prog, layoutContext.bps)}/>
+                <DebugButton onClick={() => sendDebugReq(ideContext.prog, ideContext.bps)}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Run"}

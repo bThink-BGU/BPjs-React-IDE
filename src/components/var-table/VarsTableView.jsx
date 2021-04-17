@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Table } from "antd";
 import ReactJson from "react-json-view";
-
-import { StyledTitle } from "./VarTable.styles";
-import { consoleStyle } from "../console/console.styles";
 
 /***
  * Vars to vals is a map holds the follwing keys:
@@ -48,7 +45,7 @@ export default function VarTableView({ varsToVals }) {
   return (
     <Table
       bordered={true}
-      scroll={{ y: 210 }}
+      scroll={{ y: 204 }}
       style={{ height: "80%" }}
       columns={columns}
       dataSource={rows}

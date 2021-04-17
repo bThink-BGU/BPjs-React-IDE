@@ -9,6 +9,7 @@ import ProgramStateCTX from "../state-context/StateContext";
 import "./table.scss";
 import { TableWrapper, StyledTitle } from "./VarTable.styles";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
+import { CustomTitle } from "../title/title";
 
 export default function EnvSelector() {
   const programStateCtx = useContext(ProgramStateCTX);
@@ -58,7 +59,7 @@ export default function EnvSelector() {
 
   return (
     <TableWrapper activeBottomPanels={activeBottomPanels}>
-      <StyledTitle level={4}>Variables {stateCurrThread}</StyledTitle>
+      <CustomTitle color={"white"} level={4}>Variables {stateCurrThread}</CustomTitle>
       <div className="thread-selector-title">
         &nbsp; Thread Selector
         <Cascader
