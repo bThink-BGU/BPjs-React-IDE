@@ -32,6 +32,6 @@ export const StyledConsole = styled.div`
 
 export const ConsoleWrapper = styled.div`
   height: 100%;
-  padding-top: 23px;
+  padding-top: 53px;
   ${props => getWidth(props.activeBottomPanels)}
 `;

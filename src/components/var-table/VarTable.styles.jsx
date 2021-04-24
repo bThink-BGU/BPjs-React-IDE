@@ -15,8 +15,7 @@ const getWidth = (activeBottomPanels) => {
 };
 
 export const TableWrapper = styled.div`
-  height: 87.5% !important;
-  border-radius: 7px;
+  height: 100% !important;
   ${props => getWidth(props.activeBottomPanels)}
 
   table {

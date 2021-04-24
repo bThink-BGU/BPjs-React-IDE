@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Table } from "antd";
 import ReactJson from "react-json-view";
 
@@ -45,7 +45,7 @@ export default function VarTableView({ varsToVals }) {
   return (
     <Table
       bordered={true}
-      scroll={{ y: 204 }}
+      scroll={{ y: 209 }}
       style={{ height: "80%" }}
       columns={columns}
       dataSource={rows}

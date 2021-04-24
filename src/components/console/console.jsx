@@ -13,7 +13,7 @@ export default function BPConsole({consoleText}) {
 
     return (
         <ConsoleWrapper activeBottomPanels={activeBottomPanels}>
-            <CustomTitle level={4} color={"white"}>
+            <CustomTitle level={4} color={"white"} style={{marginTop: "-30px"}}>
                 Console
             </CustomTitle>
             <StyledConsole>
