@@ -13,7 +13,7 @@ import { useConsoleText } from "../../console/useConsoleText";
 const StyledBottomControlPanel = styled.div`
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: relative;
   bottom: 38px;
   padding: 10px 30px 10px 20px;
   height: 415px;

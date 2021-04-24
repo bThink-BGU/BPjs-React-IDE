@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Table } from "antd";
 import ReactJson from "react-json-view";
 
@@ -42,13 +42,41 @@ export default function VarTableView({ varsToVals }) {
       })
       .filter((v) => v.varName !== "FUNCNAME");
 
+  const rowsss = [{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  },{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  },{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  },{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  },{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  },{key: "1",
+    varName: "asxasxasx",
+    varVal: "saxasasx"
+  }]
+
+  const [rowsx, setRows] = useState([]);
+
+  useEffect(() => {
+    const x = setInterval(() => setRows(rowsss), 3000)
+    clearInterval(x)
+
+  }, [])
+
   return (
     <Table
       bordered={true}
       scroll={{ y: 204 }}
       style={{ height: "80%" }}
       columns={columns}
-      dataSource={rows}
+      dataSource={rowsx}
       pagination={false}
       className="antdTable"
       size="small"

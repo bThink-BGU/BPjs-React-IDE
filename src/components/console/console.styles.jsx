@@ -30,12 +30,8 @@ export const StyledConsole = styled.div`
   height: 100%;
 `;
 
-export const StyledTitle = styled(Title)`
-  color: white !important;
-`;
-
 export const ConsoleWrapper = styled.div`
   height: 100%;
-  border-radius: 7px;
+  padding-top: 2px;
   ${props => getWidth(props.activeBottomPanels)}
 `;

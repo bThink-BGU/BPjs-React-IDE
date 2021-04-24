@@ -52,6 +52,14 @@ export const muteSyncState = (mute) => {
     axios.put(`${baseUrl}/bpjs/syncStates`, { skipSyncStates: mute })
 };
 
+export const sendContinueReq = () => {
+    axios.get(`${baseUrl}/bpjs/continue`)
+};
+
+export const skipExternalEvents = (skip) => {
+    axios.post(`${baseUrl}/bpjs/waitExternal`, {waitForExternal: skip})
+};
+
 export const addExternalEvent = (name) => {
     axios.post(`${baseUrl}/bpjs/externalEvent`,
         {

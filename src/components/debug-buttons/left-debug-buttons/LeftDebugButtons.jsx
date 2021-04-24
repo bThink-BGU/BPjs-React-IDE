@@ -9,7 +9,17 @@ import { ReactComponent as MuteBreakpointsButton } from "../../../assets/mute-br
 import { ReactComponent as UnMuteBreakpointsButton } from "../../../assets/unmute-breakpoints-button.svg";
 import { ReactComponent as MuteSyncStateButton } from "../../../assets/mute-sync-state-button.svg";
 import { ReactComponent as UnMuteSyncStateButton } from "../../../assets/unmute-sync-state-button.svg";
-import { muteBreakpoints, muteSyncState, sendDebugReq, stop } from '../../../utils/api'
+import { ReactComponent as ContinueButton } from "../../../assets/continue-button.svg";
+import { ReactComponent as WaitForExternalEventsButton } from "../../../assets/external-events-on-button.svg";
+import { ReactComponent as SkipForExternalEventsButton } from "../../../assets/external-events-off-button.svg";
+import {
+    muteBreakpoints,
+    muteSyncState,
+    sendContinueReq,
+    sendDebugReq,
+    skipExternalEvents,
+    stop
+} from '../../../utils/api'
 import { DelayedToolTip } from "../common/tooltip";
 import "../../../animations.scss";
 
@@ -32,6 +42,7 @@ const StyledSpace = styled(Space)`
 const LeftDebugButtons = () => {
     const [bpMuted, setBpMuted] = useState(false);
     const [syncStateMuted, setSyncStateMuted] = useState(false);
+    const [skipExternals, setSkipExternals] = useState(false);
     const ideContext = useContext(IDECTX);
 
     const handleMuteOrUnmuteBp = (mute) => {
@@ -44,8 +55,13 @@ const LeftDebugButtons = () => {
         muteSyncState(mute);
     }
 
+    const handleSkipOrWaitExternalEvents = (skip) => {
+        setSkipExternals(skip);
+        skipExternalEvents(skip);
+    }
+
     return (
-        <StyledSpace direction={"vertical"}>
+        <StyledSpace direction={"vertical"} size={10}>
             <DelayedToolTip placement="top"
                             title={"Debug"}
                             color={"#7cba59"}>
@@ -55,6 +71,11 @@ const LeftDebugButtons = () => {
                             title={"Run"}
                             color={"#7cba59"}>
                 <RunButton/>
+            </DelayedToolTip>
+            <DelayedToolTip placement="top"
+                            title={"Run"}
+                            color={"#7cba59"}>
+                <ContinueButton onClick={() => sendContinueReq()}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Stop"}
@@ -76,6 +97,13 @@ const LeftDebugButtons = () => {
                     : <MuteSyncStateButton onClick={() => handleMuteOrUnmuteSyncState(true)}/>}
             </DelayedToolTip>
 
+            <DelayedToolTip placement="top"
+                            title={`${skipExternals ? "wait for" : "dismiss"} external events `}
+                            color={"#c45749"}>
+                {skipExternals
+                    ? <WaitForExternalEventsButton onClick={() => handleSkipOrWaitExternalEvents(false)}/>
+                    : <SkipForExternalEventsButton onClick={() => handleSkipOrWaitExternalEvents(true)}/>}
+            </DelayedToolTip>
         </StyledSpace>
     );
 };

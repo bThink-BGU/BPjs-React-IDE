@@ -7,7 +7,7 @@ import { ControlButtonContainer, imageStyle } from "./ControlButton.styles";
 
 const ControlButton = ({Image, title: panel}) => {
 
-    const [isClicked, setIsClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(true);
     const layoutCtx = useContext(LayoutCtx);
     const {activeBottomPanels, setActiveBottomPanels} = layoutCtx;
 
