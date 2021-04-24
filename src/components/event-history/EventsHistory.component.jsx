@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import styled from "styled-components";
 import { Button } from "antd";
+import ProgramStateCTX from "../state-context/StateContext";
 import { CustomTitle } from "../title/title";
 import { Input } from "antd";
 import "./input-css.scss";
+import { EventRow } from "../event-row/EventRow";
 import * as API from "../../utils/api";
 import { PlusSquareOutlined } from "@ant-design/icons";
 const EventsHistoryContainer = styled.div`
@@ -52,6 +54,7 @@ const AddEventButton = styled(Button)`
 const EventsHistory = () => {
   const [showInput, inputToggle] = useState(false);
   const [input, setInput] = useState("");
+  const { progState } = useContext(ProgramStateCTX);
   const addEventApi = async () => {
     await API.addExternalEvent(input)
     setInput("")
@@ -86,6 +89,15 @@ const EventsHistory = () => {
         <CustomTitle level={5} color={"white"}>
           External Events
         </CustomTitle>
+        {progState.eventsHistory &&
+        progState.externalEvents.map((ee) => (
+          <EventRow
+            name={ee.name}
+            clickAble={false}
+            withX={true}
+            onClick={()=>{}}
+          />
+        ))}
       </EventsHistoryContent>
     </EventsHistoryContainer>
   );

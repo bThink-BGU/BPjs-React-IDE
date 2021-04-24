@@ -49,7 +49,7 @@ import { setBpjsMode, editorThemes } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
-import { setBreakpoint } from "../../utils/api";
+import { addBreakPoint,ignoreBreakPoint } from "../../utils/api";
 import IDECTX from "../../pages/IDE/IDECTX";
 
 const BP_TAP = "guttermousedown";
@@ -83,9 +83,12 @@ function Editor({ setProg, setBps }) {
     const breakpoints = e.editor.session.getBreakpoints(row, 0);
 
     if (typeof breakpoints[row] === typeof undefined) {
+      
       e.editor.session.setBreakpoint(row);
+      addBreakPoint(row+1)
     } else {
       e.editor.session.clearBreakpoint(row);
+      ignoreBreakPoint(row+1)
     }
     updateBreakpoints(breakpoints);
     e.stop();

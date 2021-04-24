@@ -10,7 +10,7 @@ export const sendDebugReq = (code, bps) => {
         {
             "sourceCode": code,
             "skipSyncStateToggle": true,
-            "skipBreakpointsToggle": false,
+            "skipBreakpointsToggle": false, 
             "breakpoints": bps
         })
 };
@@ -65,6 +65,22 @@ export const addExternalEvent = (name) => {
         {
             "externalEvent": name,
             "addEvent": true,
+        })
+};
+
+export const addBreakPoint = (row) => {
+    axios.post(`${baseUrl}/bpjs/breakpoint`,
+        {
+            "lineNumber": row,
+            "stopOnBreakpoint": true,
+        })
+};
+
+export const ignoreBreakPoint = (row) => {
+    axios.post(`${baseUrl}/bpjs/breakpoint`,
+        {
+            "lineNumber": row,
+            "stopOnBreakpoint": false,
         })
 };
 

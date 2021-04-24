@@ -12,7 +12,7 @@ const TraceContainer = styled.div`
   background-color: #353d45;
   margin-top: 30px;
   border-radius: 3px;
-  padding: 10px;
+  padding: 10px;    
   ::-webkit-scrollbar {
     height: 12px;
     width: 6px;
