@@ -136,7 +136,7 @@ function Editor({ setProg, setBps }) {
     <EditorContainer>
       <AceEditor
         height={`calc(100vh - ${
-          _.isEmpty(activeBottomPanels) ? "89px" : "503px"
+          _.isEmpty(activeBottomPanels) ? "89px" : "496px"
         })`}
         ref={editorRef}
         value={prog}
