@@ -17,7 +17,6 @@ export const groupByThreads = (progStateCTX) => {
             requested: getThreadsFor('requested', eName, threadsEventsStatus)
         }
     })
-    console.log(x)
     return x
 }
 const getThreadsFor = (eventType, eName, threadsEventsStatus) => {

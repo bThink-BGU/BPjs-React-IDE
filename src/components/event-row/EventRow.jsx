@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import { Tag, Input, Typography, Badge, Popconfirm, message } from "antd";
-import TweenOne from "rc-tween-one";
+import {ThreadsTags} from "./ThreadsTag";
 import { CloseOutlined } from "@ant-design/icons";
 import React, { ReactDOM, useContext, useState } from "react";
 
@@ -22,6 +22,7 @@ export const EventRowContainer = styled.div`
   margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 function confirm(afterConfirmMsg,cb) {
   message.success(afterConfirmMsg);
@@ -33,9 +34,11 @@ function cancel(e) {
 }
 export const EventRow = ({
   name,
-  withX = true,
+  withX = false,
   onClick = () => {},
-  clickAble = true,
+  withTags = false,
+  tagsData ={},
+  clickAble = false,
   withConfirmation = false,
   confirmMsg = "",
   afterConfirmMsg = "",
@@ -51,13 +54,17 @@ export const EventRow = ({
       cancelText="No"
     >
       <EventRowContainer onClick={() => clickAble && !withConfirmation && onClick()} clickAble={clickAble}>
-        <CustomEventRow color={"#ff9e35"}> {name} </CustomEventRow>
+        <CustomEventRow color={"#ff9e35"}> &nbsp; {name} </CustomEventRow>
         {withX && (
           <CloseOutlined
             onClick={() => setVisible(false)}
             style={{ color: "#ff9e35" }}
           />
         )}
+       {withTags ?
+        <ThreadsTags requested={tagsData.requested} blocked={tagsData.blocked} wait={tagsData.wait} />
+         : null
+       }
       </EventRowContainer>
     </Popconfirm>
   ) : null;

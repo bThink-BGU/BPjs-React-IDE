@@ -45,7 +45,6 @@ export default function EnvSelector() {
 
   
   const onChange = (e) => {
-    console.log(programStateCtx)
     if (stateCurrThread !== cascaderValue) {
       const selcetedThread = e && e[0];
       const selectedScopeName = e && e[1];

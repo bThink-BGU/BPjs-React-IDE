@@ -47,8 +47,8 @@ const Trace = () => {
         progState.eventsHistory.map((eh) => (
           <EventRow
             name={eh.name}
+            clickAble
             withConfirmation
-            withX={false}
             afterConfirmMsg={`Back To The Time Where \n  Event: \"${eh.name}\" \n Came Out To The World!`}
             confirmMsg={`Are you sure you want to cancel the event \"${eh.name}\" selection?`}
             onClick={() => API.backToSnapShot(eh.timeStamp)}
@@ -56,7 +56,7 @@ const Trace = () => {
         ))}
 
 {/* please keep this comment as this is very easy to development! */}
-      {/* {["a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"].map(
+      {["a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"].map(
         (eh) => (
           <EventRow
             name={eh}
@@ -66,7 +66,7 @@ const Trace = () => {
             confirmMsg={confirmMsg}
           />
         )
-      )} */}
+      )}
     </TraceContainer>
   );
 };

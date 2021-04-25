@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { CustomTitle } from "../title/title";
 import ProgramStateCTX from "../state-context/StateContext";
 import { EventRow } from "../event-row/EventRow";
+import { Tag } from 'antd';
+
 import {groupByThreads} from './aggregator'
 const RequestedOrBlockedContainer = styled.div`
   width: 90%;
@@ -27,19 +29,18 @@ const RequestedOrBlockedContainer = styled.div`
 
 const RequestedOrBlocked = () => {
   const {progState} = useContext(ProgramStateCTX);
-  groupByThreads(progState)
+  const eventsGroupedByThreads = groupByThreads(progState)
   return (
         <RequestedOrBlockedContainer>
             <CustomTitle level={5} color={"white"}>
               Requested/Blocked
               </CustomTitle>
               {progState.eventsHistory &&
-        progState.externalEvents.map((ee) => (
+        eventsGroupedByThreads.map((ee) => (
           <EventRow
+            withTags
+            tagsData={ee}
             name={ee.name}
-            clickAble={false}
-            withX={true}
-            onClick={()=>{}}
           />
         ))}
         </RequestedOrBlockedContainer>
