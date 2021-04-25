@@ -1,7 +1,9 @@
-import React from "react";
+import React,{useContext} from "react";
 import styled from "styled-components";
 import { CustomTitle } from "../title/title";
-
+import ProgramStateCTX from "../state-context/StateContext";
+import { EventRow } from "../event-row/EventRow";
+import {groupByThreads} from './aggregator'
 const RequestedOrBlockedContainer = styled.div`
   width: 90%;
   min-height: 200px;
@@ -24,9 +26,22 @@ const RequestedOrBlockedContainer = styled.div`
 `;
 
 const RequestedOrBlocked = () => {
-    return (
+  const {progState} = useContext(ProgramStateCTX);
+  groupByThreads(progState)
+  return (
         <RequestedOrBlockedContainer>
-            <CustomTitle level={5} color={"white"}>Requested/Blocked</CustomTitle>
+            <CustomTitle level={5} color={"white"}>
+              Requested/Blocked
+              </CustomTitle>
+              {progState.eventsHistory &&
+        progState.externalEvents.map((ee) => (
+          <EventRow
+            name={ee.name}
+            clickAble={false}
+            withX={true}
+            onClick={()=>{}}
+          />
+        ))}
         </RequestedOrBlockedContainer>
     );
 }

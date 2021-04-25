@@ -1,18 +1,17 @@
 export const mapDebugState = (stateFromServer) => {
     console.log(stateFromServer)
     return {
-        threadsAndEnvs: stateFromServer && stateFromServer.bThreadInfoList &&
-            stateFromServer.bThreadInfoList.map(t => {
-                return { name: t && t.name, env:t && t.env }
-            }),
-        currentRunningThread: { name: stateFromServer.currentRunningBT },
-        currentLine: stateFromServer.currentLineNumber,
-        eventsHistory: Object.entries(stateFromServer.eventsHistory).map(([key, value]) => {return {name: value.name,timeStamp: key}}),
-        externalEvents:
-            stateFromServer.eventsStatus &&
-             stateFromServer.eventsStatus.externalEvents &&
-             Object.entries(stateFromServer.eventsStatus.externalEvents).map(([key, value]) => {return {name: value.name}})
+        threadsAndEnvs: resolveThreadAndEnvs(stateFromServer),
 
+        currentRunningThread: { name: stateFromServer.currentRunningBT },
+
+        currentLine: stateFromServer.currentLineNumber,
+
+        eventsHistory: resolveEventsHistory(stateFromServer),
+
+        externalEvents: resolveExternalEvents(stateFromServer),
+
+        eventsInfo: resolveEventsInfo(stateFromServer)
     }
 }
 
@@ -22,4 +21,40 @@ export const mapTerminalState = (terminalStateFromServer) => {
     }
 }
 
+
+function resolveThreadAndEnvs(stateFromServer) {
+    return stateFromServer && stateFromServer.bThreadInfoList &&
+        stateFromServer.bThreadInfoList.map(t => {
+            return { name: t && t.name, env: t && t.env }
+        })
+}
+
+function resolveEventsHistory(stateFromServer) {
+    return Object.entries(stateFromServer.eventsHistory).map(([key, value]) => { return { name: value.name, timeStamp: key } })
+}
+
+function resolveExternalEvents(stateFromServer) {
+    return stateFromServer.eventsStatus &&
+        stateFromServer.eventsStatus.externalEvents &&
+        Object.entries(stateFromServer.eventsStatus.externalEvents).map(([key, value]) => { return { name: value.name } })
+}
+
+function resolveEventsInfo(stateFromServer) {
+    return {
+        events: {
+            blocked: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.blocked.map(e => e.name),
+            wait: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.wait.map(e => e.name),
+            requested: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.requested.map(e => e.name)
+        },
+        threadEvents: stateFromServer &&
+            stateFromServer.bThreadInfoList.map(t => {
+                return {
+                    name: t.name,
+                    blocked: t.blocked && t.blocked.map(e => e.name),
+                    requested: t.requested && t.requested.map(e => e.name),
+                    wait: t.wait && t.wait.map(e => e.name),
+                }
+            })
+    }
+}
 
