@@ -10,7 +10,7 @@ export const sendDebugReq = (code, bps) => {
         {
             "sourceCode": code,
             "skipSyncStateToggle": true,
-            "skipBreakpointsToggle": false, 
+            "skipBreakpointsToggle": false,
             "breakpoints": bps
         })
 };
@@ -57,7 +57,7 @@ export const sendContinueReq = () => {
 };
 
 export const skipExternalEvents = (skip) => {
-    axios.post(`${baseUrl}/bpjs/waitExternal`, {waitForExternal: skip})
+    axios.put(`${baseUrl}/bpjs/waitExternal`, {waitForExternal: skip})
 };
 
 export const addExternalEvent = (name) => {
