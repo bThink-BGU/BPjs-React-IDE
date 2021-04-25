@@ -40,19 +40,20 @@ function resolveExternalEvents(stateFromServer) {
 }
 
 function resolveEventsInfo(stateFromServer) {
+    console.log(stateFromServer)
     return {
         events: {
             blocked: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.blocked.map(e => e.name),
-            wait: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.wait.map(e => e.name),
-            requested: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.requested.map(e => e.name)
+            wait: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.wait && stateFromServer.eventsStatus.wait.map(e => e.name),
+            requested: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.requested && stateFromServer.eventsStatus.requested.map(e => e.name)
         },
         threadEvents: stateFromServer &&
             stateFromServer.bThreadInfoList.map(t => {
                 return {
                     name: t.name,
-                    blocked: t.blocked && t.blocked.map(e => e.name),
+                    blocked: t.blocked && [t.blocked.name],
                     requested: t.requested && t.requested.map(e => e.name),
-                    wait: t.wait && t.wait.map(e => e.name),
+                    wait: t.wait && [t.wait.name],
                 }
             })
     }

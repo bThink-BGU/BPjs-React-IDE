@@ -1,6 +1,6 @@
 
 export const groupByThreads = (progStateCTX) => {
-    
+
     const events = (progStateCTX.eventsInfo && progStateCTX.eventsInfo.events) ? progStateCTX.eventsInfo.events : { blocked: [], requested: [], wait: [] }
 
     const threadsEventsStatus =progStateCTX.eventsInfo &&  progStateCTX.eventsInfo.threadEvents
