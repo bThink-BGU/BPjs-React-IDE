@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Space } from "antd";
 import styled from "styled-components";
 import { ReactComponent as DebugButton } from "../../../assets/debug-button.svg";
@@ -9,19 +9,19 @@ import { ReactComponent as MuteBreakpointsButton } from "../../../assets/mute-br
 import { ReactComponent as UnMuteBreakpointsButton } from "../../../assets/unmute-breakpoints-button.svg";
 import { ReactComponent as MuteSyncStateButton } from "../../../assets/mute-sync-state-button.svg";
 import { ReactComponent as UnMuteSyncStateButton } from "../../../assets/unmute-sync-state-button.svg";
-import { ReactComponent as ContinueButton } from "../../../assets/continue-button.svg";
 import { ReactComponent as WaitForExternalEventsButton } from "../../../assets/external-events-on-button.svg";
 import { ReactComponent as SkipForExternalEventsButton } from "../../../assets/external-events-off-button.svg";
 import {
     muteBreakpoints,
     muteSyncState,
-    sendContinueReq,
+    nextSync,
     sendDebugReq,
     skipExternalEvents,
     stop
 } from '../../../utils/api'
 import { DelayedToolTip } from "../common/tooltip";
 import "../../../animations.scss";
+import { ReactComponent as NextSyncStateButton } from "../../../assets/next-sync-state-button.svg";
 
 const StyledSpace = styled(Space)`
   margin-right: 5px;
@@ -70,9 +70,9 @@ const LeftDebugButtons = () => {
                 <RunButton/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
-                            title={"Continue"}
+                            title={"Next Sync State"}
                             color={"#7cba59"}>
-                <ContinueButton onClick={() => sendContinueReq()}/>
+                <NextSyncStateButton onClick={() => nextSync()}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Stop"}

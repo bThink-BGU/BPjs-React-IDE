@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { ReactComponent as StepOutButton } from "../../../assets/step-out-button.svg";
 import { ReactComponent as StepIntoButton } from "../../../assets/step-into-button.svg";
 import { ReactComponent as StepOverButton } from "../../../assets/step-over-button.svg";
-import { nextSync, stepInto, stepOut, stepOver } from '../../../utils/api'
+import { sendContinueReq, stepInto, stepOut, stepOver } from '../../../utils/api'
 import { DelayedToolTip } from "../common/tooltip";
 import "../../../animations.scss";
-import { ReactComponent as NextSyncStateButton } from "../../../assets/next-sync-state-button.svg";
+import { ReactComponent as ContinueButton } from "../../../assets/continue-button.svg";
 
 const StyledSpace = styled(Space)`
   margin-left: 40px;
@@ -25,9 +25,9 @@ const TopDebugButtons = () => {
     return (
         <StyledSpace direction={"horizontal"}>
             <DelayedToolTip placement="top"
-                            title={"Next Sync State"}
+                            title={"Continue"}
                             color={"#2a9bc4"}>
-                <NextSyncStateButton onClick={() => nextSync()}/>
+                <ContinueButton onClick={() => sendContinueReq()}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Step Out"}

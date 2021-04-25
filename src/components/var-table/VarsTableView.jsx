@@ -1,6 +1,14 @@
 import React from "react";
-import { Table } from "antd";
+import { Empty } from "antd";
 import ReactJson from "react-json-view";
+import {
+    RowLeftContainer,
+    RowRightContainer, TableTitlesContainer,
+    VarsTableContainer,
+    VarsTableContentContainer,
+    VarsTableRowContainer
+} from "./VarTable.styles";
+import { CustomTitle } from "../title/title";
 
 /***
  * Vars to vals is a map holds the follwing keys:
@@ -9,72 +17,57 @@ import ReactJson from "react-json-view";
  * isJson: the only type we supports is an object, all other types will display their native toString representation
  */
 
-export default function VarTableView({ varsToVals }) {
-  const columns = [
-    {
-      title: "Variable Name",
-      dataIndex: "varName",
-      width: "130px",
-    },
-    {
-      title: "Value",
-      dataIndex: "varVal",
-    },
-  ];
 
-  const isStr = (ms) => typeof ms === "string" || ms instanceof String;
-  const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
-  const rows =
-    !isStr(varsToVals) &&
-    varsToVals &&
-    Object.keys(varsToVals)
-      .map((k, index) => {
-        return {
-          key: index,
-          varName: k,
-          varVal:
-          ( (isStr(varsToVals[k]) || isNum(varsToVals[k]))) ? (
-              varsToVals[k]
-            ) : (
-              <ReactJson src={varsToVals[k]} />
-            ),
-        };
-      })
-      .filter((v) => v.varName !== "FUNCNAME");
+export default function VarTableView({varsToVals}) {
+    const isStr = (ms) => typeof ms === "string" || ms instanceof String;
+    const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
 
-  return (
-    <Table
-      bordered={true}
-      scroll={{ y: 209 }}
-      style={{ height: "80%" }}
-      columns={columns}
-      dataSource={rows}
-      pagination={false}
-      className="antdTable"
-      size="small"
-    />
-  );
+    const getVarValue = (v) => {
+        return (isStr(v) || isNum(v)) ? v : <ReactJson src={v}/>;
+    };
+
+    const rows =
+        !isStr(varsToVals) && varsToVals &&
+        Object.keys(varsToVals).map(k => {
+            return {
+                varName: k,
+                varVal: getVarValue(varsToVals[k]),
+            };
+        }).filter((v) => v.varName !== "FUNCNAME");
+
+    const buildRows = (rows) => {
+        return rows.map(row => {
+            return (
+                <VarsTableRowContainer>
+                    <RowLeftContainer bordered={true}>{row.varName}</RowLeftContainer>
+                    <RowRightContainer>{row.varVal}</RowRightContainer>
+                </VarsTableRowContainer>
+            );
+        })
+    };
+
+    const buildTitleRow = () => {
+        return (
+            <TableTitlesContainer>
+                <RowLeftContainer bordered={false}>
+                    <CustomTitle level={5} color={"white"}>Var</CustomTitle>
+                </RowLeftContainer>
+                <RowRightContainer>
+                    <CustomTitle level={5} color={"white"}>Val</CustomTitle>
+                </RowRightContainer>
+            </TableTitlesContainer>
+        );
+    };
+
+    return (
+        <VarsTableContainer>
+            {buildTitleRow()}
+            <VarsTableContentContainer>
+                {rows
+                    ? buildRows(rows)
+                    : <Empty style={{paddingTop: "40px"}} description={"No variables have been found yet"}/>};
+            </VarsTableContentContainer>
+        </VarsTableContainer>
+    );
 }
 
-function extractValue(value) {
-  if (isJson(value)) return <ReactJson src={value} />;
-  else return value;
-}
-
-const isJson = (s) => {
-  if (
-    /^[\],:{}\s]*$/.test(
-      s
-        .replace(/\\["\\\/bfnrtu]/g, "@")
-        .replace(
-          /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
-          "]"
-        )
-        .replace(/(?:^|:|,)(?:\s*\[)+/g, "")
-    )
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};

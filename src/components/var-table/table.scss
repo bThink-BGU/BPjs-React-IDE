@@ -27,6 +27,14 @@
   background-color: rgb(49, 49, 49);
 }
 
+.ant-cascader-menu-item:hover {
+  background: #ff9b42 !important;
+}
+
+.anticon-right, .ant-cascader-menu-item {
+  color: white !important;
+}
+
 table {
   box-shadow: 0 0 0 2px #1c272b;
   border: none !important;
@@ -60,11 +68,11 @@ table {
   height: 210px;
 }
 
-.ant-table-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   background: rgb(49, 49, 49);
 }
 
-.ant-table-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #ff9b42;
   -webkit-border-radius: 2px;
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
