@@ -40,23 +40,20 @@ const StyledSpace = styled(Space)`
 `;
 
 const LeftDebugButtons = () => {
-    const [bpMuted, setBpMuted] = useState(false);
-    const [syncStateMuted, setSyncStateMuted] = useState(false);
-    const [skipExternals, setSkipExternals] = useState(false);
-    const ideContext = useContext(IDECTX);
+    const ideProps = useContext(IDECTX);
 
     const handleMuteOrUnmuteBp = (mute) => {
-        setBpMuted(mute);
+        ideProps.setBpMuted(mute);
         muteBreakpoints(mute);
     }
 
     const handleMuteOrUnmuteSyncState = (mute) => {
-        setSyncStateMuted(mute);
+        ideProps.setSyncStateMuted(mute);
         muteSyncState(mute);
     }
 
     const handleSkipOrWaitExternalEvents = (skip) => {
-        setSkipExternals(skip);
+        ideProps.setSkipExternals(skip);
         skipExternalEvents(skip);
     }
 
@@ -65,7 +62,7 @@ const LeftDebugButtons = () => {
             <DelayedToolTip placement="top"
                             title={"Debug"}
                             color={"#7cba59"}>
-                <DebugButton onClick={() => sendDebugReq(ideContext.prog, ideContext.bps)}/>
+                <DebugButton onClick={() => sendDebugReq(ideProps)}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Run"}
@@ -83,24 +80,24 @@ const LeftDebugButtons = () => {
                 <StopButton onClick={() => stop()}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
-                            title={`${bpMuted ? "unmute" : "mute"} breakpoints `}
+                            title={`${ideProps.bpMuted ? "unmute" : "mute"} breakpoints `}
                             color={"#c45749"}>
-                {bpMuted
+                {ideProps.bpMuted
                     ? <UnMuteBreakpointsButton onClick={() => handleMuteOrUnmuteBp(false)}/>
                     : <MuteBreakpointsButton onClick={() => handleMuteOrUnmuteBp(true)}/>}
             </DelayedToolTip>
             <DelayedToolTip placement="top"
-                            title={`${syncStateMuted ? "unmute" : "mute"} sync state `}
+                            title={`${ideProps.syncStateMuted ? "unmute" : "mute"} sync state `}
                             color={"#c45749"}>
-                {syncStateMuted
+                {ideProps.syncStateMuted
                     ? <UnMuteSyncStateButton onClick={() => handleMuteOrUnmuteSyncState(false)}/>
                     : <MuteSyncStateButton onClick={() => handleMuteOrUnmuteSyncState(true)}/>}
             </DelayedToolTip>
 
             <DelayedToolTip placement="top"
-                            title={`${skipExternals ? "wait for" : "dismiss"} external events `}
+                            title={`${ideProps.skipExternals ? "wait for" : "dismiss"} external events `}
                             color={"#c45749"}>
-                {skipExternals
+                {ideProps.skipExternals
                     ? <WaitForExternalEventsButton onClick={() => handleSkipOrWaitExternalEvents(false)}/>
                     : <SkipForExternalEventsButton onClick={() => handleSkipOrWaitExternalEvents(true)}/>}
             </DelayedToolTip>

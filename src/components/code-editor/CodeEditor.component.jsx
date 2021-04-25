@@ -49,7 +49,7 @@ import { setBpjsMode, editorThemes } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
-import { addBreakPoint,ignoreBreakPoint } from "../../utils/api";
+import { addBreakPoint, ignoreBreakPoint } from "../../utils/api";
 import IDECTX from "../../pages/IDE/IDECTX";
 
 const BP_TAP = "guttermousedown";
@@ -62,105 +62,103 @@ const EditorContainer = styled.div`
   align-items: flex-start;
 `;
 
-function Editor({ setProg, setBps }) {
-  const [editorRef, setEditorRef] = useState(null);
-  const [breakPoints, setBreakPoints] = useState([]);
-  const {progState} = useContext(ProgramStateCTX);
-  const { activeBottomPanels, currTheme } = useContext(LayoutCtx);
-  const {prog} = useContext(IDECTX);
+function Editor() {
+    const [editorRef, setEditorRef] = useState(null);
+    const {progState} = useContext(ProgramStateCTX);
+    const {activeBottomPanels, currTheme} = useContext(LayoutCtx);
+    const {prog, setProg, setBps} = useContext(IDECTX);
 
-  const onChange = (newValue) => {
-    newValue !== prog && setProg(newValue);
-  };
+    const onChange = (newValue) => {
+        newValue !== prog && setProg(newValue);
+    };
 
-  const handleBreakPointTap = (e, updateBreakpoints) => {
-    const target = e.domEvent.target;
+    const handleBreakPointTap = (e, updateBreakpoints) => {
+        const target = e.domEvent.target;
 
-    if (target.className.indexOf("ace_gutter-cell") === -1) {
-      return;
-    }
-    const row = e.getDocumentPosition().row;
-    const breakpoints = e.editor.session.getBreakpoints(row, 0);
+        if (target.className.indexOf("ace_gutter-cell") === -1) {
+            return;
+        }
+        const row = e.getDocumentPosition().row;
+        const breakpoints = e.editor.session.getBreakpoints(row, 0);
 
-    if (typeof breakpoints[row] === typeof undefined) {
-      
-      e.editor.session.setBreakpoint(row);
-      addBreakPoint(row+1)
-    } else {
-      e.editor.session.clearBreakpoint(row);
-      ignoreBreakPoint(row+1)
-    }
-    updateBreakpoints(breakpoints);
-    e.stop();
-  };
+        if (typeof breakpoints[row] === typeof undefined) {
 
-  const setCleanBreakpoints = (breakpoints) => {
-    const breakPointsParsed =  Object.keys(breakpoints).map((breakPoint) => parseInt(breakPoint))
-    setBreakPoints(breakPointsParsed);
-    setBps(breakPointsParsed.map(bp=>bp+1));
-    return breakPointsParsed
-  };
+            e.editor.session.setBreakpoint(row);
+            addBreakPoint(row + 1)
+        } else {
+            e.editor.session.clearBreakpoint(row);
+            ignoreBreakPoint(row + 1)
+        }
+        updateBreakpoints(breakpoints);
+        e.stop();
+    };
 
-  useEffect(() => {
-    if (editorRef && editorRef.current) {
-      const {
-        editor,
-        editor: { session },
-      } = editorRef.current;
-      setBpjsMode(editor, session);
-      editor.setAutoScrollEditorIntoView(true);
+    const setCleanBreakpoints = (breakpoints) => {
+        const breakPointsParsed = Object.keys(breakpoints).map((breakPoint) => parseInt(breakPoint))
+        setBps(breakPointsParsed.map(bp => bp + 1));
+        return breakPointsParsed;
+    };
 
-      editor.on(BP_TAP, (e) => {
-        handleBreakPointTap(e, setCleanBreakpoints);
-      });
-    }
-  }, [editorRef]);
+    useEffect(() => {
+        if (editorRef && editorRef.current) {
+            const {
+                editor,
+                editor: {session},
+            } = editorRef.current;
+            setBpjsMode(editor, session);
+            editor.setAutoScrollEditorIntoView(true);
 
-  useEffect(() => {
-    const editorRef = createRef();
-    setEditorRef(editorRef);
-  }, []);
+            editor.on(BP_TAP, (e) => {
+                handleBreakPointTap(e, setCleanBreakpoints);
+            });
+        }
+    }, [editorRef]);
 
-  const editorStyle = {
-    width: "100%",
-    paddingTop: "10px"
-  };
-  let markers = [];
-  markers.push({
-    startRow: progState.currentLine - 1,
-    startCol: 0,
-    endRow: progState.currentLine,
-    endCol: 0,
-    className: "replacement_marker",
-    type: "text",
-  });
+    useEffect(() => {
+        const editorRef = createRef();
+        setEditorRef(editorRef);
+    }, []);
 
-  return (
-    <EditorContainer>
-      <AceEditor
-        height={`calc(100vh - ${
-          _.isEmpty(activeBottomPanels) ? "89px" : "496px"
-        })`}
-        ref={editorRef}
-        value={prog}
-        mode={"javascript"}
-        theme={currTheme}
-        onChange={onChange}
-        name="UNIQUE_ID_OF_DIV"
-        enableBasicAutocompletion={true}
-        enableLiveAutocompletion={true}
-        enableSnippets={true}
-        highlightActiveLine={true}
-        setOptions={{ useWorker: false }}
-        markers={markers}
-        editorProps={{
-          $blockScrolling: true,
-          $useWorker: false,
-        }}
-        style={editorStyle}
-      />
-    </EditorContainer>
-  );
+    const editorStyle = {
+        width: "100%",
+        paddingTop: "10px"
+    };
+    let markers = [];
+    markers.push({
+        startRow: progState.currentLine - 1,
+        startCol: 0,
+        endRow: progState.currentLine,
+        endCol: 0,
+        className: "replacement_marker",
+        type: "text",
+    });
+
+    return (
+        <EditorContainer>
+            <AceEditor
+                height={`calc(100vh - ${
+                    _.isEmpty(activeBottomPanels) ? "89px" : "496px"
+                })`}
+                ref={editorRef}
+                value={prog}
+                mode={"javascript"}
+                theme={currTheme}
+                onChange={onChange}
+                name="UNIQUE_ID_OF_DIV"
+                enableBasicAutocompletion={true}
+                enableLiveAutocompletion={true}
+                enableSnippets={true}
+                highlightActiveLine={true}
+                setOptions={{useWorker: false}}
+                markers={markers}
+                editorProps={{
+                    $blockScrolling: true,
+                    $useWorker: false,
+                }}
+                style={editorStyle}
+            />
+        </EditorContainer>
+    );
 }
 
 export default Editor;
