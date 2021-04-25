@@ -56,7 +56,7 @@ const Trace = () => {
         ))}
 
 {/* please keep this comment as this is very easy to development! */}
-      {["a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"].map(
+      {/* {["a", "b", "c", "a", "b", "c", "a", "b", "c", "a", "b", "c"].map(
         (eh) => (
           <EventRow
             name={eh}
@@ -66,7 +66,7 @@ const Trace = () => {
             confirmMsg={confirmMsg}
           />
         )
-      )}
+      )} */}
     </TraceContainer>
   );
 };
