@@ -73,7 +73,7 @@ const LeftDebugButtons = () => {
                 <RunButton/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
-                            title={"Run"}
+                            title={"Continue"}
                             color={"#7cba59"}>
                 <ContinueButton onClick={() => sendContinueReq()}/>
             </DelayedToolTip>
