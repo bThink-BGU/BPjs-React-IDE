@@ -12,6 +12,8 @@ const getWidth = (activeBottomPanels) => {
         return css` width: 48%;`;
     } else if (debugIsActive && !terminalIsActive) {
         return css` width: 100%;`;
+    } else if (!debugIsActive && terminalIsActive) {
+        return css`width: 0; opacity: 0;`;
     }
 };
 
@@ -19,6 +21,8 @@ export const TableWrapper = styled.div`
   height: 100% !important;
 
   ${props => getWidth(props.activeBottomPanels)}
+  transition: width 0.2s ease-out, opacity 0.2s ease;
+  
   table {
     box-shadow: 0 0 0 2px #1c272b;
     border-style: hidden !important;

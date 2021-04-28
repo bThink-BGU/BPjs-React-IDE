@@ -7,6 +7,8 @@ import { Tag } from 'antd';
 
 import {groupByThreads} from './aggregator'
 const RequestedOrBlockedContainer = styled.div`
+  opacity: ${props => props.shouldFadePanel ? "0" : "1"};
+  transition: opacity 0.2s;
   width: 90%;
   min-height: 200px;
   background-color: #353d45;
@@ -27,11 +29,11 @@ const RequestedOrBlockedContainer = styled.div`
   }
 `;
 
-const RequestedOrBlocked = () => {
+const RequestedOrBlocked = ({shouldFadePanel}) => {
   const {progState} = useContext(ProgramStateCTX);
   const eventsGroupedByThreads = groupByThreads(progState)
   return (
-        <RequestedOrBlockedContainer>
+        <RequestedOrBlockedContainer shouldFadePanel={shouldFadePanel}>
             <CustomTitle level={5} color={"white"}>
               Requested/Blocked
               </CustomTitle>

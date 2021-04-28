@@ -5,6 +5,7 @@ import { CustomTitle } from "../title/title";
 import * as API from "../../utils/api";
 import { EventRow } from "../event-row/EventRow";
 const TraceContainer = styled.div`
+  opacity: ${props => props.shouldFadePanel ? "0" : "1"};
   width: 90%;
   min-height: 200px;
   max-height: 200px;
@@ -25,11 +26,11 @@ const TraceContainer = styled.div`
   }
 `;
 
-const Trace = () => {
+const Trace = ({shouldFadePanel}) => {
   const { progState } = useContext(ProgramStateCTX);
   const confirmMsg = "Are u sure you want to travel back in time?";
   return (
-    <TraceContainer>
+    <TraceContainer shouldFadePanel={shouldFadePanel}>
       <CustomTitle
         style={{
           position: "sticky",

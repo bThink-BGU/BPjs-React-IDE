@@ -9,6 +9,9 @@ import { EventRow } from "../event-row/EventRow";
 import * as API from "../../utils/api";
 import { PlusSquareOutlined } from "@ant-design/icons";
 const EventsHistoryContainer = styled.div`
+  opacity: ${props => props.shouldFadePanel ? "0" : "1"};
+  transition: opacity 0.2s;
+
   width: 90%;
 `;
 
@@ -51,7 +54,7 @@ const AddEventButton = styled(Button)`
   }
 `;
 
-const EventsHistory = () => {
+const EventsHistory = ({shouldFadePanel}) => {
   const [showInput, inputToggle] = useState(false);
   const [input, setInput] = useState("");
   const { progState } = useContext(ProgramStateCTX);
@@ -60,7 +63,7 @@ const EventsHistory = () => {
     setInput("")
   };
   return (
-    <EventsHistoryContainer>
+    <EventsHistoryContainer shouldFadePanel={shouldFadePanel}>
       {showInput ? (
         <Input
           onChange={(i) => setInput(i.target.value)}

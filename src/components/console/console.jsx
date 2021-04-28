@@ -1,28 +1,35 @@
 import React, { useContext } from "react";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
-import { Console } from "console-feed";
-import { consoleStyle, ConsoleWrapper, StyledConsole } from "./console.styles";
+import { ConsoleContainer, Log, StyledConsole } from "./console.styles";
 import { CustomTitle } from "../title/title";
+import { useConsoleText } from "./useConsoleText";
 
+const assembleLog = (consoleOutput) => {
+    const isSpecialLog = consoleOutput.type === "warning" || consoleOutput.type === "error";
+    return <Log isSpecial={isSpecialLog}
+                showIcon={isSpecialLog}
+                type={consoleOutput.type}
+                banner={true}
+                message={<pre>{consoleOutput.message}</pre>}/>;
+}
 
-export default function BPConsole({consoleText}) {
+export default function BPConsole() {
 
     const layoutCtx = useContext(LayoutCtx);
     const {activeBottomPanels} = layoutCtx;
-    //our terminal is listening to console.log so any printout with console.log file will be displayed in the ui
+    const {consoleText} = useConsoleText();
 
     return (
-        <ConsoleWrapper activeBottomPanels={activeBottomPanels}>
-            <CustomTitle level={4} color={"white"} style={{marginTop: "-30px"}}>
+        <ConsoleContainer activeBottomPanels={activeBottomPanels}>
+            <CustomTitle level={4} color={"white"}>
                 Console
             </CustomTitle>
             <StyledConsole>
-                <Console logs={consoleText}
-                         styles={consoleStyle}
-                         variant={"dark"}
-                         filter={["log"]}/>
+                {consoleText
+                    .filter(log => !!log)
+                    .map(consoleOutput => assembleLog(consoleOutput))}
             </StyledConsole>
-        </ConsoleWrapper>
+        </ConsoleContainer>
     );
 }
 

@@ -1,9 +1,7 @@
-import { Typography } from 'antd';
 import _ from "lodash";
 import { BOTTOM_PANELS } from "../../pages/IDE/ide";
 import styled, { css } from "styled-components";
-
-const {Title} = Typography;
+import { Alert } from "antd";
 
 const getWidth = (activeBottomPanels) => {
     const terminalIsActive = _.includes(activeBottomPanels, BOTTOM_PANELS.CONSOLE);
@@ -12,13 +10,9 @@ const getWidth = (activeBottomPanels) => {
         return css` width: 48% `;
     } else if (!debugIsActive && terminalIsActive) {
         return css` width: 100% `;
+    } else if (debugIsActive && !terminalIsActive) {
+        return css`width: 0; opacity: 0;`;
     }
-};
-
-export const consoleStyle = {
-    LOG_COLOR: "white",
-    BASE_FONT_SIZE: "16px",
-    LOG_BACKGROUND: "none",
 };
 
 export const StyledConsole = styled.div`
@@ -28,10 +22,20 @@ export const StyledConsole = styled.div`
   background-color: rgb(49, 49, 49);
   width: 100%;
   height: 100%;
+  border-radius: 1px;
 `;
 
-export const ConsoleWrapper = styled.div`
-  height: 100%;
-  padding-top: 53px;
-  ${props => getWidth(props.activeBottomPanels)}
+export const ConsoleContainer = styled.div`
+  height: 306px;
+  transition: width 0.2s ease-out, opacity 0.2s ease;
+  ${props => getWidth(props.activeBottomPanels)};
+`;
+
+export const Log = styled(Alert)`
+  border-bottom: 1px solid orange;
+  background: ${props => !props.isSpecial && "none"};
+
+  pre {
+    color: ${props => props.isSpecial ? "rgb(49, 49, 49)" : "white"};
+  }
 `;

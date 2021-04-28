@@ -13,10 +13,9 @@ import { useConsoleText } from "../../console/useConsoleText";
 const StyledBottomControlPanel = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   bottom: 38px;
-  padding: 10px 30px 10px 20px;
-  height: 415px;
+  padding: 10px 30px 508px 20px;
+  height: 400px;
   width: 100%;
   background-color: #353d45;
   border-top: 5px solid orange;
@@ -24,11 +23,9 @@ const StyledBottomControlPanel = styled.div`
 
 const PanelsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   flex-direction: row;
   width: 100%;
-  height: calc(100% - 80px);
-
 `;
 
 const BottomControlPanel = () => {
@@ -45,15 +42,15 @@ const BottomControlPanel = () => {
             <TopDebugButtons/>
             <PanelsContainer>
                 <LeftDebugButtons/>
-                {isActive(BOTTOM_PANELS.DEBUG) && <EnvSelector/>}
+                {<EnvSelector/>}
                 {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.CONSOLE) &&
                 <Divider style={{
-                    height: "100%",
+                    height: "300px",
                     width: "2px",
                     backgroundColor: "#ff9b42",
                     marginTop: "40px"
                 }} type="vertical"/>}
-                {isActive(BOTTOM_PANELS.CONSOLE) && <BPConsole consoleText={consoleText}/>}
+                {<BPConsole/>}
             </PanelsContainer>
         </StyledBottomControlPanel>
     );

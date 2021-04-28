@@ -1,11 +1,10 @@
-import styled, { css } from "styled-components";
+import styled  from "styled-components";
 import { Resizable } from "re-resizable";
 
 export const LeftControlPanelContent = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   ${props => `height: calc(100vh - ${props.bottomPanelHeight + 20}px)`};
-  background-color: green;
   width: 90%;
   margin: 20px 20px;
   padding: 20px 20px;

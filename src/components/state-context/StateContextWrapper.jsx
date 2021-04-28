@@ -8,7 +8,7 @@ export default class StateManager extends React.Component {
     super(props);
     this.state = {
       progState: "empty state",
-      terminalState: { outputs: "WELCOME TO BPJS ONLINE IDE" },
+      terminalState: { outputs: null },
     };
   }
 

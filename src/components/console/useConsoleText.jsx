@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Hook } from "console-feed";
 import printoutsResolver from "./ConsoleStateResolver";
 import ProgramStateCTX from "../state-context/StateContext";
 
@@ -15,21 +14,11 @@ const initialBpjsText = " /$$$$$$$  /$$$$$$$   /$$$$$  /$$$$$$ \n" +
     "Happy Debugging";
 
 export const useConsoleText = () => {
-    const [text, setText] = useState([]);
+    const [text, setText] = useState([{message: initialBpjsText, type: "info"}]);
     const terminalState = useContext(ProgramStateCTX);
 
     useEffect(() => {
-        Hook(
-            window.console,
-            (log) => setText((currLogs) => [...currLogs, log]),
-            false
-        )
-        console.log(initialBpjsText);
-        // return () => Unhook(window.console)
-    }, [])
-
-    useEffect(() => {
-        console.log(printoutsResolver(terminalState))
+        setText(prevText => [...prevText, printoutsResolver(terminalState)]);
     }, [terminalState.terminalState]);
 
     return {consoleText: text};
