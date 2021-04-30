@@ -16,6 +16,7 @@ import {
     muteSyncState,
     nextSync,
     sendDebugReq,
+    sendRunReq,
     skipExternalEvents,
     stop
 } from '../../../utils/api'
@@ -67,7 +68,7 @@ const LeftDebugButtons = () => {
             <DelayedToolTip placement="top"
                             title={"Run"}
                             color={"#7cba59"}>
-                <RunButton/>
+                <RunButton onClick={() => sendRunReq(ideProps)}/>
             </DelayedToolTip>
             <DelayedToolTip placement="top"
                             title={"Next Sync State"}

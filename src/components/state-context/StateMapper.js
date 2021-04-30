@@ -1,5 +1,4 @@
 export const mapDebugState = (stateFromServer) => {
-    console.log(stateFromServer)
     return {
         threadsAndEnvs: resolveThreadAndEnvs(stateFromServer),
 
@@ -17,7 +16,7 @@ export const mapDebugState = (stateFromServer) => {
 
 export const mapTerminalState = (terminalStateFromServer) => {
     return {
-        outputs: terminalStateFromServer.message
+        outputs: terminalStateFromServer
     }
 }
 
@@ -40,7 +39,6 @@ function resolveExternalEvents(stateFromServer) {
 }
 
 function resolveEventsInfo(stateFromServer) {
-    console.log(stateFromServer)
     return {
         events: {
             blocked: stateFromServer && stateFromServer.eventsStatus && stateFromServer.eventsStatus.blocked && stateFromServer.eventsStatus.blocked.map(e => e.name),

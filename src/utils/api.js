@@ -17,6 +17,13 @@ export const sendDebugReq = (ideParams) => {
         })
 };
 
+export const sendRunReq = (ideParams) => {
+    axios.post(`${baseUrl}/bpjs/run`,
+        {
+            "sourceCode": ideParams.prog,
+            "waitForExternalEvents": !ideParams.skipExternals,
+        })
+};
 
 export const getEventHsitory = (from, to) => {
     axios.get(`${baseUrl}/bpjs/events?from=${from}&to=${to}`)
