@@ -1,10 +1,13 @@
 export const mapDebugState = (stateFromServer) => {
+    console.log(stateFromServer)
     return {
         threadsAndEnvs: resolveThreadAndEnvs(stateFromServer),
 
         currentRunningThread: { name: stateFromServer.currentRunningBT },
 
         currentLine: stateFromServer.currentLineNumber,
+
+        isSyncState: stateFromServer && !stateFromServer.currentLineNumber,
 
         eventsHistory: resolveEventsHistory(stateFromServer),
 
