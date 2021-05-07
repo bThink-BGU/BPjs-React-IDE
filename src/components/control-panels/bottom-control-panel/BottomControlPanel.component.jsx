@@ -26,7 +26,6 @@ const StyledBottomControlPanel = styled.div`
   .sync-state-on {
     opacity: 1;
     transition: opacity 0.4s;
-    box-shadow: orange -4px 9px 25px -6px;
   }
 
   .sync-state-off {
@@ -70,10 +69,12 @@ const BottomControlPanel = () => {
                 <Divider style={{
                     height: "300px",
                     width: "2px",
+                    marginRight: "12px",
+                    marginLeft: "12px",
                     backgroundColor: "#ff9b42",
                     marginTop: "40px"
                 }} type="vertical"/>}
-                {<BPConsole/>}
+                <BPConsole/>
             </PanelsContainer>
         </StyledBottomControlPanel>
     );

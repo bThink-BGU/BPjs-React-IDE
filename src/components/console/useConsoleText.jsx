@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import printoutsResolver from "./ConsoleStateResolver";
 import ProgramStateCTX from "../state-context/StateContext";
 
-const initialBpjsText = " /$$$$$$$  /$$$$$$$   /$$$$$  /$$$$$$ \n" +
+export const initialBpjsText = " /$$$$$$$  /$$$$$$$   /$$$$$  /$$$$$$ \n" +
     "| $$__  $$| $$__  $$ |__  $$ /$$__  $$\n" +
     "| $$  \\ $$| $$  \\ $$    | $$| $$  \\__/\n" +
     "| $$$$$$$ | $$$$$$$/    | $$|  $$$$$$ \n" +

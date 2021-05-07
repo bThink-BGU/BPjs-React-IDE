@@ -10,7 +10,7 @@ const LeftControlPanel = () => {
     const [shouldFadePanel, setShouldFadePanel] = useState(false);
 
     const handleResize = (resizeEvent) => {
-        if (resizeEvent.clientX <= 80) {
+        if (resizeEvent.clientX <= 100) {
             setShouldFadePanel(true)
         } else {
             setShouldFadePanel(false)

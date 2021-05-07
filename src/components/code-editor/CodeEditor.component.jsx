@@ -106,7 +106,6 @@ function Editor() {
                 editor: {session},
             } = editorRef.current;
             setBpjsMode(editor, session);
-            editor.setAutoScrollEditorIntoView(true);
 
             editor.on(BP_TAP, (e) => {
                 handleBreakPointTap(e, setCleanBreakpoints);
@@ -118,6 +117,13 @@ function Editor() {
         const editorRef = createRef();
         setEditorRef(editorRef);
     }, []);
+
+    useEffect(() => {
+        editorRef?.current?.editor?.scrollToRow(progState.currentLine - 5);
+        // editorRef?.current?.editor?.gotoLine(progState.currentLine, 0, true);
+        // editorRef?.current?.editor?.scrollToLine(progState.currentLine, true,true, () => {});
+        // editorRef?.current?.editor?.scrollToRow(progState.currentLine);
+    }, [progState.currentLine]);
 
     const editorStyle = {
         width: "100%",

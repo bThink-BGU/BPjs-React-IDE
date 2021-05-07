@@ -19,7 +19,7 @@ export const BOTTOM_PANELS = {
 };
 
 function IDE() {
-    const [currTheme, setCurrTheme] = useState("ambiance");
+    const [currTheme, setCurrTheme] = useState("idle_fingers");
     const [activeBottomPanels, setActiveBottomPanels] = useState([BOTTOM_PANELS.CONSOLE, BOTTOM_PANELS.DEBUG]);
     const [prog, setProg] = useState("");
     const [bps, setBps] = useState([]);
