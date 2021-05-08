@@ -21,17 +21,28 @@ import { CustomTitle } from "../title/title";
 export default function VarTableView({varsToVals}) {
     const isStr = (ms) => typeof ms === "string" || ms instanceof String;
     const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
+    const isObject = (ms) => typeof ms === "object" || ms instanceof Object;
 
     const getVarValue = (v) => {
-        return (isStr(v) || isNum(v)) ? v : <ReactJson src={v}/>;
+        return (isStr(v) || isNum(v)) ? v : isObject(v) ? <ReactJson src={v}/> : "null";
+    };
+
+    const tryParse = json => {
+        try {
+            return json === "null" ? json : JSON.parse(json);
+        } catch (e) {
+            console.log("HERE", e)
+            return json
+        }
     };
 
     const rows =
-        !isStr(varsToVals) && varsToVals &&
+        !isStr(varsToVals) &&
+        varsToVals &&
         Object.keys(varsToVals).map(k => {
             return {
                 varName: k,
-                varVal: getVarValue(varsToVals[k]),
+                varVal: getVarValue(tryParse(varsToVals[k])),
             };
         }).filter((v) => v.varName !== "FUNCNAME");
 
