@@ -7,8 +7,6 @@ export const mapDebugState = (stateFromServer) => {
 
         currentLine: stateFromServer.currentLineNumber,
 
-        isSyncState: stateFromServer && !stateFromServer.currentLineNumber,
-
         eventsHistory: resolveEventsHistory(stateFromServer),
 
         externalEvents: resolveExternalEvents(stateFromServer),
@@ -23,6 +21,9 @@ export const mapTerminalState = (terminalStateFromServer) => {
     }
 }
 
+export const mapProgramStatus = (programStatus) => {
+    return programStatus.status;
+}
 
 function resolveThreadAndEnvs(stateFromServer) {
     return stateFromServer && stateFromServer.bThreadInfoList &&

@@ -45,6 +45,7 @@ const BottomControlPanel = () => {
 
     const layoutCtx = useContext(LayoutCtx);
     const {progState} = useContext(ProgramStateCTX);
+    const {status} = useContext(ProgramStateCTX);
 
     const {activeBottomPanels} = layoutCtx;
     const {consoleText} = useConsoleText();
@@ -56,7 +57,7 @@ const BottomControlPanel = () => {
         <StyledBottomControlPanel>
             <Space size={50}>
                 <TopDebugButtons/>
-                {<Tag className={`sync-state-${progState.isSyncState ? "on" : "off"}`}
+                {<Tag className={`sync-state-${status === "SYNCSTATE" ? "on" : "off"}`}
                       icon={<ExclamationCircleOutlined/>}
                       color="warning">
                     In Sync State
