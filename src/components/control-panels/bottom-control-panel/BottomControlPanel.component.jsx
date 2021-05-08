@@ -9,7 +9,6 @@ import { Divider, Space, Tag } from "antd";
 import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 import TopDebugButtons from "../../debug-buttons/top-debug-buttons/TopDebugButtons";
 import LeftDebugButtons from "../../debug-buttons/left-debug-buttons/LeftDebugButtons";
-import { useConsoleText } from "../../console/useConsoleText";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ProgramStateCTX from "../../state-context/StateContext";
 import "../../../animations.scss";

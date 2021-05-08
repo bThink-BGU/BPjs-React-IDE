@@ -1,4 +1,4 @@
-import React, { createRef, useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { ConsoleContainer, Log, StyledConsole } from "./console.styles";
 import { CustomTitle } from "../title/title";

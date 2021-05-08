@@ -22,12 +22,11 @@ import {
 import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 import {
     DEBUG_BUTTON,
-    NEXT_SYNC_BUTTON, RUN_BUTTON,
+    RUN_BUTTON,
     statusToActiveButtonsMap, STOP_BUTTON, TOGGLE_BP_BUTTON, TOGGLE_EXTERNALS_BUTTON, TOGGLE_SYNC_BUTTON
 } from "../../control-panels/bottom-control-panel/BottomControlPanel.component";
 import ProgramStateCTX from "../../state-context/StateContext";
 import _ from "lodash";
-import { useConsoleText } from "../../console/useConsoleText";
 
 const StyledSpace = styled(Space)`
   margin-right: 5px;
