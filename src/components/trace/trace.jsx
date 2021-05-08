@@ -60,6 +60,7 @@ const Trace = ({shouldFadePanel}) => {
                             key={i}
                             name={eh.name}
                             clickAble
+                            withX   
                             withConfirmation
                             afterConfirmMsg={`Back To The Time Where \n  Event: \"${eh.name}\" \n Came Out To The World!`}
                             confirmMsg={`Are you sure you want to cancel the event \"${eh.name}\" selection?`}
