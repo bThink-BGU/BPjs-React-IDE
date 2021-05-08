@@ -10,6 +10,8 @@ import "./table.scss";
 import { TableWrapper, StyledTitle } from "./VarTable.styles";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { CustomTitle } from "../title/title";
+import { Switch } from 'antd';
+import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function EnvSelector() {
   const programStateCtx = useContext(ProgramStateCTX);
@@ -22,17 +24,17 @@ export default function EnvSelector() {
   
   const [functionName, setFunctionName] = useState("Please Select");
 
-  const [currEnv, setCurrEnv] = useState({});
-
   const layoutCtx = useContext(LayoutCtx);
 
   const [currentThreadName, setCurrThreadName] = useState(stateCurrThread);
+
+  const [manual, setManual]  = useState(true);
 
   const { activeBottomPanels } = layoutCtx;
   
 
   function getEnvByThreadName(programStateCtx, selcetedThread,functionName) {
-    const maybeSelectedScope = programStateCtx && programStateCtx.progState.threadsAndEnvs && programStateCtx.progState.threadsAndEnvs.filter(
+    const maybeSelectedScope = programStateCtx && programStateCtx.progState && programStateCtx.progState.threadsAndEnvs && programStateCtx.progState.threadsAndEnvs.filter(
       (t) => t.name == selcetedThread
     );
     
@@ -52,15 +54,48 @@ export default function EnvSelector() {
       e && e[1] && setFunctionName(e[1])
       setCascaderValue(e.toString());
       setCurrThreadName(selcetedThread)
-
+      setManual(true)
     }
   };
-
+  const onChangeToggle =(e) => {
+    setManual(!!!manual)
+  }
+  const resolveCurrFunction = (stateCurrThread) => {
+    const maybeSelectedScope = programStateCtx && 
+    programStateCtx.progState &&
+     programStateCtx.progState.threadsAndEnvs &&
+      programStateCtx.progState.threadsAndEnvs.filter(
+      (t) => t.name == stateCurrThread
+    );
+    // console.log('yo yo yo',JSON.stringify(maybeSelectedScope[0]['env']['0']))
+    if(maybeSelectedScope && maybeSelectedScope[0]) return maybeSelectedScope[0]['env']['0']
+    else return  {FUNCNAME: 'Not Running'}
+  }
   return (
     <TableWrapper activeBottomPanels={activeBottomPanels}>
-      <CustomTitle color={"white"} level={4}>Variables {stateCurrThread}</CustomTitle>
+      <CustomTitle color={"white"} level={4}>
+        Variables {stateCurrThread},
+        {resolveCurrFunction(stateCurrThread)["FUNCNAME"]}{" "}
+      </CustomTitle>
       <div className="thread-selector-title">
-        &nbsp; Thread Selector
+        <span
+          style={{ width: "100%" }}
+          className="thread-selector-inner-titles"
+        >
+          <span>&nbsp; Thread Selector</span>
+          <span style={{ marginRight: "9px" }}>
+            Manual Selection &nbsp;{" "}
+            <Switch
+              checkedChildren={<CheckOutlined />}
+              unCheckedChildren={<CloseOutlined />}
+              checked={manual}
+              size="small"
+              style={{ position: "relative", right: "0" }}
+              defaultChecked
+              onChange={onChangeToggle}
+            />
+          </span>
+        </span>
         <Cascader
           options={optionsFromState}
           value={[cascaderValue]}
@@ -69,7 +104,8 @@ export default function EnvSelector() {
           placeholder="Please select"
         />
       </div>
-      <VarTableView varsToVals={getEnvByThreadName(programStateCtx,currentThreadName,functionName)} />
+      <VarTableView 
+      varsToVals={manual ? getEnvByThreadName(programStateCtx,currentThreadName,functionName) :  resolveCurrFunction(stateCurrThread)} />
     </TableWrapper>
   );
 }
