@@ -25,7 +25,7 @@ const StyledSpace = styled(Space)`
 const ButtonsContainer = styled(Tag)`
   padding-top: 2px;
   height: 32px;
-  margin-left: 65px;
+  margin-left: 58px;
   margin-bottom: 3px;
   opacity: 1 !important;
 `
