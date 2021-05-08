@@ -42,14 +42,34 @@ const PanelsContainer = styled.div`
   width: 100%;
 `;
 
+export const DEBUG_BUTTON = "Debug-Button";
+export const RUN_BUTTON = "Run-Button";
+export const STEP_INTO_BUTTON = "Step-Into-Button";
+export const STEP_OUT_BUTTON = "Step-Out-Button";
+export const STEP_OVER_BUTTON = "Step-Over-Button";
+export const STOP_BUTTON = "Stop-Button";
+export const CONTINUE_BUTTON  = "Continue-Button";
+export const NEXT_SYNC_BUTTON  = "Next-Sync-Button";
+
+export const TOGGLE_SYNC_BUTTON  = "Toggle-Sync-Button";
+export const TOGGLE_BP_BUTTON  = "Toggle-Bp-Button";
+export const TOGGLE_EXTERNALS_BUTTON  = "Toggle-Externals-Button";
+const TOGGLES = [TOGGLE_SYNC_BUTTON, TOGGLE_BP_BUTTON, TOGGLE_EXTERNALS_BUTTON];
+
+export const statusToActiveButtonsMap = {
+    "RUN": [STOP_BUTTON, TOGGLE_EXTERNALS_BUTTON],
+    "DEBUG": [STOP_BUTTON, ...TOGGLES],
+    "SYNCSTATE": [NEXT_SYNC_BUTTON, STOP_BUTTON, ...TOGGLES],
+    "BREAKPOINT": [CONTINUE_BUTTON, STOP_BUTTON, STEP_INTO_BUTTON, STEP_OUT_BUTTON, STEP_OVER_BUTTON, ...TOGGLES],
+    "STOP": [DEBUG_BUTTON, RUN_BUTTON, ...TOGGLES]
+}
+
 const BottomControlPanel = () => {
 
     const layoutCtx = useContext(LayoutCtx);
-    const {progState} = useContext(ProgramStateCTX);
     const {status} = useContext(ProgramStateCTX);
 
     const {activeBottomPanels} = layoutCtx;
-    const {consoleText} = useConsoleText();
 
     const isActive = (panel) => _.includes(activeBottomPanels, panel);
 
