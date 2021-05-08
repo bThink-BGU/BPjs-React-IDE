@@ -52,9 +52,9 @@ function resolveEventsInfo(stateFromServer) {
             stateFromServer.bThreadInfoList.map(t => {
                 return {
                     name: t.name,
-                    blocked: t.blocked && t.blocked.map(e => e.name),
+                    blocked: t.blocked && [t.blocked.name],
                     requested: t.requested && t.requested.map(e => e.name),
-                    wait: t.wait && t.wait.map(e => e.name),
+                    wait: t.wait && [t.wait.name],
                 }
             })
     }

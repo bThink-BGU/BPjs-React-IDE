@@ -7,7 +7,7 @@ export const groupByThreads = (progStateCTX) => {
 
     if (!events || !threadsEventsStatus) return
 
-    const totalEvents = [... new Set([].concat(events.requested))]
+    const totalEvents = [... new Set([].concat(events.blocked).concat(events.requested).concat(events.wait))]
 
     const x =  totalEvents.map(eName => {
         return {
