@@ -17,6 +17,7 @@
     "re-resizable": "^6.9.0",
     "react": "^17.0.1",
     "react-ace": "^9.3.0",
+    "react-animated-list": "^0.1.4",
     "react-dom": "^17.0.1",
     "react-json-view": "^1.21.1",
     "react-scripts": "4.0.3",

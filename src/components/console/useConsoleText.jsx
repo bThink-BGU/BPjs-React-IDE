@@ -21,6 +21,6 @@ export const useConsoleText = () => {
         setText(prevText => [...prevText, printoutsResolver(terminalState)]);
     }, [terminalState.terminalState]);
 
-    return {consoleText: text};
+    return {consoleText: text, updateConsoleText: setText};
 };
 

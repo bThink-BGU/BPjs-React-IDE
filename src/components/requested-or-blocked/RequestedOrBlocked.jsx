@@ -1,11 +1,13 @@
-import React,{useContext} from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { CustomTitle } from "../title/title";
 import ProgramStateCTX from "../state-context/StateContext";
 import { EventRow } from "../event-row/EventRow";
-import { Tag } from 'antd';
+import { Empty, Tag } from 'antd';
 import './events_status.scss'
-import {groupByThreads} from './aggregator'
+import { groupByThreads } from './aggregator'
+import { AnimatedList } from "react-animated-list";
+
 const RequestedOrBlockedContainer = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
   transition: opacity 0.2s;
@@ -17,11 +19,13 @@ const RequestedOrBlockedContainer = styled.div`
   padding: 10px;
   max-height: 200px;
   overflow-y: auto;
+
   ::-webkit-scrollbar {
     height: 12px;
     width: 6px;
     background: #23272b;
   }
+
   ::-webkit-scrollbar-thumb {
     background: #ff9e35;
     -webkit-border-radius: 1ex;
@@ -30,9 +34,9 @@ const RequestedOrBlockedContainer = styled.div`
 `;
 
 const RequestedOrBlocked = ({shouldFadePanel}) => {
-  const {progState} = useContext(ProgramStateCTX);
-  const eventsGroupedByThreads = groupByThreads(progState)
-  return (
+    const {progState} = useContext(ProgramStateCTX);
+    const eventsGroupedByThreads = groupByThreads(progState)
+    return (
         <RequestedOrBlockedContainer shouldFadePanel={shouldFadePanel}>
             <span className={'box-header'}>
             <CustomTitle level={5} color={"white"}>
@@ -42,14 +46,17 @@ const RequestedOrBlocked = ({shouldFadePanel}) => {
               <Tag color="orange"> Requested | Wait For | Blocked </Tag>
               </span>
               </span>
-              {progState.eventsHistory &&
-        eventsGroupedByThreads.map((ee) => (
-          <EventRow
-            withTags
-            tagsData={ee}
-            name={ee.name}
-          />
-        ))}
+            {progState.eventsHistory?.length > 0 ?
+                <AnimatedList animation={"grow"}>
+                    {eventsGroupedByThreads.map((ee, i) => (
+                        <EventRow
+                            key={i}
+                            withTags
+                            tagsData={ee}
+                            name={ee.name}
+                        />
+                    ))}
+                </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
         </RequestedOrBlockedContainer>
     );
 }
