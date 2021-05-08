@@ -9,22 +9,20 @@ import {
     VarsTableRowContainer
 } from "./VarTable.styles";
 import { CustomTitle } from "../title/title";
-
+import './table.scss'
 /***
  * Vars to vals is a map holds the follwing keys:
  * varName: Varaialbe name
  * varVal: Varaialbe Value
  * isJson: the only type we supports is an object, all other types will display their native toString representation
  */
-
-
 export default function VarTableView({varsToVals}) {
     const isStr = (ms) => typeof ms === "string" || ms instanceof String;
     const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
     const isObject = (ms) => typeof ms === "object" || ms instanceof Object;
 
     const getVarValue = (v) => {
-        return (isStr(v) || isNum(v)) ? v : isObject(v) ? <ReactJson src={v}/> : "null";
+        return (isStr(v) || isNum(v)) ? v : isObject(v) ? <ReactJson theme='railscasts' src={v}/> : "null";
     };
 
     const tryParse = json => {
