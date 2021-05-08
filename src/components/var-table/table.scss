@@ -8,9 +8,16 @@
     color: white !important;
   }
 }
-
+.ant-switch-checked {
+  background-color: #717171 !important;
+}
 .ant-cascader-input {
   border: none !important;
+}
+.thread-selector-inner-titles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .ant-table-tbody > tr > th {
