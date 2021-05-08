@@ -19,7 +19,7 @@ import {
     skipExternalEvents,
     stop
 } from '../../../utils/api'
-import { DelayedToolTip } from "../common/tooltip";
+import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 
 const StyledSpace = styled(Space)`
   margin-right: 5px;

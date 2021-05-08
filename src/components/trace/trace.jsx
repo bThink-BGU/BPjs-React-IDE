@@ -66,7 +66,7 @@ const Trace = ({shouldFadePanel}) => {
                             onClick={() => API.backToSnapShot(eh.timeStamp)}
                         />
                     ))}
-                </AnimatedList>: <Empty/>}
+                </AnimatedList>: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
             </TraceContainer>
         );
     }

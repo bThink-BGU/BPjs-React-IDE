@@ -116,7 +116,7 @@ const EventsHistory = ({shouldFadePanel}) => {
                                 }}
                             />
                         ))}
-                    </AnimatedList> : <Empty/>}
+                    </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
             </EventsHistoryContent>
         </EventsHistoryContainer>
     );

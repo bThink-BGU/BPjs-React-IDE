@@ -6,6 +6,7 @@ import LayoutCtx from "../../../pages/IDE/LayoutCtx";
 import { BOTTOM_PANELS } from "../../../pages/IDE/ide";
 import _ from "lodash";
 import { Divider, Space, Tag } from "antd";
+import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 import TopDebugButtons from "../../debug-buttons/top-debug-buttons/TopDebugButtons";
 import LeftDebugButtons from "../../debug-buttons/left-debug-buttons/LeftDebugButtons";
 import { useConsoleText } from "../../console/useConsoleText";
@@ -57,11 +58,14 @@ const BottomControlPanel = () => {
         <StyledBottomControlPanel>
             <Space size={50}>
                 <TopDebugButtons/>
-                {<Tag className={`sync-state-${status === "SYNCSTATE" ? "on" : "off"}`}
+                { <DelayedToolTip placement="top" 
+                title='When B-Prgram is in Sync-State use "Manual Selection" to watch variables '>
+                  <Tag className={`sync-state-${status === "SYNCSTATE" ? "on" : "off"}`}
                       icon={<ExclamationCircleOutlined/>}
                       color="warning">
                     In Sync State
-                </Tag>}
+                </Tag>
+                </DelayedToolTip>}
             </Space>
             <PanelsContainer>
                 <LeftDebugButtons/>

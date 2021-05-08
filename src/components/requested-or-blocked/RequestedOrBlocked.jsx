@@ -56,7 +56,7 @@ const RequestedOrBlocked = ({shouldFadePanel}) => {
                             name={ee.name}
                         />
                     ))}
-                </AnimatedList> : <Empty/>}
+                </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
         </RequestedOrBlockedContainer>
     );
 }
