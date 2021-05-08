@@ -32,13 +32,14 @@ const ThreadTag = ({threadList}) => {
   const noMouseColor = '#fa8c18'
   const yesMouseColor = '#a56e33'
   const [color,setColor]  = useState('#fa8c18')
+  const isEmpty = threadList.length < 1
   return (<span className={"e_type_tag"}>
-      <Dropdown overlay={ThreadsNames(threadList)}>
+      <Dropdown disabled={isEmpty} overlay={ThreadsNames(threadList)}>
         <Badge
           onMouseEnter={() => setColor(yesMouseColor)}
           onMouseLeave={() => setColor(noMouseColor)}
           className="event-count"
-          style={{ backgroundColor: color, marginRight: "9px" }}
+          style={{ backgroundColor: isEmpty ? 'grey' : color, marginRight: "9px" }}
           size="default"
           showZero
           count={threadList.length}
