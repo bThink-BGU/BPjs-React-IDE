@@ -1,30 +1,50 @@
 import styled from "styled-components";
-
+import { Badge } from "antd";
+import './tags.scss'
 import { Tag, Dropdown, Menu } from "antd";
 
 import React, { ReactDOM, useContext, useState } from "react";
 
-const ThreadsNames = ( tNames ) => {
+const ThreadsNames = (tNames) => {
   return (
-    tNames && <Menu>
-      {tNames.map((tName) => (
-        <Menu.Item>{tName}</Menu.Item>
-      ))}
-    </Menu>
+    tNames  && (
+      <Menu>
+        {tNames.map((tName) => (
+          <Menu.Item>{tName}</Menu.Item>
+        ))}
+      </Menu>
+    )
   );
 };
+
+
 export const ThreadsTags = ({ char, blocked, wait, requested }) => {
   return (
     <span>
-      <Dropdown overlay={ThreadsNames( wait )}>
-        <Tag color="orange">W</Tag>
-      </Dropdown>
-      <Dropdown overlay={ThreadsNames(requested )}>
-        <Tag color="orange">R</Tag>
-      </Dropdown>
-      <Dropdown overlay={ThreadsNames(blocked )}>
-        <Tag color="orange">B</Tag>
-      </Dropdown>
+      {[requested, wait, blocked].map((threads) => (
+        <ThreadTag threadList={threads} />
+      ))}
     </span>
   );
 };
+
+const ThreadTag = ({threadList}) => {
+  const noMouseColor = '#fa8c18'
+  const yesMouseColor = '#a56e33'
+  const [color,setColor]  = useState('#fa8c18')
+  return (<span className={"e_type_tag"}>
+      <Dropdown overlay={ThreadsNames(threadList)}>
+        <Badge
+          onMouseEnter={() => setColor(yesMouseColor)}
+          onMouseLeave={() => setColor(noMouseColor)}
+          className="event-count"
+          style={{ backgroundColor: color, marginRight: "9px" }}
+          size="default"
+          showZero
+          count={threadList.length}
+          overflowCount={99}
+        ></Badge>
+      </Dropdown>
+    </span>
+  )
+}

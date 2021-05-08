@@ -1,0 +1,10 @@
+.box-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.event-tag {
+    position:relative;
+    top:-4px;
+    right:-8px;
+}

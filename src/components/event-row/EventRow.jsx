@@ -62,7 +62,9 @@ export const EventRow = ({
           />
         )}
        {withTags ?
+       <span style={{padding: '8px 0px 8px 0px'}}>
         <ThreadsTags requested={tagsData.requested} blocked={tagsData.blocked} wait={tagsData.wait} />
+        </span>
          : null
        }
       </EventRowContainer>

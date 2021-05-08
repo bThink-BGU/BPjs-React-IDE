@@ -4,7 +4,7 @@ import { CustomTitle } from "../title/title";
 import ProgramStateCTX from "../state-context/StateContext";
 import { EventRow } from "../event-row/EventRow";
 import { Tag } from 'antd';
-
+import './events_status.scss'
 import {groupByThreads} from './aggregator'
 const RequestedOrBlockedContainer = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
@@ -34,9 +34,14 @@ const RequestedOrBlocked = ({shouldFadePanel}) => {
   const eventsGroupedByThreads = groupByThreads(progState)
   return (
         <RequestedOrBlockedContainer shouldFadePanel={shouldFadePanel}>
+            <span className={'box-header'}>
             <CustomTitle level={5} color={"white"}>
-              Requested/Blocked
+              Events Status
               </CustomTitle>
+              <span className={'event-tag'}>
+              <Tag color="orange"> Requested | Wait For | Blocked </Tag>
+              </span>
+              </span>
               {progState.eventsHistory &&
         eventsGroupedByThreads.map((ee) => (
           <EventRow
