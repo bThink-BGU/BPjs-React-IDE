@@ -9,7 +9,7 @@ import {
     VarsTableRowContainer
 } from "./VarTable.styles";
 import { CustomTitle } from "../title/title";
-
+import './table.scss'
 /***
  * Vars to vals is a map holds the follwing keys:
  * varName: Varaialbe name
