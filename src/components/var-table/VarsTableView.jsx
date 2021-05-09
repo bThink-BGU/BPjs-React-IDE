@@ -22,16 +22,24 @@ export default function VarTableView({varsToVals}) {
     const isStr = (ms) => typeof ms === "string" || ms instanceof String;
     const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
     const isObject = (ms) => typeof ms === "object" || ms instanceof Object;
+    const isArray = (ms) => typeof ms === "object" && "join" in ms && typeof ms.join === "function" &&
+        "length" in ms && typeof ms.length === "number";
 
     const getVarValue = (v) => {
-        return (isStr(v) || isNum(v)) ? v : isObject(v) ? <ReactJson src={v}/> : "null";
+        return (isStr(v) || isNum(v)) ? v : isObject(v) ?
+            <ReactJson collapsed={true}
+                       name={null}
+                       theme={"monokai"}
+                       displayObjectSize={false}
+                       enableClipboard={false}
+                       displayDataTypes={false}
+                       src={v}/> : "null";
     };
 
     const tryParse = json => {
         try {
             return json === "null" ? json : JSON.parse(json);
         } catch (e) {
-            console.log("HERE", e)
             return json
         }
     };
