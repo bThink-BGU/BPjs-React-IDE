@@ -28,7 +28,7 @@ export default function EnvSelector() {
 
   const [currentThreadName, setCurrThreadName] = useState(stateCurrThread);
 
-  const [manual, setManual]  = useState(true);
+  const [manual, setManual]  = useState(false);
 
   const { activeBottomPanels } = layoutCtx;
   
