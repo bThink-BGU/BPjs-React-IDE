@@ -2,12 +2,17 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import { StyledHeader, StyledLogo } from "./Header.styles";
 import ThemePicker from "../theme-picker/ThemePicker.component";
+import FileUploader from "../file-uploader/FileUploader";
+import { Space } from "antd";
 
 const IdeHeader = () => {
     return (
         <StyledHeader>
             <StyledLogo src={logo}/>
-            <ThemePicker/>
+            <Space>
+                <FileUploader/>
+                <ThemePicker/>
+            </Space>
         </StyledHeader>
     );
 };

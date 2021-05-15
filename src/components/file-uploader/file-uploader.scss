@@ -1,0 +1,30 @@
+.upload-button-wrapper {
+  .ant-btn-primary {
+    background-color: #353D45 !important;
+    color: #ff9b42 !important;
+    border: 1px solid #ff9b42 !important;
+    border-radius: 3px !important;
+  }
+}
+
+.ant-modal-confirm-body-wrapper {
+  .ant-btn {
+    color: #353D45 !important;
+    border: 1px solid #ff9b42 !important;
+    border-radius: 3px !important;
+
+    &:hover {
+      color: #ff9b42 !important;
+      border: 1px solid #353D45 !important;
+      background-color: #353D45 !important;
+    }
+  }
+
+  .ant-btn-primary {
+    background-color: #ff9b42 !important;
+    color: #353D45 !important;
+    border: 1px solid #ff9b42 !important;
+    border-radius: 3px !important;
+  }
+
+}
