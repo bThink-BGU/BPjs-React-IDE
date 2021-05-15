@@ -27,7 +27,7 @@ export default function VarTableView({varsToVals}) {
 
     const getVarValue = (v) => {
         return (isStr(v) || isNum(v)) ? v : isObject(v) ?
-            <ReactJson collapsed={true}
+            <ReactJson collapsed={false}
                        name={null}
                        theme={"railscasts"}
                        displayObjectSize={false}

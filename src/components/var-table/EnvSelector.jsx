@@ -74,15 +74,18 @@ export default function EnvSelector() {
   return (
     <TableWrapper activeBottomPanels={activeBottomPanels}>
       <CustomTitle color={"white"} level={4}>
-        Variables {stateCurrThread},
-        {resolveCurrFunction(stateCurrThread)["FUNCNAME"]}{" "}
+        Variables 
       </CustomTitle>
       <div className="thread-selector-title">
         <span
           style={{ width: "100%" }}
           className="thread-selector-inner-titles"
         >
-          <span>&nbsp; Thread Selector</span>
+          <span>&nbsp; Thread Selector
+<span style={{color:'gray',fontSize:'0.8em'}}>
+&nbsp; [current running b-thread: {stateCurrThread}]
+        </span>
+          </span>
           <span style={{ marginRight: "9px" }}>
             Manual Selection &nbsp;{" "}
             <Switch
