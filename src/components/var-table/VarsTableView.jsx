@@ -1,5 +1,5 @@
 import React from "react";
-import { Empty } from "antd";
+import { Empty, Tag } from "antd";
 import ReactJson from "react-json-view";
 import {
     RowLeftContainer,
@@ -10,6 +10,7 @@ import {
 } from "./VarTable.styles";
 import { CustomTitle } from "../title/title";
 import './table.scss'
+
 /***
  * Vars to vals is a map holds the follwing keys:
  * varName: Varaialbe name
@@ -18,7 +19,8 @@ import './table.scss'
  */
 
 
-export default function VarTableView({varsToVals}) {
+export default function VarTableView({varsToVals, globalVarsToVals}) {
+    console.log(",,,,,,", globalVarsToVals)
     const isStr = (ms) => typeof ms === "string" || ms instanceof String;
     const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
     const isObject = (ms) => typeof ms === "object" || ms instanceof Object;
@@ -44,7 +46,7 @@ export default function VarTableView({varsToVals}) {
         }
     };
 
-    const rows =
+    const varToValRows =
         !isStr(varsToVals) &&
         varsToVals &&
         Object.keys(varsToVals).map(k => {
@@ -54,11 +56,25 @@ export default function VarTableView({varsToVals}) {
             };
         }).filter((v) => v.varName !== "FUNCNAME");
 
+    const globalVarToValRows =
+        !isStr(globalVarsToVals) &&
+        globalVarsToVals &&
+        Object.keys(globalVarsToVals).map(k => {
+            return {
+                varName: k,
+                varVal: getVarValue(tryParse(globalVarsToVals[k])),
+                isGlobal: true
+            };
+        }).filter((v) => v.varName !== "FUNCNAME");
+
     const buildRows = (rows) => {
         return rows.map(row => {
             return (
                 <VarsTableRowContainer>
-                    <RowLeftContainer bordered={true}>{row.varName}</RowLeftContainer>
+                    <RowLeftContainer bordered={true}>
+                        {row.isGlobal && <Tag color={"geekblue"}>G</Tag>}
+                        {row.varName}
+                    </RowLeftContainer>
                     <RowRightContainer>{row.varVal}</RowRightContainer>
                 </VarsTableRowContainer>
             );
@@ -82,8 +98,8 @@ export default function VarTableView({varsToVals}) {
         <VarsTableContainer>
             {buildTitleRow()}
             <VarsTableContentContainer>
-                {rows
-                    ? buildRows(rows)
+                {[...globalVarToValRows, ...varToValRows]
+                    ? buildRows([...globalVarToValRows, ...varToValRows])
                     : <Empty style={{paddingTop: "40px"}} description={"No variables have been found yet"}/>};
             </VarsTableContentContainer>
         </VarsTableContainer>

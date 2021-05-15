@@ -7,7 +7,7 @@ import {
 } from "./VarTableContextResolver";
 import ProgramStateCTX from "../state-context/StateContext";
 import "./table.scss";
-import { TableWrapper, StyledTitle } from "./VarTable.styles";
+import { TableWrapper } from "./VarTable.styles";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { CustomTitle } from "../title/title";
 import { Switch } from 'antd';
@@ -15,25 +15,18 @@ import { CloseOutlined, CheckOutlined } from '@ant-design/icons';
 
 export default function EnvSelector() {
     const programStateCtx = useContext(ProgramStateCTX);
-    console.log("------> ", programStateCtx);
     const optionsFromState = mapStateToOptions(programStateCtx);
-
     const stateCurrThread = mapStateToCurrThread(programStateCtx);
-
     const [cascaderValue, setCascaderValue] = useState("Please Select");
-
     const [functionName, setFunctionName] = useState("Please Select");
-
     const layoutCtx = useContext(LayoutCtx);
-
     const [currentThreadName, setCurrThreadName] = useState(stateCurrThread);
-
     const [manual, setManual] = useState(false);
-
     const {activeBottomPanels} = layoutCtx;
 
 
     function getEnvByThreadName(programStateCtx, selcetedThread, functionName) {
+        console.log(programStateCtx);
         const maybeSelectedScope = programStateCtx?.progState?.threadsAndEnvs?.filter(
             (t) => t.name == selcetedThread
         );
@@ -108,7 +101,9 @@ export default function EnvSelector() {
                 />
             </div>
             <VarTableView
-                varsToVals={manual ? getEnvByThreadName(programStateCtx, currentThreadName, functionName) : resolveCurrFunction(stateCurrThread)}/>
+                varsToVals={manual ? getEnvByThreadName(programStateCtx, currentThreadName, functionName) : resolveCurrFunction(stateCurrThread)}
+                globalVarsToVals={programStateCtx.progState.globalEnv}
+            />
         </TableWrapper>
     );
 }
