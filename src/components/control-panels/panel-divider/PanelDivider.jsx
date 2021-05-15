@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { device } from "../../../pages/IDE/ide.styles";
 
 const getCssPerDirection = (direction) => {
     const verticalCss = css`
@@ -18,4 +19,9 @@ export const PanelDivider = styled.div`
   border-radius: 30px;
   ${props => getCssPerDirection(props.direction)}
   transition: 0.4s;
+  opacity: 1;
+
+  @media ${device.tablet} {
+    opacity: 0;
+  }
 `;

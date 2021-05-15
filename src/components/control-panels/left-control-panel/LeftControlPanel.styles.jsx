@@ -1,5 +1,6 @@
 import styled  from "styled-components";
 import { Resizable } from "re-resizable";
+import { device } from "../../../pages/IDE/ide.styles";
 
 export const LeftControlPanelContent = styled.div`
   overflow-y: scroll;
@@ -18,6 +19,11 @@ export const StyledLeftControlPanel = styled.div`
   width: 100%;
   height: calc(100vh - 87px);
   background-color: rgb(35, 39, 43);
+  overflow: hidden;
+
+  @media ${device.tablet} {
+    overflow-y: scroll;
+  }
 `;
 
 export const StyledResizableContainer = styled(Resizable)`

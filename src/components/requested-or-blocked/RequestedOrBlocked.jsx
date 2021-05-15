@@ -46,7 +46,7 @@ const RequestedOrBlocked = ({shouldFadePanel}) => {
               <Tag color="orange"> Requested | Wait For | Blocked </Tag>
               </span>
               </span>
-            {progState.eventsHistory?.length > 0 ?
+            {eventsGroupedByThreads?.length > 0 ?
                 <AnimatedList animation={"grow"}>
                     {eventsGroupedByThreads.map((ee, i) => (
                         <EventRow
