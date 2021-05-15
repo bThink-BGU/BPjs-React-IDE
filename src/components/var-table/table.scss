@@ -80,6 +80,8 @@ table {
 
 ::-webkit-scrollbar {
   background: rgb(49, 49, 49);
+  width: 6px !important;
+  margin-left: 1px;
 }
 
 ::-webkit-scrollbar-thumb {

@@ -18,7 +18,7 @@ const RequestedOrBlockedContainer = styled.div`
   border-radius: 3px;
   padding: 10px;
   max-height: 200px;
-  overflow-y: auto;
+  overflow: hidden;
 
   ::-webkit-scrollbar {
     height: 12px;
@@ -46,17 +46,19 @@ const RequestedOrBlocked = ({shouldFadePanel}) => {
               <Tag color="orange"> Requested | Wait For | Blocked </Tag>
               </span>
               </span>
-            {eventsGroupedByThreads?.length > 0 ?
-                <AnimatedList animation={"grow"}>
-                    {eventsGroupedByThreads.map((ee, i) => (
-                        <EventRow
-                            key={i}
-                            withTags
-                            tagsData={ee}
-                            name={ee.name}
-                        />
-                    ))}
-                </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+            <div style={{height: "85%", overflowY: "auto", padding: "2px"}}>
+                {eventsGroupedByThreads?.length > 0 ?
+                    <AnimatedList animation={"grow"}>
+                        {eventsGroupedByThreads.map((ee, i) => (
+                            <EventRow
+                                key={i}
+                                withTags
+                                tagsData={ee}
+                                name={ee.name}
+                            />
+                        ))}
+                    </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+            </div>
         </RequestedOrBlockedContainer>
     );
 }

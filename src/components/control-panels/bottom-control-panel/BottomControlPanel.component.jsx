@@ -23,12 +23,12 @@ const StyledBottomControlPanel = styled.div`
   background-color: #353d45;
   border-top: 5px solid orange;
 
-  .sync-state-on {
+  .state-on {
     opacity: 1;
     transition: opacity 0.4s;
   }
 
-  .sync-state-off {
+  .state-off {
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -47,20 +47,28 @@ export const STEP_INTO_BUTTON = "Step-Into-Button";
 export const STEP_OUT_BUTTON = "Step-Out-Button";
 export const STEP_OVER_BUTTON = "Step-Over-Button";
 export const STOP_BUTTON = "Stop-Button";
-export const CONTINUE_BUTTON  = "Continue-Button";
-export const NEXT_SYNC_BUTTON  = "Next-Sync-Button";
+export const CONTINUE_BUTTON = "Continue-Button";
+export const NEXT_SYNC_BUTTON = "Next-Sync-Button";
 
-export const TOGGLE_SYNC_BUTTON  = "Toggle-Sync-Button";
-export const TOGGLE_BP_BUTTON  = "Toggle-Bp-Button";
-export const TOGGLE_EXTERNALS_BUTTON  = "Toggle-Externals-Button";
+export const TOGGLE_SYNC_BUTTON = "Toggle-Sync-Button";
+export const TOGGLE_BP_BUTTON = "Toggle-Bp-Button";
+export const TOGGLE_EXTERNALS_BUTTON = "Toggle-Externals-Button";
 const TOGGLES = [TOGGLE_SYNC_BUTTON, TOGGLE_BP_BUTTON, TOGGLE_EXTERNALS_BUTTON];
 
+const RUN_STATE = "RNU";
+const DEBUG_STATE = "DEBUG";
+const SYNCSTATE_STATE = "SYNCSTATE";
+const BREAKPOINT_STATE = "BREAKPOINT";
+const STOP_STATE = "STOP";
+const WAITING_FOR_EXTERNAL_EVENT_STATE = "WAITING_FOR_EXTERNAL_EVENT";
+
 export const statusToActiveButtonsMap = {
-    "RUN": [STOP_BUTTON, TOGGLE_EXTERNALS_BUTTON],
-    "DEBUG": [STOP_BUTTON, ...TOGGLES],
-    "SYNCSTATE": [NEXT_SYNC_BUTTON, STOP_BUTTON, ...TOGGLES],
-    "BREAKPOINT": [CONTINUE_BUTTON, STOP_BUTTON, STEP_INTO_BUTTON, STEP_OUT_BUTTON, STEP_OVER_BUTTON, ...TOGGLES],
-    "STOP": [DEBUG_BUTTON, RUN_BUTTON, ...TOGGLES]
+    [RUN_STATE]: [STOP_BUTTON, TOGGLE_EXTERNALS_BUTTON],
+    [DEBUG_STATE]: [STOP_BUTTON, ...TOGGLES],
+    [SYNCSTATE_STATE]: [NEXT_SYNC_BUTTON, STOP_BUTTON, ...TOGGLES],
+    [BREAKPOINT_STATE]: [CONTINUE_BUTTON, STOP_BUTTON, STEP_INTO_BUTTON, STEP_OUT_BUTTON, STEP_OVER_BUTTON, ...TOGGLES],
+    [STOP_STATE]: [DEBUG_BUTTON, RUN_BUTTON, ...TOGGLES],
+    [WAITING_FOR_EXTERNAL_EVENT_STATE]: [STOP_BUTTON, ...TOGGLES]
 }
 
 const BottomControlPanel = () => {
@@ -77,13 +85,21 @@ const BottomControlPanel = () => {
         <StyledBottomControlPanel>
             <Space size={50}>
                 <TopDebugButtons/>
-                { <DelayedToolTip placement="top" 
-                title='When B-Prgram is in Sync-State use "Manual Selection" to watch variables '>
-                  <Tag className={`sync-state-${status === "SYNCSTATE" ? "on" : "off"}`}
-                      icon={<ExclamationCircleOutlined/>}
-                      color="warning">
-                    In Sync State
-                </Tag>
+                {<DelayedToolTip placement="top"
+                                 title='When B-Prgram is in Sync-State use "Manual Selection" to watch variables '>
+                    <Tag className={`state-${status === SYNCSTATE_STATE ? "on" : "off"}`}
+                         icon={<ExclamationCircleOutlined/>}
+                         color="warning">
+                        In Sync State
+                    </Tag>
+                </DelayedToolTip>}
+                {<DelayedToolTip placement="top"
+                                 title='Add external event in the left panel in order to continue the program'>
+                    <Tag className={`state-${status === WAITING_FOR_EXTERNAL_EVENT_STATE ? "on" : "off"}`}
+                         icon={<ExclamationCircleOutlined/>}
+                         color="blue">
+                        Waiting For External Event
+                    </Tag>
                 </DelayedToolTip>}
             </Space>
             <PanelsContainer>

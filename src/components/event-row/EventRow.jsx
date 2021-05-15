@@ -20,6 +20,7 @@ export const EventRowContainer = styled.div`
   border: 1px solid orange;
   padding: 2px;
   margin-bottom: 5px;
+  margin-right: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -13,19 +13,18 @@ import { AnimatedList } from "react-animated-list";
 const EventsHistoryContainer = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
   transition: opacity 0.2s;
-
   width: 90%;
 `;
 
 const EventsHistoryContent = styled.div`
   width: 100%;
-  min-height: 200px;
   background-color: #353d45;
   margin-top: 10px;
   border-radius: 3px;
   padding: 10px;
   max-height: 200px;
-  overflow-y: auto;
+  min-height: 200px;
+  overflow: hidden;
 
   ::-webkit-scrollbar {
     height: 12px;
@@ -104,19 +103,21 @@ const EventsHistory = ({shouldFadePanel}) => {
                 <CustomTitle level={5} color={"white"}>
                     External Events
                 </CustomTitle>
-                {progState.eventsHistory?.length > 0 ?
-                    <AnimatedList animation={"grow"}>
-                        {progState.externalEvents.map((ee, i) => (
-                            <EventRow
-                                key={i}
-                                name={ee.name}
-                                clickAble={false}
-                                withX={true}
-                                onClick={() => {
-                                }}
-                            />
-                        ))}
-                    </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                <div className={"divvvv"} style={{height: "75%", overflowY: "auto"}}>
+                    {progState.eventsHistory?.length > 0 ?
+                        <AnimatedList animation={"grow"}>
+                            {progState.externalEvents.map((ee, i) => (
+                                <EventRow
+                                    key={i}
+                                    name={ee.name}
+                                    clickAble={false}
+                                    withX={true}
+                                    onClick={() => {
+                                    }}
+                                />
+                            ))}
+                        </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                </div>
             </EventsHistoryContent>
         </EventsHistoryContainer>
     );

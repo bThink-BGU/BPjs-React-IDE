@@ -12,7 +12,7 @@ const TraceContainer = styled.div`
   width: 90%;
   min-height: 200px;
   max-height: 200px;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: #353d45;
   margin-top: 30px;
   border-radius: 3px;
@@ -53,21 +53,23 @@ const Trace = ({shouldFadePanel}) => {
                 >
                     Trace
                 </CustomTitle>
-                {progState.eventsHistory?.length > 0 ?
-                <AnimatedList animation={"grow"}>
-                    {progState.eventsHistory.map((eh, i) => (
-                        <EventRow
-                            key={i}
-                            name={eh.name}
-                            clickAble
-                            withX   
-                            withConfirmation
-                            afterConfirmMsg={`Back To The Time Where \n  Event: \"${eh.name}\" \n Came Out To The World!`}
-                            confirmMsg={`Are you sure you want to cancel the event \"${eh.name}\" selection?`}
-                            onClick={() => API.backToSnapShot(eh.timeStamp)}
-                        />
-                    ))}
-                </AnimatedList>: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                <div style={{height: "80%", overflowY: "auto"}}>
+                    {progState.eventsHistory?.length > 0 ?
+                        <AnimatedList animation={"grow"}>
+                            {progState.eventsHistory.map((eh, i) => (
+                                <EventRow
+                                    key={i}
+                                    name={eh.name}
+                                    clickAble
+                                    withX
+                                    withConfirmation
+                                    afterConfirmMsg={`Back To The Time Where \n  Event: \"${eh.name}\" \n Came Out To The World!`}
+                                    confirmMsg={`Are you sure you want to cancel the event \"${eh.name}\" selection?`}
+                                    onClick={() => API.backToSnapShot(eh.timeStamp)}
+                                />
+                            ))}
+                        </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                </div>
             </TraceContainer>
         );
     }
