@@ -99,7 +99,7 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
             {buildTitleRow()}
             <VarsTableContentContainer>
                 {globalVarToValRows && varToValRows
-                    ? buildRows([...globalVarToValRows, ...varToValRows])
+                    ? buildRows([...varToValRows, ...globalVarToValRows])
                     : <Empty style={{paddingTop: "40px"}} description={"No variables have been found yet"}/>};
             </VarsTableContentContainer>
         </VarsTableContainer>
