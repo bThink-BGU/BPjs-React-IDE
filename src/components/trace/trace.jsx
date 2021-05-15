@@ -53,7 +53,7 @@ const Trace = ({shouldFadePanel}) => {
                 >
                     Trace
                 </CustomTitle>
-                <div style={{height: "80%", overflowY: "auto"}}>
+                <div style={{height: "75%", overflowY: "auto"}}>
                 {progState.currentEvent ? (
               
               <EventRow alertDot name={progState.currentEvent} />
