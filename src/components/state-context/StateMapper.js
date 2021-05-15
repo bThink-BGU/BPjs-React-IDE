@@ -11,9 +11,12 @@ export const mapDebugState = (stateFromServer) => {
 
         externalEvents: resolveExternalEvents(stateFromServer),
 
-        eventsInfo: resolveEventsInfo(stateFromServer)
+        eventsInfo: resolveEventsInfo(stateFromServer),
+
+        currentEvent: resolveCurrentEventSelection(stateFromServer)
     }
 }
+
 
 export const mapTerminalState = (terminalStateFromServer) => {
     return {
@@ -23,6 +26,16 @@ export const mapTerminalState = (terminalStateFromServer) => {
 
 export const mapProgramStatus = (programStatus) => {
     return programStatus.status;
+}
+
+function resolveCurrentEventSelection(stateFromServer) {
+    stateFromServer.eventsStatus && console.log(stateFromServer.eventsStatus.currentEvent)
+    return stateFromServer &&
+        stateFromServer.eventsStatus &&
+        stateFromServer.eventsStatus.currentEvent &&
+        stateFromServer.eventsStatus.currentEvent.name 
+        
+
 }
 
 function resolveThreadAndEnvs(stateFromServer) {

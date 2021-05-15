@@ -5,7 +5,7 @@ import { CustomTitle } from "../title/title";
 import * as API from "../../utils/api";
 import { EventRow } from "../event-row/EventRow";
 import { AnimatedList } from "react-animated-list";
-import { Empty } from "antd";
+import { Empty,Badge } from "antd";
 
 const TraceContainer = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
@@ -54,6 +54,11 @@ const Trace = ({shouldFadePanel}) => {
                     Trace
                 </CustomTitle>
                 <div style={{height: "80%", overflowY: "auto"}}>
+                {progState.currentEvent ? (
+              
+              <EventRow alertDot name={progState.currentEvent} />
+            
+          ) : null}
                     {progState.eventsHistory?.length > 0 ?
                         <AnimatedList animation={"grow"}>
                             {progState.eventsHistory.map((eh, i) => (

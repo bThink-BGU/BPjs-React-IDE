@@ -4,7 +4,7 @@ import { Tag, Input, Typography, Badge, Popconfirm, message } from "antd";
 import {ThreadsTags} from "./ThreadsTag";
 import { CloseOutlined } from "@ant-design/icons";
 import React, { ReactDOM, useContext, useState } from "react";
-
+import './row.scss'
 const { Title } = Typography;
 
 export const CustomEventRow = styled(Title)`
@@ -43,6 +43,7 @@ export const EventRow = ({
   withConfirmation = false,
   confirmMsg = "",
   afterConfirmMsg = "",
+  alertDot = false
 }) => {
   const [visible, setVisible] = useState(true);
   return visible ? (
@@ -55,8 +56,13 @@ export const EventRow = ({
       cancelText="No"
     >
       <EventRowContainer onClick={() => clickAble && !withConfirmation && onClick()} clickAble={clickAble}>
-        <CustomEventRow color={"#ff9e35"}> &nbsp; {name} </CustomEventRow>
-        {withX && (
+        <CustomEventRow color={"#ff9e35"}>
+          
+           &nbsp; {name} 
+            
+        </CustomEventRow>
+        {(!withX && alertDot) ?  <span className="dot">  </span>: null} 
+        {(withX && !alertDot) &&  (
           <CloseOutlined
             onClick={() => setVisible(false)}
             style={{ color: "#ff9e35" }}
