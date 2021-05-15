@@ -59,7 +59,7 @@ const RUN_STATE = "RNU";
 const DEBUG_STATE = "DEBUG";
 const SYNCSTATE_STATE = "SYNCSTATE";
 const BREAKPOINT_STATE = "BREAKPOINT";
-const STOP_STATE = "STOP";
+export const STOP_STATE = "STOP";
 const WAITING_FOR_EXTERNAL_EVENT_STATE = "WAITING_FOR_EXTERNAL_EVENT";
 
 export const statusToActiveButtonsMap = {
