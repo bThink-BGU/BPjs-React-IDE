@@ -10,7 +10,6 @@ const FileUploader = () => {
 
     const {prog, setProg} = useContext(IDECTX);
     const {status} = useContext(ProgramStateCTX);
-    console.log(status)
     const [isLoadingFile, setIsLoadingFile] = useState(false);
 
     const handleFileUpload = async (file) => {
@@ -20,7 +19,7 @@ const FileUploader = () => {
             overrideIfApproved(programFromFile);
         } else {
             setProg(programFromFile);
-            message.success({duration: 1, content: "File was loaded successfully"});
+            message.success({duration: 2, content: "File was loaded successfully"});
         }
         setIsLoadingFile(false);
     };
@@ -31,13 +30,12 @@ const FileUploader = () => {
             content: "There is a bpjs program in the editor, sure you want to override it?",
             onOk: () => {
                 setProg(programFromFile);
-                message.success({duration: 1, content: "File was loaded successfully"});
+                message.success({duration: 2, content: "File was loaded successfully"});
             },
             onCancel: () => {
             },
             closable: true,
             okText: "Override",
-            cancelButtonProps: {className: "cancel-override-button"}
         });
     };
 

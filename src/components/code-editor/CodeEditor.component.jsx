@@ -120,9 +120,6 @@ function Editor() {
 
     useEffect(() => {
         editorRef?.current?.editor?.scrollToRow(progState.currentLine - 5);
-        // editorRef?.current?.editor?.gotoLine(progState.currentLine, 0, true);
-        // editorRef?.current?.editor?.scrollToLine(progState.currentLine, true,true, () => {});
-        // editorRef?.current?.editor?.scrollToRow(progState.currentLine);
     }, [progState.currentLine]);
 
     const editorStyle = {

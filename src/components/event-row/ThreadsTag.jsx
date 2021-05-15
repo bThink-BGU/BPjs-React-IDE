@@ -17,7 +17,7 @@ const ThreadsNames = (tNames) => {
 
 export const ThreadsTags = ({blocked, wait, requested}) => {
     return (
-        <Space size={12}>
+        <Space size={9}>
             {[requested, wait, blocked].map((threads) => (
                 <ThreadTag threadList={threads}/>
             ))}
@@ -37,7 +37,7 @@ const ThreadTag = ({threadList}) => {
             onMouseEnter={() => setColor(yesMouseColor)}
             onMouseLeave={() => setColor(noMouseColor)}
             className="event-count"
-            style={{backgroundColor: isEmpty ? 'grey' : color, marginRight: "10px"}}
+            style={{backgroundColor: isEmpty ? 'grey' : color, marginRight: "8px"}}
             size="default"
             showZero
             count={threadList.length}
