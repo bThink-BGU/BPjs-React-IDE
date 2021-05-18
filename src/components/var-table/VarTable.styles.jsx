@@ -58,6 +58,7 @@ export const RowLeftContainer = styled.div`
   border-right: ${props => props.bordered ? "1px solid #e9a870" : "none"};
   padding-left: 5px;
   padding-bottom: 10px;
+  padding-top: 5px;
 `;
 
 export const RowRightContainer = styled.div`
