@@ -59,7 +59,7 @@ const Trace = ({shouldFadePanel}) => {
               <EventRow alertDot name={progState.currentEvent} />
             
           ) : null}
-                    {progState.eventsHistory?.length > 0 ?
+                    {(progState.eventsHistory?.length > 0 && ! progState.currentEvent)?
                         <AnimatedList animation={"grow"}>
                             {progState.eventsHistory.map((eh, i) => (
                                 <EventRow
