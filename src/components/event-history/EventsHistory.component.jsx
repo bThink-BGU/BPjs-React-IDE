@@ -104,7 +104,7 @@ const EventsHistory = ({shouldFadePanel}) => {
                     External Events
                 </CustomTitle>
                 <div className={"divvvv"} style={{height: "75%", overflowY: "auto"}}>
-                    {progState.eventsHistory?.length > 0 ?
+                    {progState.externalEvents?.length > 0 ?
                         <AnimatedList animation={"grow"}>
                             {progState.externalEvents.map((ee, i) => (
                                 <EventRow
