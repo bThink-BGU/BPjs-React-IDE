@@ -1,5 +1,5 @@
 import React from "react";
-import { Empty, Tag } from "antd";
+import { Empty, Tag, Tooltip } from "antd";
 import ReactJson from "react-json-view";
 import {
     RowLeftContainer,
@@ -73,7 +73,9 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
                 <VarsTableRowContainer>
                     <RowLeftContainer bordered={true}>
                         {row.isGlobal && <Tag color={"geekblue"}>G</Tag>}
-                        {row.varName}
+                        <Tooltip title={row.varName}>
+                            {row.varName}
+                        </Tooltip>
                     </RowLeftContainer>
                     <RowRightContainer>{row.varVal}</RowRightContainer>
                 </VarsTableRowContainer>

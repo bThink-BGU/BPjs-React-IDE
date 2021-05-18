@@ -9,7 +9,7 @@ import { Divider, Space, Tag } from "antd";
 import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 import TopDebugButtons from "../../debug-buttons/top-debug-buttons/TopDebugButtons";
 import LeftDebugButtons from "../../debug-buttons/left-debug-buttons/LeftDebugButtons";
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined, SyncOutlined } from '@ant-design/icons';
 import ProgramStateCTX from "../../state-context/StateContext";
 import "../../../animations.scss";
 
@@ -96,7 +96,7 @@ const BottomControlPanel = () => {
                 {<DelayedToolTip placement="top"
                                  title='Add external event in the left panel in order to continue the program'>
                     <Tag className={`state-${status === WAITING_FOR_EXTERNAL_EVENT_STATE ? "on" : "off"}`}
-                         icon={<ExclamationCircleOutlined/>}
+                         icon={<SyncOutlined spin />}
                          color="blue">
                         Waiting For External Event
                     </Tag>

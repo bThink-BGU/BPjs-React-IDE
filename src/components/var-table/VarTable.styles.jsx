@@ -49,16 +49,14 @@ export const TableWrapper = styled.div`
   }
 `;
 
-export const StyledTitle = styled(Title)`
-  color: white !important;
-`;
-
 export const RowLeftContainer = styled.div`
   width: 30%;
   border-right: ${props => props.bordered ? "1px solid #e9a870" : "none"};
-  padding-left: 5px;
-  padding-bottom: 10px;
-  padding-top: 5px;
+  padding: 5px 5px 10px 5px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const RowRightContainer = styled.div`
