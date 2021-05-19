@@ -16,8 +16,8 @@ import "../../../animations.scss";
 const StyledBottomControlPanel = styled.div`
   display: flex;
   flex-direction: column;
-  bottom: 38px;
-  padding: 10px 30px 508px 20px;
+  margin-bottom: 38px;
+  padding: 10px 30px 30px 20px;
   height: 400px;
   width: 100%;
   background-color: #353d45;
@@ -107,7 +107,7 @@ const BottomControlPanel = () => {
                 {<EnvSelector/>}
                 {isActive(BOTTOM_PANELS.DEBUG) && isActive(BOTTOM_PANELS.CONSOLE) &&
                 <Divider style={{
-                    height: "300px",
+                    height: "290px",
                     width: "2px",
                     marginRight: "12px",
                     marginLeft: "12px",

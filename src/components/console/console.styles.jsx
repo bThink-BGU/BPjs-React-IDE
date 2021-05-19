@@ -26,7 +26,7 @@ export const StyledConsole = styled.div`
 `;
 
 export const ConsoleContainer = styled.div`
-  height: 306px;
+  height: 293px;
   transition: width 0.2s ease-out, opacity 0.2s ease;
   ${props => getWidth(props.activeBottomPanels)};
 `;

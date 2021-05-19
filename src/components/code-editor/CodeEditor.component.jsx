@@ -60,6 +60,8 @@ const EditorContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  padding: 5px;
+  background: rgb(44,44,44);
 `;
 
 function Editor() {
@@ -140,14 +142,14 @@ function Editor() {
         <EditorContainer>
             <AceEditor
                 height={`calc(100vh - ${
-                    _.isEmpty(activeBottomPanels) ? "89px" : "496px"
+                    _.isEmpty(activeBottomPanels) ? "89px" : "488px"
                 })`}
                 ref={editorRef}
                 value={prog}
                 mode={"javascript"}
                 theme={currTheme}
                 onChange={onChange}
-                name="UNIQUE_ID_OF_DIV"
+                name="code-editor-component"
                 enableBasicAutocompletion={true}
                 enableLiveAutocompletion={true}
                 enableSnippets={true}

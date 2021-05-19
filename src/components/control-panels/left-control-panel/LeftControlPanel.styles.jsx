@@ -16,6 +16,7 @@ export const StyledLeftControlPanel = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 10px;
+  padding-bottom: 10px;
   width: 100%;
   height: calc(100vh - 87px);
   background-color: rgb(35, 39, 43);
@@ -31,9 +32,6 @@ export const StyledResizableContainer = styled(Resizable)`
   align-items: center;
   justify-content: center;
 `;
-
-
-
 
 export const handleStyle = {
     right: {

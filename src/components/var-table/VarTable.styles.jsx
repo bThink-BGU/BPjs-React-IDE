@@ -50,7 +50,7 @@ export const TableWrapper = styled.div`
 `;
 
 export const RowLeftContainer = styled.div`
-  width: 30%;
+  width: 35%;
   border-right: ${props => props.bordered ? "1px solid #e9a870" : "none"};
   padding: 5px 5px 10px 5px;
 
@@ -60,8 +60,11 @@ export const RowLeftContainer = styled.div`
 `;
 
 export const RowRightContainer = styled.div`
-  width: 70%;
+  width: 65%;
   padding-left: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const VarsTableRowContainer = styled.div`
@@ -75,7 +78,7 @@ export const VarsTableContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 210px;
+  height: 192px;
   overflow-y: scroll;
   border: 1px solid #ff9b42;
   border-radius: 1px;

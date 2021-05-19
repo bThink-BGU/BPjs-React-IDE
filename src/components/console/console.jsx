@@ -1,9 +1,23 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import { ConsoleContainer, Log, StyledConsole } from "./console.styles";
 import { CustomTitle } from "../title/title";
-import { useConsoleText } from "./useConsoleText";
 import scrollIntoView from 'scroll-into-view-if-needed';
+import ProgramStateCTX from "../state-context/StateContext";
+import printoutsResolver from "./ConsoleStateResolver";
+
+const initialBpjsText = " /$$$$$$$  /$$$$$$$   /$$$$$  /$$$$$$ \n" +
+    "| $$__  $$| $$__  $$ |__  $$ /$$__  $$\n" +
+    "| $$  \\ $$| $$  \\ $$    | $$| $$  \\__/\n" +
+    "| $$$$$$$ | $$$$$$$/    | $$|  $$$$$$ \n" +
+    "| $$__  $$| $$____//$$  | $$ \\____  $$\n" +
+    "| $$  \\ $$| $$    | $$  | $$ /$$  \\ $$\n" +
+    "| $$$$$$$/| $$    |  $$$$$$/|  $$$$$$/\n" +
+    "|_______/ |__/     \\______/  \\______/ \n" +
+    "                                      \n" +
+    "Happy Debugging";
+
+const initialConsoleState = [{message: initialBpjsText, type: "info"}];
 
 const assembleLog = (consoleOutput) => {
     const isSpecialLog = consoleOutput.type === "warning" || consoleOutput.type === "error";
@@ -18,9 +32,19 @@ export default function BPConsole() {
 
     const layoutCtx = useContext(LayoutCtx);
     const {activeBottomPanels} = layoutCtx;
-    const {consoleText} = useConsoleText();
+    const {terminalState} = useContext(ProgramStateCTX);
+    const [consoleOutput, setConsoleOutput] = useState(initialConsoleState);
 
     const consoleEndRef = useRef()
+
+    useEffect(() => {
+        if (printoutsResolver(terminalState) === null) {
+            console.log(printoutsResolver(terminalState))
+            setConsoleOutput(initialConsoleState);
+        } else {
+            setConsoleOutput(prevText => [...prevText, printoutsResolver(terminalState)]);
+        }
+    }, [terminalState]);
 
     useEffect(() => {
         scrollIntoView(consoleEndRef.current, {
@@ -29,7 +53,7 @@ export default function BPConsole() {
             inline: 'nearest',
             behavior: "smooth"
         })
-    }, [consoleText]);
+    }, [consoleOutput]);
 
     return (
         <ConsoleContainer activeBottomPanels={activeBottomPanels}>
@@ -38,7 +62,7 @@ export default function BPConsole() {
             </CustomTitle>
             <StyledConsole>
                 <div>
-                    {consoleText
+                    {consoleOutput
                         .filter(log => !!log)
                         .map(consoleOutput => assembleLog(consoleOutput))}
                     <div ref={consoleEndRef}/>

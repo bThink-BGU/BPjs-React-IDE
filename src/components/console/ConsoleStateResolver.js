@@ -1,5 +1,5 @@
-const printoutsResolver = (clientState) => {
-    return clientState.terminalState.outputs
+const printoutsResolver = (terminalState) => {
+    return terminalState.outputs
 }
 
 export default printoutsResolver

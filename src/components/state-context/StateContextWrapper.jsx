@@ -4,14 +4,16 @@ import ProgramStateCTX from "./StateContext";
 import { mapDebugState, mapProgramStatus, mapTerminalState } from "./StateMapper";
 import { setUserId } from '../../utils/api'
 
+const initialState = {
+    progState: "empty state",
+    terminalState: {outputs: null},
+    status: "STOP"
+};
+
 export default class StateManager extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            progState: "empty state",
-            terminalState: {outputs: null},
-            status: "STOP"
-        };
+        this.state = initialState;
     }
 
     componentDidMount() {
@@ -46,13 +48,18 @@ export default class StateManager extends React.Component {
         this.client.activate();
     }
 
+    resetState = () => {
+        this.setState(initialState);
+    };
+
     render() {
         return (
             <ProgramStateCTX.Provider
                 value={{
                     progState: this.state.progState,
                     terminalState: this.state.terminalState,
-                    status: this.state.status
+                    status: this.state.status,
+                    resetState: this.resetState
                 }}
             >
                 {this.props.children}

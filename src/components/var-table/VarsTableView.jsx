@@ -20,7 +20,6 @@ import './table.scss'
 
 
 export default function VarTableView({varsToVals, globalVarsToVals}) {
-    console.log(",,,,,,", globalVarsToVals)
     const isStr = (ms) => typeof ms === "string" || ms instanceof String;
     const isNum = (ms) => typeof ms === "number" || ms instanceof Number;
     const isObject = (ms) => typeof ms === "object" || ms instanceof Object;
@@ -29,7 +28,7 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
 
     const getVarValue = (v) => {
         return (isStr(v) || isNum(v)) ? v : isObject(v) ?
-            <ReactJson collapsed={false}
+            <ReactJson collapsed={true}
                        name={null}
                        theme={"railscasts"}
                        displayObjectSize={false}
@@ -102,7 +101,7 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
             <VarsTableContentContainer>
                 {globalVarToValRows && varToValRows
                     ? buildRows([...varToValRows, ...globalVarToValRows])
-                    : <Empty style={{paddingTop: "40px"}} description={"No variables have been found yet"}/>};
+                    : <Empty style={{paddingTop: "30px"}} description={"No variables have been found yet"}/>};
             </VarsTableContentContainer>
         </VarsTableContainer>
     );

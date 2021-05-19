@@ -27,6 +27,7 @@ import {
 } from "../../control-panels/bottom-control-panel/BottomControlPanel.component";
 import ProgramStateCTX from "../../state-context/StateContext";
 import _ from "lodash";
+import { useConsoleText } from "../../console/useConsoleText";
 
 const StyledSpace = styled(Space)`
   margin-right: 5px;
@@ -38,6 +39,7 @@ const StyledSpace = styled(Space)`
   .debug-button-on {
     opacity: 1;
     transition: all 0.2s;
+
     :hover {
       cursor: pointer;
     }
@@ -60,7 +62,7 @@ const ButtonsContainer = styled(Tag)`
 
 const LeftDebugButtons = () => {
         const ideProps = useContext(IDECTX);
-        const {status} = useContext(ProgramStateCTX);
+        const {resetState, status} = useContext(ProgramStateCTX);
 
         const isOn = (currButton) => {
             return _.includes(statusToActiveButtonsMap[status], currButton);
@@ -68,6 +70,12 @@ const LeftDebugButtons = () => {
 
         const handleDebug = () => {
             sendDebugReq(ideProps);
+            resetState();
+        }
+
+        const handleStop = () => {
+            stop();
+            resetState();
         }
 
         const handleMuteOrUnmuteBp = (mute) => {
@@ -101,15 +109,15 @@ const LeftDebugButtons = () => {
                                         title={"Run"}
                                         color={"#7cba59"}
                                         hoverable={isOn(RUN_BUTTON)}>
-                        <RunButton className={`debug-button-${isOn(RUN_BUTTON) ? "on" : "off"}`}
+                            <RunButton className={`debug-button-${isOn(RUN_BUTTON) ? "on" : "off"}`}
                                        onClick={() => sendRunReq(ideProps)}/>
                         </DelayedToolTip>
                         <DelayedToolTip placement="top"
                                         title={"Stop"}
                                         color={"#c45749"}
                                         hoverable={isOn(STOP_BUTTON)}>
-                        <StopButton className={`debug-button-${isOn(STOP_BUTTON) ? "on" : "off"}`}
-                                        onClick={() => stop()}/>
+                            <StopButton className={`debug-button-${isOn(STOP_BUTTON) ? "on" : "off"}`}
+                                        onClick={handleStop}/>
                         </DelayedToolTip>
                     </Space>
                 </ButtonsContainer>
@@ -125,7 +133,7 @@ const LeftDebugButtons = () => {
                                         title={`${ideProps.bpMuted ? "unmute" : "mute"} breakpoints `}
                                         color={"#c45749"}
                                         hoverable={isOn(TOGGLE_BP_BUTTON)}>
-                        {ideProps.bpMuted
+                            {ideProps.bpMuted
                                 ?
                                 <UnMuteBreakpointsButton className={`debug-button-${isOn(TOGGLE_BP_BUTTON) ? "on" : "off"}`}
                                                          onClick={() => handleMuteOrUnmuteBp(false)}/>
@@ -136,9 +144,10 @@ const LeftDebugButtons = () => {
                                         title={`${ideProps.syncStateMuted ? "unmute" : "mute"} sync state `}
                                         color={"#c45749"}
                                         hoverable={isOn(TOGGLE_SYNC_BUTTON)}>
-                        {ideProps.syncStateMuted
-                                ? <UnMuteSyncStateButton className={`debug-button-${isOn(TOGGLE_SYNC_BUTTON) ? "on" : "off"}`}
-                                                         onClick={() => handleMuteOrUnmuteSyncState(false)}/>
+                            {ideProps.syncStateMuted
+                                ?
+                                <UnMuteSyncStateButton className={`debug-button-${isOn(TOGGLE_SYNC_BUTTON) ? "on" : "off"}`}
+                                                       onClick={() => handleMuteOrUnmuteSyncState(false)}/>
                                 : <MuteSyncStateButton className={`debug-button-${isOn(TOGGLE_SYNC_BUTTON) ? "on" : "off"}`}
                                                        onClick={() => handleMuteOrUnmuteSyncState(true)}/>}
                         </DelayedToolTip>
@@ -147,7 +156,7 @@ const LeftDebugButtons = () => {
                                         title={`${ideProps.skipExternals ? "wait for" : "dismiss"} external events `}
                                         color={"#c45749"}
                                         hoverable={isOn(TOGGLE_EXTERNALS_BUTTON)}>
-                        {ideProps.skipExternals
+                            {ideProps.skipExternals
                                 ? <WaitForExternalEventsButton
                                     className={`debug-button-${isOn(TOGGLE_EXTERNALS_BUTTON) ? "on" : "off"}`}
                                     onClick={() => handleSkipOrWaitExternalEvents(false)}/>
