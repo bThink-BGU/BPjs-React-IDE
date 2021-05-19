@@ -39,7 +39,6 @@ export default function BPConsole() {
 
     useEffect(() => {
         if (printoutsResolver(terminalState) === null) {
-            console.log(printoutsResolver(terminalState))
             setConsoleOutput(initialConsoleState);
         } else {
             setConsoleOutput(prevText => [...prevText, printoutsResolver(terminalState)]);

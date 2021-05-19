@@ -51,6 +51,7 @@ import styled from "styled-components";
 import _ from "lodash";
 import { addBreakPoint, ignoreBreakPoint } from "../../utils/api";
 import IDECTX from "../../pages/IDE/IDECTX";
+import printoutsResolver from "../console/ConsoleStateResolver";
 
 const BP_TAP = "guttermousedown";
 
@@ -61,14 +62,15 @@ const EditorContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 5px;
-  background: rgb(44,44,44);
+  background: rgb(44, 44, 44);
 `;
 
 function Editor() {
     const [editorRef, setEditorRef] = useState(null);
-    const {progState} = useContext(ProgramStateCTX);
+    const {progState, terminalState, status} = useContext(ProgramStateCTX);
     const {activeBottomPanels, currTheme} = useContext(LayoutCtx);
     const {prog, setProg, setBps} = useContext(IDECTX);
+    const [markers, setMarkers] = useState([]);
 
     const onChange = (newValue) => {
         newValue !== prog && setProg(newValue);
@@ -84,12 +86,11 @@ function Editor() {
         const breakpoints = e.editor.session.getBreakpoints(row, 0);
 
         if (typeof breakpoints[row] === typeof undefined) {
-
             e.editor.session.setBreakpoint(row);
             addBreakPoint(row + 1)
         } else {
             e.editor.session.clearBreakpoint(row);
-            ignoreBreakPoint(row + 1)
+            ignoreBreakPoint(row + 1);
         }
         updateBreakpoints(breakpoints);
         e.stop();
@@ -121,25 +122,37 @@ function Editor() {
     }, []);
 
     useEffect(() => {
-        editorRef?.current?.editor?.scrollToRow(progState.currentLine - 5);
+        if (progState.currentLine) {
+            setMarkers([{
+                startRow: progState.currentLine - 1,
+                startCol: 0,
+                endRow: progState.currentLine,
+                endCol: 0,
+                className: "replacement_marker",
+                type: "text",
+            }]);
+
+            editorRef?.current?.editor?.scrollToRow(progState.currentLine - 5);
+        } else {
+            setMarkers([]);
+        }
+
     }, [progState.currentLine]);
+
+    useEffect(() => {
+        if (printoutsResolver(terminalState) === null) {
+            setMarkers([]);
+        }
+    }, [terminalState]);
 
     const editorStyle = {
         width: "100%",
         paddingTop: "10px"
     };
-    let markers = [];
-    markers.push({
-        startRow: progState.currentLine - 1,
-        startCol: 0,
-        endRow: progState.currentLine,
-        endCol: 0,
-        className: "replacement_marker",
-        type: "text",
-    });
 
     return (
         <EditorContainer>
+            {console.log(markers)}
             <AceEditor
                 height={`calc(100vh - ${
                     _.isEmpty(activeBottomPanels) ? "89px" : "488px"
