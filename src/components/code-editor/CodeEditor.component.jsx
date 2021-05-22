@@ -43,9 +43,10 @@ import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/theme-xcode";
+import 'ace-builds/src-noconflict/ext-searchbox';
 
 import "./code-editor.css";
-import { setBpjsMode, editorThemes } from "./editor-setting";
+import { setBpjsMode } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
