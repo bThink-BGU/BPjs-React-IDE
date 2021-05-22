@@ -53,7 +53,7 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
                 varName: k,
                 varVal: getVarValue(tryParse(varsToVals[k])),
             };
-        }).filter((v) => v.varName !== "FUNCNAME");
+        });
 
     const globalVarToValRows =
         !isStr(globalVarsToVals) &&
@@ -64,7 +64,7 @@ export default function VarTableView({varsToVals, globalVarsToVals}) {
                 varVal: getVarValue(tryParse(globalVarsToVals[k])),
                 isGlobal: true
             };
-        }).filter((v) => v.varName !== "FUNCNAME");
+        });
 
     const buildRows = (rows) => {
         return rows.map(row => {
