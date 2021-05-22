@@ -26,26 +26,20 @@ export default function EnvSelector() {
 
 
     function getEnvByThreadName(programStateCtx, selcetedThread, functionName) {
-        console.log(programStateCtx);
         const maybeSelectedScope = programStateCtx?.progState?.threadsAndEnvs?.filter(
             (t) => t.name == selcetedThread
         );
 
-        console.log(maybeSelectedScope);
-        console.log(functionName);
         var selectedScopeCopy = maybeSelectedScope &&
             maybeSelectedScope[0] &&
             maybeSelectedScope[0].env &&
             Object.entries(maybeSelectedScope[0].env).filter(e => e[1]['scopeName'] == functionName)[0]
-	console.log(Object.entries(maybeSelectedScope[0].env));
-	console.log(selectedScopeCopy);
         return selectedScopeCopy && selectedScopeCopy[1]['variables'];
     }
 
 
     const onChange = (e) => {
         if (stateCurrThread !== cascaderValue) {
-            console.log(e);
             const selcetedThread = e && e[0];
             const selectedScopeName = e && e[1];
             var selectedScopeCopy = getEnvByThreadName(programStateCtx, selcetedThread);
@@ -65,7 +59,7 @@ export default function EnvSelector() {
             programStateCtx.progState.threadsAndEnvs.filter(
                 (t) => t.name == stateCurrThread
             );
-        if (maybeSelectedScope && maybeSelectedScope[0]) return maybeSelectedScope[0]['env']['scopeName']
+        if (maybeSelectedScope && maybeSelectedScope[0]) return maybeSelectedScope[0]['env'][0]['variables']
         else return {}
     }
     return (
