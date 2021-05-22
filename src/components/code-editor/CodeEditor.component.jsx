@@ -152,7 +152,6 @@ function Editor() {
 
     return (
         <EditorContainer>
-            {console.log(markers)}
             <AceEditor
                 height={`calc(100vh - ${
                     _.isEmpty(activeBottomPanels) ? "89px" : "488px"

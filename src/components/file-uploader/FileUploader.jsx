@@ -47,7 +47,7 @@ const FileUploader = () => {
                         size={"middle"}
                         icon={<UploadOutlined/>}
                         disabled={status !== STOP_STATE}>
-                    Load File
+                    Load Program
                 </Button>
             </div>
         </Upload>
