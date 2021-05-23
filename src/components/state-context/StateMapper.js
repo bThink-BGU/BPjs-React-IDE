@@ -28,8 +28,6 @@ function resolveCurrentEventSelection(stateFromServer) {
         stateFromServer.eventsStatus &&
         stateFromServer.eventsStatus.currentEvent &&
         stateFromServer.eventsStatus.currentEvent.name 
-        
-
 }
 
 function resolveThreadAndEnvs(stateFromServer) {

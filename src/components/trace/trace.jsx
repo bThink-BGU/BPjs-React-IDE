@@ -5,7 +5,7 @@ import { CustomTitle } from "../title/title";
 import * as API from "../../utils/api";
 import { EventRow } from "../event-row/EventRow";
 import { AnimatedList } from "react-animated-list";
-import { Empty,Badge } from "antd";
+import { Empty, Badge } from "antd";
 
 const TraceContainer = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
@@ -35,8 +35,8 @@ const TraceContainer = styled.div`
   }
 `;
 
-const Trace = ({shouldFadePanel}) => {
-        const {progState} = useContext(ProgramStateCTX);
+const Trace = ({ shouldFadePanel }) => {
+        const { progState } = useContext(ProgramStateCTX);
         const confirmMsg = "Are u sure you want to travel back in time?";
         return (
             <TraceContainer shouldFadePanel={shouldFadePanel}>
@@ -53,13 +53,13 @@ const Trace = ({shouldFadePanel}) => {
                 >
                     Trace
                 </CustomTitle>
-                <div style={{height: "75%", overflowY: "auto"}}>
-                {progState.currentEvent ? (
-              
-              <EventRow alertDot name={progState.currentEvent} />
-            
-          ) : null}
-                    {(progState.eventsHistory?.length > 0 && ! progState.currentEvent)?
+                <div style={{ height: "75%", overflowY: "auto" }}>
+                    { progState.currentEvent ?
+                        (<EventRow alertDot name={progState.currentEvent}/>) :
+                        null
+                    }
+                    {(!progState.eventsHistory || (progState.eventsHistory && progState.eventsHistory.length === 0)) && !progState.currentEvent ?
+                        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/> :
                         <AnimatedList animation={"grow"}>
                             {progState.eventsHistory.map((eh, i) => (
                                 <EventRow
@@ -73,7 +73,7 @@ const Trace = ({shouldFadePanel}) => {
                                     onClick={() => API.backToSnapShot(eh.timeStamp)}
                                 />
                             ))}
-                        </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
+                        </AnimatedList>}
                 </div>
             </TraceContainer>
         );
