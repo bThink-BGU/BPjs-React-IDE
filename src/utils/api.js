@@ -94,7 +94,7 @@ export const ignoreBreakPoint = (row) => {
 };
 
 export const backToSnapShot = (time) => {
-    axios.post(`${baseUrl}/bpjs/syncSnapshot`,
+    axios.put(`${baseUrl}/bpjs/syncSnapshot`,
         {
             "snapShotTime": time
         })
