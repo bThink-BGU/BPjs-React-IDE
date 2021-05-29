@@ -1,5 +1,5 @@
-import "ace-builds/src-min-noconflict/mode-javascript";
-import ace from "ace-builds"
+import "ace-builds/src-noconflict/mode-javascript";
+import ace from "ace-builds";
 
 class BpjsHighlightRules extends ace.require("ace/mode/javascript_highlight_rules").JavaScriptHighlightRules {
     constructor() {
@@ -27,7 +27,6 @@ const registerSnippets = function (editor, session, mode, snippets) {
     m.scope = mode
     m.snippetText = snippetText
     m.snippet = snippetManager.parseSnippetFile(snippetText, m.scope)
-
     snippetManager.register(m.snippet, m.scope)
 }
 
@@ -51,12 +50,20 @@ const bpjsSnippets = [
         code: "bp.registerBThread(\"Your bt name\", () => {\n\n});",
     },
     {
-        name: "bp.sync({waitFor: add your event});",
-        code: "bp.sync({waitFor: add your event});",
+        name: "bp.log.info",
+        code: "bp.log.info(\"Your log goes here\")",
     },
     {
-        name: "bp.sync({request: add your event});",
-        code: `bp.sync({request: add your event});`,
+        name: "bp.log.error",
+        code: "bp.log.error(\"Your log goes here\")",
+    },
+    {
+        name: "bp.sync({waitFor: \"add your event here\"});",
+        code: "bp.sync({waitFor: \"add your event here\"});",
+    },
+    {
+        name: "bp.sync({request: \"add your event here\"});",
+        code: `bp.sync({request: \"add your event here\"});`,
     },
     {
         name: "bp.sync({waitFor: bp.Event(\"\")});",
@@ -86,7 +93,7 @@ const bpjsHighlightRules = [
         regex: /(block|request|waitFor)\b/
     }
 ];
-//1 2 5 6 9 13 14 15 18 21 22 23 24 25 26 29 32 33 34  35  36 37
+
 export const editorThemes = {
     light: [
         "chrome",
@@ -132,7 +139,7 @@ export const editorThemes = {
     ],
 }
 
-const annotations = [
+export const annotations = [
     {
         row: 0, // must be 0 based
         column: 0, // must be 0 based

@@ -6,7 +6,7 @@ import { CustomTitle } from "../title/title";
 import { Input } from "antd";
 import "./event-history.scss";
 import { EventRow } from "../event-row/EventRow";
-import * as API from "../../utils/api";
+import * as API from "../../utils/api-service";
 import { PlusSquareOutlined } from "@ant-design/icons";
 import { AnimatedList } from "react-animated-list";
 

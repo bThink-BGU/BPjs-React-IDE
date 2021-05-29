@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { ReactComponent as StepOutButton } from "../../../assets/step-out-button.svg";
 import { ReactComponent as StepIntoButton } from "../../../assets/step-into-button.svg";
 import { ReactComponent as StepOverButton } from "../../../assets/step-over-button.svg";
-import { nextSync, sendContinueReq, stepInto, stepOut, stepOver } from '../../../utils/api'
+import { nextSync, sendContinueReq, stepInto, stepOut, stepOver } from '../../../utils/api-service'
 import { DelayedToolTip } from "../common/tooltip";
 import { ReactComponent as ContinueButton } from "../../../assets/continue-button.svg";
 import { ReactComponent as NextSyncStateButton } from "../../../assets/next-sync-state-button.svg";

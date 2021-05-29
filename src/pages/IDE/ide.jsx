@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import StateManager from "../../components/state-context/StateContextWrapper";
 import Editor from "../../components/code-editor/CodeEditor.component";
 import LeftControlPanel from "../../components/control-panels/left-control-panel/LeftControlPanel.component";
 import BottomControlPanel from "../../components/control-panels/bottom-control-panel/BottomControlPanel.component";
@@ -46,7 +45,6 @@ function IDE() {
         skipExternals,
         setSkipExternals
     };
-
 
     return (
         <LayoutCtx.Provider value={layoutProperties}>

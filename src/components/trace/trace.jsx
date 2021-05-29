@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import ProgramStateCTX from "../state-context/StateContext";
 import styled from "styled-components";
 import { CustomTitle } from "../title/title";
-import * as API from "../../utils/api";
+import * as API from "../../utils/api-service";
 import { EventRow } from "../event-row/EventRow";
 import { AnimatedList } from "react-animated-list";
 import { Empty, Badge } from "antd";

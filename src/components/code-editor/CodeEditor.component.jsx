@@ -1,10 +1,16 @@
 import React, { useState, useEffect, createRef, useContext } from "react";
+import ProgramStateCTX from "../state-context/StateContext";
+import "ace-builds/webpack-resolver";
+
 import AceEditor from "react-ace";
 import "ace-builds/src-min-noconflict/ext-language_tools";
 import "ace-builds/src-min-noconflict/ext-beautify";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/snippets/javascript";
-import ProgramStateCTX from "../state-context/StateContext";
+import "ace-builds/src-noconflict/ext-searchbox";
+import "ace-builds/src-noconflict/ext-error_marker";
+import "ace-builds/src-noconflict/worker-javascript";
+
 import "ace-builds/src-noconflict/theme-ambiance";
 import "ace-builds/src-noconflict/theme-chaos";
 import "ace-builds/src-noconflict/theme-chrome";
@@ -43,14 +49,13 @@ import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
 import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/theme-vibrant_ink";
 import "ace-builds/src-noconflict/theme-xcode";
-import 'ace-builds/src-noconflict/ext-searchbox';
 
-import "./code-editor.css";
+import "./code-editor.scss";
 import { setBpjsMode } from "./editor-setting";
 import LayoutCtx from "../../pages/IDE/LayoutCtx";
 import styled from "styled-components";
 import _ from "lodash";
-import { addBreakPoint, ignoreBreakPoint } from "../../utils/api";
+import { addBreakPoint, ignoreBreakPoint } from "../../utils/api-service";
 import IDECTX from "../../pages/IDE/IDECTX";
 import printoutsResolver from "../console/ConsoleStateResolver";
 
@@ -68,6 +73,7 @@ const EditorContainer = styled.div`
 
 function Editor() {
     const [editorRef, setEditorRef] = useState(null);
+    const [annotations, setAnnotations] = useState([]);
     const {progState, terminalState, status} = useContext(ProgramStateCTX);
     const {activeBottomPanels, currTheme} = useContext(LayoutCtx);
     const {prog, setProg, setBps} = useContext(IDECTX);
@@ -150,6 +156,9 @@ function Editor() {
         width: "100%",
         paddingTop: "10px"
     };
+    // height={`calc(100vh - ${
+    //     _.isEmpty(activeBottomPanels) ? "89px" : "488px"
+    // })`}
 
     return (
         <EditorContainer>
@@ -167,11 +176,10 @@ function Editor() {
                 enableLiveAutocompletion={true}
                 enableSnippets={true}
                 highlightActiveLine={true}
-                setOptions={{useWorker: false}}
                 markers={markers}
+                setOptions={{ useWorker: true }}
                 editorProps={{
                     $blockScrolling: true,
-                    $useWorker: false,
                 }}
                 style={editorStyle}
             />

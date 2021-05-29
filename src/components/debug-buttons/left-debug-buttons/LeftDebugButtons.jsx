@@ -18,7 +18,7 @@ import {
     sendRunReq,
     skipExternalEvents,
     stop
-} from '../../../utils/api'
+} from '../../../utils/api-service'
 import { DelayedToolTip } from "../../debug-buttons/common/tooltip";
 import {
     DEBUG_BUTTON,

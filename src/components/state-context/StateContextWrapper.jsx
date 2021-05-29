@@ -2,7 +2,7 @@ import { Client } from "@stomp/stompjs";
 import React from "react";
 import ProgramStateCTX from "./StateContext";
 import { mapDebugState, mapProgramStatus, mapTerminalState } from "./StateMapper";
-import { setUserId } from '../../utils/api'
+import { setUserId } from '../../utils/api-service'
 
 const initialState = {
     progState: "empty state",

@@ -49,9 +49,10 @@ export default function BPConsole() {
         scrollIntoView(consoleEndRef.current, {
             scrollMode: 'if-needed',
             block: 'nearest',
+            skipOverflowHiddenElements: true,
             inline: 'nearest',
             behavior: "smooth"
-        })
+        });
     }, [consoleOutput]);
 
     return (
@@ -64,8 +65,8 @@ export default function BPConsole() {
                     {consoleOutput
                         .filter(log => !!log)
                         .map(consoleOutput => assembleLog(consoleOutput))}
-                    <div ref={consoleEndRef}/>
                 </div>
+                <div ref={consoleEndRef}/>
             </StyledConsole>
         </ConsoleContainer>
     );
