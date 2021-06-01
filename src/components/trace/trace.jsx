@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ProgramStateCTX from "../state-context/StateContext";
 import styled from "styled-components";
 import { CustomTitle } from "../title/title";
@@ -6,12 +6,14 @@ import * as API from "../../utils/api-service";
 import { EventRow } from "../event-row/EventRow";
 import { AnimatedList } from "react-animated-list";
 import { Empty, Badge } from "antd";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 
 const TraceContainer = styled.div`
+  transition: min-height 0.5s, max-height 0.5s;
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
   width: 90%;
-  min-height: 200px;
-  max-height: 200px;
+  min-height: ${props => props.componentsHeight}px;
+  max-height: ${props => props.componentsHeight}px;
   overflow: hidden;
   background-color: #353d45;
   margin-top: 30px;
@@ -36,26 +38,44 @@ const TraceContainer = styled.div`
   }
 `;
 
-const Trace = ({ shouldFadePanel }) => {
-        const { progState } = useContext(ProgramStateCTX);
-        const confirmMsg = "Are u sure you want to travel back in time?";
+const StyledMinimizeIcon = styled(MinusOutlined)`
+  color: white;
+  transition: font-size 0.2s;
+
+  &:hover {
+    color: orange;
+    font-size: 22px;
+    cursor: pointer;
+  }
+`;
+
+const StyledMaximizeIcon = styled(PlusOutlined)`
+  color: white;
+  transition: font-size 0.2s;
+
+  &:hover {
+    color: orange;
+    font-size: 22px;
+    cursor: pointer;
+  }
+`;
+
+const Trace = ({shouldFadePanel}) => {
+        const {progState} = useContext(ProgramStateCTX);
+        const [componentsHeight, setComponentsHeight] = useState(200);
+        const hasContent = progState.eventsHistory?.length > 0
         return (
-            <TraceContainer shouldFadePanel={shouldFadePanel}>
-                <CustomTitle
-                    style={{
-                        position: "sticky",
-                        top: "-10px",
-                        minHeight: "25px;",
-                        padding: "5px 0px 5px 0px",
-                        backgroundColor: "#363d46",
-                    }}
-                    level={5}
-                    color={"white"}
-                >
-                    Trace
-                </CustomTitle>
-                <div style={{ height: "75%", overflowY: "auto" }}>
-                    { progState.currentEvent ?
+            <TraceContainer shouldFadePanel={shouldFadePanel} componentsHeight={componentsHeight}>
+                <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <CustomTitle level={5} color={hasContent && componentsHeight < 200 ? "#ff6961" : "white"}>
+                        Trace
+                    </CustomTitle>
+                    {componentsHeight === 200
+                        ? <StyledMinimizeIcon onClick={() => setComponentsHeight(40)}/>
+                        : <StyledMaximizeIcon onClick={() => setComponentsHeight(200)}/>}
+                </div>
+                <div style={{height: "75%", overflowY: "auto"}}>
+                    {progState.currentEvent ?
                         (<EventRow alertDot name={progState.currentEvent}/>) :
                         null
                     }

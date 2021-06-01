@@ -7,7 +7,7 @@ import { Input } from "antd";
 import "./event-history.scss";
 import { EventRow } from "../event-row/EventRow";
 import * as API from "../../utils/api-service";
-import { PlusSquareOutlined } from "@ant-design/icons";
+import { MinusOutlined, PlusOutlined, PlusSquareOutlined } from "@ant-design/icons";
 import { AnimatedList } from "react-animated-list";
 
 const EventsHistoryContainer = styled.div`
@@ -17,13 +17,15 @@ const EventsHistoryContainer = styled.div`
 `;
 
 const EventsHistoryContent = styled.div`
+  transition: min-height 0.5s, max-height 0.5s;
+
   width: 100%;
   background-color: #353d45;
   margin-top: 10px;
   border-radius: 3px;
   padding: 10px;
-  max-height: 200px;
-  min-height: 200px;
+  min-height: ${props => props.componentsHeight}px;
+  max-height: ${props => props.componentsHeight}px;
   overflow: hidden;
 `;
 
@@ -52,14 +54,39 @@ const ButtonInputContainer = styled.div`
   align-items: flex-start;
 `;
 
+const StyledMinimizeIcon = styled(MinusOutlined)`
+  color: white;
+  transition: font-size 0.2s;
+
+  &:hover {
+    color: orange;
+    font-size: 22px;
+    cursor: pointer;
+  }
+`;
+
+const StyledMaximizeIcon = styled(PlusOutlined)`
+  color: white;
+  transition: font-size 0.2s;
+
+  &:hover {
+    color: orange;
+    font-size: 22px;
+    cursor: pointer;
+  }
+`;
+
 const EventsHistory = ({shouldFadePanel}) => {
     const [showInput, inputToggle] = useState(false);
     const [input, setInput] = useState("");
+    const [componentsHeight, setComponentsHeight] = useState(200);
     const {progState} = useContext(ProgramStateCTX);
     const addEventApi = async () => {
         await API.addExternalEvent(input)
         setInput("")
     };
+    const hasContent = progState.externalEvents?.length > 0
+
     return (
         <EventsHistoryContainer shouldFadePanel={shouldFadePanel}>
             <ButtonInputContainer>
@@ -87,12 +114,17 @@ const EventsHistory = ({shouldFadePanel}) => {
                     onPressEnter={addEventApi}
                 />
             </ButtonInputContainer>
-            <EventsHistoryContent>
-                <CustomTitle level={5} color={"white"}>
-                    External Events
-                </CustomTitle>
+            <EventsHistoryContent componentsHeight={componentsHeight}>
+                <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
+                    <CustomTitle level={5} color={hasContent && componentsHeight < 200 ? "#ff6961" : "white"}>
+                        External Events
+                    </CustomTitle>
+                    {componentsHeight === 200
+                        ? <StyledMinimizeIcon onClick={() => setComponentsHeight(40)}/>
+                        : <StyledMaximizeIcon onClick={() => setComponentsHeight(200)}/>}
+                </div>
                 <div className={"divvvv"} style={{height: "75%", overflowY: "auto"}}>
-                    {progState.externalEvents?.length > 0 ?
+                    {hasContent ?
                         <AnimatedList animation={"grow"}>
                             {progState.externalEvents.map((ee, i) => (
                                 <EventRow

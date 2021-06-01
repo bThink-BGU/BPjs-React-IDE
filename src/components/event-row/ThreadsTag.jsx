@@ -17,7 +17,7 @@ const ThreadsNames = (tNames) => {
 
 export const ThreadsTags = ({blocked, wait, requested}) => {
     return (
-        <Space size={9}>
+        <Space size={9} style={{marginRight: "24px"}}>
             {[requested, wait, blocked].map((threads) => (
                 <ThreadTag threadList={threads}/>
             ))}
