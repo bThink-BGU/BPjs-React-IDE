@@ -20,7 +20,8 @@ export const StyledLeftControlPanel = styled.div`
   width: 100%;
   height: calc(100vh - 87px);
   background-color: rgb(35, 39, 43);
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @media ${device.tablet} {
     overflow-y: scroll;

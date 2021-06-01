@@ -15,6 +15,7 @@ const TraceContainer = styled.div`
   overflow: hidden;
   background-color: #353d45;
   margin-top: 30px;
+  margin-bottom: 20px;
   border-radius: 3px;
   padding: 10px;
 

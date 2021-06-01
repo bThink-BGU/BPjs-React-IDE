@@ -4,6 +4,7 @@ import { handleStyle, StyledLeftControlPanel, StyledResizableContainer } from ".
 import EventsHistory from "../../event-history/EventsHistory.component";
 import RequestedOrBlocked from "../../requested-or-blocked/RequestedOrBlocked";
 import Trace from "../../trace/trace";
+import ThreadsToLinesMap from "../../threads-to-line-map/ThreadToLineMap";
 
 const LeftControlPanel = () => {
 
@@ -29,6 +30,7 @@ const LeftControlPanel = () => {
                 <EventsHistory shouldFadePanel={shouldFadePanel}/>
                 <RequestedOrBlocked shouldFadePanel={shouldFadePanel}/>
                 <Trace shouldFadePanel={shouldFadePanel}/>
+                <ThreadsToLinesMap shouldFadePanel={shouldFadePanel}/>
             </StyledLeftControlPanel>
         </StyledResizableContainer>
     );
