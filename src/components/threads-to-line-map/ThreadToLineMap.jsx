@@ -63,14 +63,6 @@ const ThreadsToLinesMap = ({shouldFadePanel}) => {
                                     withX={false}
                                 />
                             ))}
-                            {progState.threadsAndEnvs.map((threadAndEnv, i) => (
-                                <EventRow
-                                    key={i}
-                                    name={getThreadAndCurrLineMessage(threadAndEnv)}
-                                    clickAble={false}
-                                    withX={false}
-                                />
-                            ))}
                         </AnimatedList> : <Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>}
                 </div>
             </Content>
