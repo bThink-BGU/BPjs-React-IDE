@@ -61,6 +61,7 @@ const SYNCSTATE_STATE = "SYNCSTATE";
 const BREAKPOINT_STATE = "BREAKPOINT";
 export const STOP_STATE = "STOP";
 const WAITING_FOR_EXTERNAL_EVENT_STATE = "WAITING_FOR_EXTERNAL_EVENT";
+const SUPER_STEP_DONE = "SUPERSTEPDONE";
 
 export const statusToActiveButtonsMap = {
     [RUN_STATE]: [STOP_BUTTON, TOGGLE_EXTERNALS_BUTTON],
@@ -93,14 +94,25 @@ const BottomControlPanel = () => {
                         In Sync State
                     </Tag>
                 </DelayedToolTip>}
-                {<DelayedToolTip placement="top"
-                                 title='Add external event in the left panel in order to continue the program'>
-                    <Tag className={`state-${status === WAITING_FOR_EXTERNAL_EVENT_STATE ? "on" : "off"}`}
-                         icon={<SyncOutlined spin />}
-                         color="blue">
-                        Waiting For External Event
-                    </Tag>
-                </DelayedToolTip>}
+                <Space>
+                    {<DelayedToolTip placement="top"
+                                     title='Add external event in the left panel in order to continue the program'>
+                        <Tag className={`state-${status === WAITING_FOR_EXTERNAL_EVENT_STATE ? "on" : "off"}`}
+                             icon={<SyncOutlined spin/>}
+                             color="blue">
+                            Waiting For External Event
+                        </Tag>
+                    </DelayedToolTip>}
+                    {<DelayedToolTip placement="top"
+                                     title='Super step is done.'>
+                        <Tag
+                            className={`state-${status === WAITING_FOR_EXTERNAL_EVENT_STATE || status === SUPER_STEP_DONE ? "on" : "off"}`}
+                            icon={<ExclamationCircleOutlined/>}
+                            color="cyan">
+                            Super Step Done
+                        </Tag>
+                    </DelayedToolTip>}
+                </Space>
             </Space>
             <PanelsContainer>
                 <LeftDebugButtons/>
