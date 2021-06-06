@@ -11,14 +11,13 @@ const Container = styled.div`
   opacity: ${props => props.shouldFadePanel ? "0" : "1"};
   transition: opacity 0.2s;
   width: 90%;
-  margin-bottom: 10px;
 `;
 
 const Content = styled.div`
   transition: height 0.5s;
   width: 100%;
   background-color: #353d45;
-  margin-top: 10px;
+  margin-top: 30px;
   border-radius: 3px;
   padding: 10px;
   height: ${props => props.componentsHeight}px;
@@ -67,7 +66,7 @@ const getThreadAndCurrLineMessage = (threadAndEnv) => {
 
 const ThreadsToLinesMap = ({shouldFadePanel}) => {
     const {progState} = useContext(ProgramStateCTX);
-    const [componentsHeight, setComponentsHeight] = useState(200);
+    const [componentsHeight, setComponentsHeight] = useState(40);
     const hasContent = progState.threadsAndEnvs?.length > 0
 
     return (

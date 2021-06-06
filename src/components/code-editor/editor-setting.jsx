@@ -47,7 +47,7 @@ const createSnippets = (snippets) => {
 const bpjsSnippets = [
     {
         name: "bp.registerBThread",
-        code: "bp.registerBThread(\"Your bt name\", () => {\n\n});",
+        code: "bp.registerBThread(\"Your bt name\", function () {\n\n});",
     },
     {
         name: "bp.log.info",
@@ -58,24 +58,16 @@ const bpjsSnippets = [
         code: "bp.log.error(\"Your log goes here\")",
     },
     {
-        name: "bp.sync({waitFor: \"add your event here\"});",
-        code: "bp.sync({waitFor: \"add your event here\"});",
+        name: "bp.sync({request: bp.Event(\"Your event goes here\")});",
+        code: "bp.sync({request: bp.Event(\"Your event goes here\")});",
     },
     {
-        name: "bp.sync({request: \"add your event here\"});",
-        code: `bp.sync({request: \"add your event here\"});`,
-    },
-    {
-        name: "bp.sync({waitFor: bp.Event(\"\")});",
-        code: "bp.sync({waitFor: bp.Event(\"\")});",
-    },
-    {
-        name: "bp.sync({request: bp.Event(\"\")});",
-        code: `bp.sync({request: bp.Event(\"\")});`,
+        name: "bp.sync({waitFor: bp.Event(\"Your event goes here\")});",
+        code: "bp.sync({waitFor: bp.Event(\"Your event goes here\")});",
     },
     {
         name: "bp.Event",
-        code: "bp.Event(\"\")"
+        code: "bp.Event(\"Your event goes here\")"
     }
 ];
 

@@ -79,7 +79,7 @@ const StyledMaximizeIcon = styled(PlusOutlined)`
 const EventsHistory = ({shouldFadePanel}) => {
     const [showInput, inputToggle] = useState(false);
     const [input, setInput] = useState("");
-    const [componentsHeight, setComponentsHeight] = useState(200);
+    const [componentsHeight, setComponentsHeight] = useState(40);
     const {progState} = useContext(ProgramStateCTX);
     const addEventApi = async () => {
         await API.addExternalEvent(input)

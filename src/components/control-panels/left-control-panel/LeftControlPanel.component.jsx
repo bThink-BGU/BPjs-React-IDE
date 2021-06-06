@@ -28,9 +28,9 @@ const LeftControlPanel = () => {
             <PanelDivider direction={"vertical"}/>
             <StyledLeftControlPanel>
                 <EventsHistory shouldFadePanel={shouldFadePanel}/>
+                <ThreadsToLinesMap shouldFadePanel={shouldFadePanel}/>
                 <RequestedOrBlocked shouldFadePanel={shouldFadePanel}/>
                 <Trace shouldFadePanel={shouldFadePanel}/>
-                <ThreadsToLinesMap shouldFadePanel={shouldFadePanel}/>
             </StyledLeftControlPanel>
         </StyledResizableContainer>
     );
