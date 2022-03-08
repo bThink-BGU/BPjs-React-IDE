@@ -3,7 +3,7 @@
 # turn on bash's job control
 set -m
 
-./backend.sh
+./backend.sh &
 
 ./frontend.sh
 

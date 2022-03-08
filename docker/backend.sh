@@ -8,7 +8,7 @@ git pull
 mvn install -DskipTests 
 
 cd controller
-mvn spring-boot:run &
+mvn spring-boot:run
 
 # now we bring the primary process back into the foreground
 # and leave it there
