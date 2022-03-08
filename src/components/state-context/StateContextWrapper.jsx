@@ -19,7 +19,8 @@ export default class StateManager extends React.Component {
     componentDidMount() {
         this.client = new Client();
         this.client.configure({
-            brokerURL: "ws://localhost:8080/ws",
+            brokerURL: `ws://${process.env.REACT_APP_API_URL || "localhost:8080"}/ws`,
+            // brokerURL: "ws://localhost:8080/ws",
             onConnect: (msg) => {
 
                 setUserId(msg.headers['user-name'])
