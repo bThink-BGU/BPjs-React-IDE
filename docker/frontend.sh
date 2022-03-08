@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # turn on bash's job control
-set -m
+#set -m
 
 cd BPjs-React-IDE 
 git pull
@@ -14,4 +14,4 @@ serve -s build -p 80
 
 # now we bring the primary process back into the foreground
 # and leave it there
-fg %1
+#fg %1
