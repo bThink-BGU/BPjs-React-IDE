@@ -4,7 +4,7 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*"
 axios.defaults.headers.common['Access-Control-Allow-Credentials'] = true
 export const setUserId = (uid) => axios.defaults.headers.common['userId'] = uid;
 
-export const baseUrl = `http://${process.env.REACT_APP_API_URL || "localhost:8080"}`;
+export const baseUrl = `http://${process.env.REACT_APP_API_URL || window.location.hostname+":8080"}`;
 
 export const sendDebugReq = (ideParams) => {
     axios.post(`${baseUrl}/bpjs/debug`,

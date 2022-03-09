@@ -5,8 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'antd/dist/antd.css';
 
-// const baseURL = process.env.REACT_APP_API_URL || "http://localhost:8080";
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
