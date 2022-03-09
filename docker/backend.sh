@@ -3,12 +3,20 @@
 # turn on bash's job control
 #set -m
 
-cd BPjs-Debugger
-git pull
-mvn install -DskipTests 
+cd BPjs-Debugger || exit 1
 
-cd controller
-mvn spring-boot:run&
+updateProjects=${UPDATE_PROJECTS:0}
+if [[ $updateProjects -eq 1 ]]
+then
+    echo "Updating backend from GitHub"
+    git pull
+    echo "Installing backend dependencies"
+    mvn install -DskipTests
+fi
+
+cd controller || exit 1
+echo "Starting backend"
+mvn spring-boot:run
 
 # now we bring the primary process back into the foreground
 # and leave it there

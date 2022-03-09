@@ -8,7 +8,8 @@ RUN apt-get update && apt-get upgrade \
 	&& apt-get install -y git build-essential openjdk-11-jdk maven \
 	&& npm install --unsafe-perm -g node-sass serve
 
-RUN git clone https://github.com/bThink-BGU/BPjs-React-IDE.git \
+RUN git config --global pull.rebase false \
+    && git clone https://github.com/bThink-BGU/BPjs-React-IDE.git \
 	&& cd BPjs-React-IDE \
 	&& npm install --production \
 	&& npm run build \
