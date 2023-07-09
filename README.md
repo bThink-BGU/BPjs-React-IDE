@@ -2,6 +2,8 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+The project must be run with [BPjs-Debugger](https://github.com/bThink-BGU/BPjs-Debugger).
+
 ## Available Scripts
 
 In the project directory, you can run:
