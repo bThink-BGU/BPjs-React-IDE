@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 The project must be run with [BPjs-Debugger](https://github.com/bThink-BGU/BPjs-Debugger).
 
+## Creating a docker file
+To create a docker file that starts both the [BPjs-Debugger](https://github.com/bThink-BGU/BPjs-Debugger) and the BPjs-React-IDE, run:
+
+```shell
+cd docker
+docker build . -t bthink-bgu/bpjs-react-ide
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
