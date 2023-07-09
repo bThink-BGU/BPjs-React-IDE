@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY *.sh ./
 
-RUN apt-get update && apt-get upgrade \
-	&& apt-get install -y git build-essential openjdk-11-jdk maven \
+RUN apt-get update && apt-get -y upgrade \
+	&& apt-get install -y git build-essential openjdk-11-jdk maven python3 \
 	&& npm install --unsafe-perm -g node-sass serve
 
 RUN git config --global pull.rebase false \
