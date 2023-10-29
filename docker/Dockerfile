@@ -22,4 +22,4 @@ EXPOSE 80
 EXPOSE 8080
 
 # Run the application
-CMD ./run.sh
+CMD ls -al ; ./run.sh
